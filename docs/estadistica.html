@@ -411,34 +411,51 @@ div.tocify {
 <pre class="r"><code>library(tidyverse)
 library(haven) # importa, entre otros software, de Stata
 library(sjlabelled) # manejar labels de las variables </code></pre>
-<pre class="r"><code># data_emovi2017 &lt;- read_stata(
-#                      path = &quot;Datos/ESRU-EMOVI-2017/ESRU-EMOVI-2017-Entrevistado.dta&quot;,
-#                      enc = NULL
-#                      ) </code></pre>
+<pre class="r"><code>data_emovi2017 &lt;- read_stata(
+                     path = &quot;Datos/ESRU-EMOVI-2017/ESRU-EMOVI-2017-Entrevistado.dta&quot;,
+                     enc = NULL
+                     )</code></pre>
 <div id="justificar">
 <p>Al momento de exportar a R, existen errores en las etiqeutas de las variables y de los valores. Las etiqeutea de las varibles describen con maypr presicion a dichas variables. Mientras que las etiquetas de los volores es tán a sociadas a datos categóricos. Existen diversas formaas de lidiar con este problema. La forma que se utilizará (por el momento, esto se podría optimizar) es hacer una conversión de codificación entre los formatos de windows y mac, solo en caso de ser necesario. No es posible hacer una coversión general (por el momento, podría optimizarse) pues algunas codificaciones son correctas y otras no.</p>
 </div>
-<pre class="r"><code># a &lt;- get_label(data_emovi2017$est_dis)
-# b &lt;- get_labels(data_emovi2017$Estado)
-# print(a)
-# print(b)
-# data_emovi2017$ezona &lt;- set_labels(
-#                           data_emovi2017$ezona,
-#                           labels =unlist(
-#                                       lapply(
-#                                         get_labels(data_emovi2017$ezona), 
-#                                         iconv,from= &quot;UTF-8&quot;,to=&quot;ISO_8859-15&quot;
-#                                         )
-#                                   )
-#                         )
+<pre class="r"><code>a &lt;- get_label(data_emovi2017$est_dis)
+b &lt;- get_labels(data_emovi2017$Estado)
+print(a)</code></pre>
+<pre><code>## [1] &quot;estrato de diseÃ±o&quot;</code></pre>
+<pre class="r"><code>print(b)</code></pre>
+<pre><code>##  [1] &quot;Aguascalientes&quot;                  &quot;Baja California&quot;                
+##  [3] &quot;Baja California Sur&quot;             &quot;Campeche&quot;                       
+##  [5] &quot;Coahuila de Zaragoza&quot;            &quot;Colima&quot;                         
+##  [7] &quot;Chiapas&quot;                         &quot;Chihuahua&quot;                      
+##  [9] &quot;Distrito Federal&quot;                &quot;Durango&quot;                        
+## [11] &quot;Guanajuato&quot;                      &quot;Guerrero&quot;                       
+## [13] &quot;Hidalgo&quot;                         &quot;Jalisco&quot;                        
+## [15] &quot;México&quot;                          &quot;Michoacán de Ocampo&quot;            
+## [17] &quot;Morelos&quot;                         &quot;Nayarit&quot;                        
+## [19] &quot;Nuevo León&quot;                      &quot;Oaxaca&quot;                         
+## [21] &quot;Puebla&quot;                          &quot;Querétaro&quot;                      
+## [23] &quot;Quintana Roo&quot;                    &quot;San Luis Potosí&quot;                
+## [25] &quot;Sinaloa&quot;                         &quot;Sonora&quot;                         
+## [27] &quot;Tabasco&quot;                         &quot;Tamaulipas&quot;                     
+## [29] &quot;Tlaxcala&quot;                        &quot;Veracruz de Ignacio de la Llave&quot;
+## [31] &quot;Yucatán&quot;                         &quot;Zacatecas&quot;</code></pre>
+<pre class="r"><code>data_emovi2017$ezona &lt;- set_labels(
+                          data_emovi2017$ezona,
+                          labels =unlist(
+                                      lapply(
+                                        get_labels(data_emovi2017$ezona),
+                                        iconv,from= &quot;UTF-8&quot;,to=&quot;ISO_8859-15&quot;
+                                        )
+                                  )
+                        )
 
 #get_labels(data_emovi2017)
 #get_labels(data_emovi2017$ezona)
 #str(get_labels(data_emovi2017))
 #replace_labels(data_emovi2017, labels=iconv(get_labels(data_emovi2017),&quot;UTF-8&quot;,&quot;ISO_8859-15&quot;))
 #lapply(get_labels(data_emovi2017), iconv,from= &quot;UTF-8&quot;,to=&quot;ISO_8859-15&quot;)</code></pre>
-<pre class="r"><code># str(data_emovi2017)
-# view(data_emovi2017)</code></pre>
+<pre class="r"><code>str(data_emovi2017)
+view(data_emovi2017)</code></pre>
 </div>
 <div id="esru-emovi-2011" class="section level1">
 <h1>ESRU-EMOVI 2011</h1>
@@ -447,7 +464,7 @@ library(sjlabelled) # manejar labels de las variables </code></pre>
 <h1>ESRU-EMOVI 2006</h1>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRXN0YWTDrXN0aWNhIgphdXRob3I6ICJSYWZhZWwgTWFydMOtbmV6IE1hcnTDrW5leiIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKICAgIGNvZGVfZm9sZGluZzogaGlkZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIG1lc3NhZ2UgPSBGQUxTRSkKYGBgCjxkaXYgaWQgPSAianVzdGlmaWNhciI+CkxvcyBkYXRvcyBzZSByZWN1cGVyYXJvbiBkZWwgc2l0aW8gZGVsIFtDRUVZXVtdIGRvbmRlIHNlIHRpZW5lbiBsYXMgZW5jdWVzdGFzIEVTUlUtRU1PVkkgKExhcyBlc2N1ZXN0YXMgZGUgbGEgZnVuZGFjacOzbiBFc3Bpbm9zYSBSdWdhcmPDrWEgZGUgTW92aWxpZGFkIFNvaWNhbCBlbiBNw6l4aWNvKSBwYXJhIGxvcyBsZXZhbnRhbWllbnRvczogMjAwNiwgMjAxMSB5IDIwMTcuIAoKQ2FkYSB1bmEgZGUgbGFzIGVuY3VlbnRhcyB0aWVuZSBkaXN0aW50b3Mgb2JqZXRpdm9zLCBxdWUgc2UgZXhwbGljYXLDoW4gZW4gbGFzIHNpZ3VpZW50ZXMgc2VjY2lvbmVzLiBQYXJhIG1heW9yZXMgZGV0YWxsZXMgc29icmUgbGFzIGVuY3VldGFzIHNlIHB1ZWRlIGNvbnN1bHRhciBlbCBzaXRpbyBvZmljaWFsIGRvbmRlIHNlIGVuY3VldHJhbiBhbG9qYWRvcyBsb3MgZGF0b3MgW0NFRVldW10uCjwvZGl2PgogIFtDRUVZXTogaHR0cHM6Ly9jZWV5Lm9yZy5teC9jb250ZW5pZG8vcXVlLWhhY2Vtb3MvZW1vdmkvCgoKIyBFU1JVLUVNT1ZJIDIwMTcKCgoKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoYXZlbikgIyBpbXBvcnRhLCBlbnRyZSBvdHJvcyBzb2Z0d2FyZSwgZGUgU3RhdGEKbGlicmFyeShzamxhYmVsbGVkKSAjIG1hbmVqYXIgbGFiZWxzIGRlIGxhcyB2YXJpYWJsZXMgCmBgYAoKYGBge3J9CiMgZGF0YV9lbW92aTIwMTcgPC0gcmVhZF9zdGF0YSgKIyAgICAgICAgICAgICAgICAgICAgICBwYXRoID0gIkRhdG9zL0VTUlUtRU1PVkktMjAxNy9FU1JVLUVNT1ZJLTIwMTctRW50cmV2aXN0YWRvLmR0YSIsCiMgICAgICAgICAgICAgICAgICAgICAgZW5jID0gTlVMTAojICAgICAgICAgICAgICAgICAgICAgICkgCmBgYAoKPGRpdiBpZCA9ICJqdXN0aWZpY2FyIj4KQWwgbW9tZW50byBkZSBleHBvcnRhciBhIFIsIGV4aXN0ZW4gZXJyb3JlcyBlbiBsYXMgZXRpcWV1dGFzIGRlIGxhcyB2YXJpYWJsZXMgeSBkZSBsb3MgdmFsb3Jlcy4gTGFzIGV0aXFldXRlYSBkZSBsYXMgdmFyaWJsZXMgZGVzY3JpYmVuIGNvbiBtYXlwciBwcmVzaWNpb24gYSBkaWNoYXMgdmFyaWFibGVzLiBNaWVudHJhcyBxdWUgbGFzIGV0aXF1ZXRhcyBkZSBsb3Mgdm9sb3JlcyBlcyB0w6FuIGEgc29jaWFkYXMgYSBkYXRvcyBjYXRlZ8Ozcmljb3MuIEV4aXN0ZW4gZGl2ZXJzYXMgZm9ybWFhcyBkZSBsaWRpYXIgY29uIGVzdGUgcHJvYmxlbWEuIExhIGZvcm1hIHF1ZSBzZSB1dGlsaXphcsOhIChwb3IgZWwgbW9tZW50bywgZXN0byBzZSBwb2Ryw61hIG9wdGltaXphcikgZXMgaGFjZXIgdW5hIGNvbnZlcnNpw7NuIGRlIGNvZGlmaWNhY2nDs24gZW50cmUgbG9zIGZvcm1hdG9zIGRlIHdpbmRvd3MgeSBtYWMsIHNvbG8gZW4gY2FzbyBkZSBzZXIgbmVjZXNhcmlvLiBObyBlcyBwb3NpYmxlIGhhY2VyIHVuYSBjb3ZlcnNpw7NuIGdlbmVyYWwgKHBvciBlbCBtb21lbnRvLCBwb2Ryw61hIG9wdGltaXphcnNlKSBwdWVzIGFsZ3VuYXMgY29kaWZpY2FjaW9uZXMgc29uIGNvcnJlY3RhcyB5IG90cmFzIG5vLiAKPC9kaXY+CgpgYGB7cn0KIyBhIDwtIGdldF9sYWJlbChkYXRhX2Vtb3ZpMjAxNyRlc3RfZGlzKQojIGIgPC0gZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNyRFc3RhZG8pCiMgcHJpbnQoYSkKIyBwcmludChiKQojIGRhdGFfZW1vdmkyMDE3JGV6b25hIDwtIHNldF9sYWJlbHMoCiMgICAgICAgICAgICAgICAgICAgICAgICAgICBkYXRhX2Vtb3ZpMjAxNyRlem9uYSwKIyAgICAgICAgICAgICAgICAgICAgICAgICAgIGxhYmVscyA9dW5saXN0KAojICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGFwcGx5KAojICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBnZXRfbGFiZWxzKGRhdGFfZW1vdmkyMDE3JGV6b25hKSwgCiMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGljb252LGZyb209ICJVVEYtOCIsdG89IklTT184ODU5LTE1IgojICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApCiMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICkKIyAgICAgICAgICAgICAgICAgICAgICAgICApCgojZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNykKI2dldF9sYWJlbHMoZGF0YV9lbW92aTIwMTckZXpvbmEpCiNzdHIoZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNykpCiNyZXBsYWNlX2xhYmVscyhkYXRhX2Vtb3ZpMjAxNywgbGFiZWxzPWljb252KGdldF9sYWJlbHMoZGF0YV9lbW92aTIwMTcpLCJVVEYtOCIsIklTT184ODU5LTE1IikpCiNsYXBwbHkoZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNyksIGljb252LGZyb209ICJVVEYtOCIsdG89IklTT184ODU5LTE1IikKYGBgCgpgYGB7ciwgZXZhbCA9IEZBTFNFfQojIHN0cihkYXRhX2Vtb3ZpMjAxNykKIyB2aWV3KGRhdGFfZW1vdmkyMDE3KQpgYGAKCiMgRVNSVS1FTU9WSSAyMDExCgoKIyBFU1JVLUVNT1ZJIDIwMDYKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRXN0YWTDrXN0aWNhIgphdXRob3I6ICJSYWZhZWwgTWFydMOtbmV6IE1hcnTDrW5leiIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKICAgIGNvZGVfZm9sZGluZzogaGlkZQotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUsIG1lc3NhZ2UgPSBGQUxTRSkKYGBgCjxkaXYgaWQgPSAianVzdGlmaWNhciI+CkxvcyBkYXRvcyBzZSByZWN1cGVyYXJvbiBkZWwgc2l0aW8gZGVsIFtDRUVZXVtdIGRvbmRlIHNlIHRpZW5lbiBsYXMgZW5jdWVzdGFzIEVTUlUtRU1PVkkgKExhcyBlc2N1ZXN0YXMgZGUgbGEgZnVuZGFjacOzbiBFc3Bpbm9zYSBSdWdhcmPDrWEgZGUgTW92aWxpZGFkIFNvaWNhbCBlbiBNw6l4aWNvKSBwYXJhIGxvcyBsZXZhbnRhbWllbnRvczogMjAwNiwgMjAxMSB5IDIwMTcuIAoKQ2FkYSB1bmEgZGUgbGFzIGVuY3VlbnRhcyB0aWVuZSBkaXN0aW50b3Mgb2JqZXRpdm9zLCBxdWUgc2UgZXhwbGljYXLDoW4gZW4gbGFzIHNpZ3VpZW50ZXMgc2VjY2lvbmVzLiBQYXJhIG1heW9yZXMgZGV0YWxsZXMgc29icmUgbGFzIGVuY3VldGFzIHNlIHB1ZWRlIGNvbnN1bHRhciBlbCBzaXRpbyBvZmljaWFsIGRvbmRlIHNlIGVuY3VldHJhbiBhbG9qYWRvcyBsb3MgZGF0b3MgW0NFRVldW10uCjwvZGl2PgogIFtDRUVZXTogaHR0cHM6Ly9jZWV5Lm9yZy5teC9jb250ZW5pZG8vcXVlLWhhY2Vtb3MvZW1vdmkvCgoKIyBFU1JVLUVNT1ZJIDIwMTcKCgoKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoYXZlbikgIyBpbXBvcnRhLCBlbnRyZSBvdHJvcyBzb2Z0d2FyZSwgZGUgU3RhdGEKbGlicmFyeShzamxhYmVsbGVkKSAjIG1hbmVqYXIgbGFiZWxzIGRlIGxhcyB2YXJpYWJsZXMgCmBgYAoKYGBge3J9CmRhdGFfZW1vdmkyMDE3IDwtIHJlYWRfc3RhdGEoCiAgICAgICAgICAgICAgICAgICAgIHBhdGggPSAiRGF0b3MvRVNSVS1FTU9WSS0yMDE3L0VTUlUtRU1PVkktMjAxNy1FbnRyZXZpc3RhZG8uZHRhIiwKICAgICAgICAgICAgICAgICAgICAgZW5jID0gTlVMTAogICAgICAgICAgICAgICAgICAgICApCmBgYAoKPGRpdiBpZCA9ICJqdXN0aWZpY2FyIj4KQWwgbW9tZW50byBkZSBleHBvcnRhciBhIFIsIGV4aXN0ZW4gZXJyb3JlcyBlbiBsYXMgZXRpcWV1dGFzIGRlIGxhcyB2YXJpYWJsZXMgeSBkZSBsb3MgdmFsb3Jlcy4gTGFzIGV0aXFldXRlYSBkZSBsYXMgdmFyaWJsZXMgZGVzY3JpYmVuIGNvbiBtYXlwciBwcmVzaWNpb24gYSBkaWNoYXMgdmFyaWFibGVzLiBNaWVudHJhcyBxdWUgbGFzIGV0aXF1ZXRhcyBkZSBsb3Mgdm9sb3JlcyBlcyB0w6FuIGEgc29jaWFkYXMgYSBkYXRvcyBjYXRlZ8Ozcmljb3MuIEV4aXN0ZW4gZGl2ZXJzYXMgZm9ybWFhcyBkZSBsaWRpYXIgY29uIGVzdGUgcHJvYmxlbWEuIExhIGZvcm1hIHF1ZSBzZSB1dGlsaXphcsOhIChwb3IgZWwgbW9tZW50bywgZXN0byBzZSBwb2Ryw61hIG9wdGltaXphcikgZXMgaGFjZXIgdW5hIGNvbnZlcnNpw7NuIGRlIGNvZGlmaWNhY2nDs24gZW50cmUgbG9zIGZvcm1hdG9zIGRlIHdpbmRvd3MgeSBtYWMsIHNvbG8gZW4gY2FzbyBkZSBzZXIgbmVjZXNhcmlvLiBObyBlcyBwb3NpYmxlIGhhY2VyIHVuYSBjb3ZlcnNpw7NuIGdlbmVyYWwgKHBvciBlbCBtb21lbnRvLCBwb2Ryw61hIG9wdGltaXphcnNlKSBwdWVzIGFsZ3VuYXMgY29kaWZpY2FjaW9uZXMgc29uIGNvcnJlY3RhcyB5IG90cmFzIG5vLiAKPC9kaXY+CgpgYGB7cn0KYSA8LSBnZXRfbGFiZWwoZGF0YV9lbW92aTIwMTckZXN0X2RpcykKYiA8LSBnZXRfbGFiZWxzKGRhdGFfZW1vdmkyMDE3JEVzdGFkbykKcHJpbnQoYSkKcHJpbnQoYikKZGF0YV9lbW92aTIwMTckZXpvbmEgPC0gc2V0X2xhYmVscygKICAgICAgICAgICAgICAgICAgICAgICAgICBkYXRhX2Vtb3ZpMjAxNyRlem9uYSwKICAgICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPXVubGlzdCgKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYXBwbHkoCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBnZXRfbGFiZWxzKGRhdGFfZW1vdmkyMDE3JGV6b25hKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGljb252LGZyb209ICJVVEYtOCIsdG89IklTT184ODU5LTE1IgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKQogICAgICAgICAgICAgICAgICAgICAgICApCgojZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNykKI2dldF9sYWJlbHMoZGF0YV9lbW92aTIwMTckZXpvbmEpCiNzdHIoZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNykpCiNyZXBsYWNlX2xhYmVscyhkYXRhX2Vtb3ZpMjAxNywgbGFiZWxzPWljb252KGdldF9sYWJlbHMoZGF0YV9lbW92aTIwMTcpLCJVVEYtOCIsIklTT184ODU5LTE1IikpCiNsYXBwbHkoZ2V0X2xhYmVscyhkYXRhX2Vtb3ZpMjAxNyksIGljb252LGZyb209ICJVVEYtOCIsdG89IklTT184ODU5LTE1IikKYGBgCgpgYGB7ciwgZXZhbCA9IEZBTFNFfQpzdHIoZGF0YV9lbW92aTIwMTcpCnZpZXcoZGF0YV9lbW92aTIwMTcpCmBgYAoKIyBFU1JVLUVNT1ZJIDIwMTEKCgojIEVTUlUtRU1PVkkgMjAwNgoKCgo=</div>
 
 
 </div>
