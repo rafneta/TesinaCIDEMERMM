@@ -12,7 +12,7 @@
 <meta name="author" content="Rafael Martínez Martínez" />
 
 
-<title>Estudio sobre movilidad intergeneracional y diferencias regionales en México.</title>
+<title>Módulo de Movilidad Social Intergeneracional (MMSI) 2016</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -21,7 +21,12 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
@@ -78,6 +83,9 @@ h6 {
 }
 .table th:not([align]) {
   text-align: left;
+}
+#rmd-source-code {
+  display: none;
 }
 </style>
 
@@ -259,7 +267,73 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
 
 
 
@@ -269,6 +343,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -301,21 +385,50 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">Estudio sobre movilidad intergeneracional y diferencias regionales en México.</h1>
+
+<h1 class="title toc-ignore">Módulo de Movilidad Social Intergeneracional (MMSI) 2016</h1>
 <h4 class="author">Rafael Martínez Martínez</h4>
 
 </div>
 
 
 <div id="justificar">
-<p>En este sitio se presentan los códigos y resultados obtenidos en el trabajo de tesina: <strong>Estudio sobre movilidad intergeneracional y diferencias regionales en México.</strong> Para obtener el grado de Maestro en Economía en <a href="https://www.cide.edu/de/docencia/me/plan-de-estudios/">CIDE-ME</a> en la especilidad de <em>Economia del desarrollo y políticas públicas</em>.</p>
-El objetivo del sitio es que se puedan reproducir los resultados si así se desea. Y como fuente de apéndices en linéa, para aprovechar las gráficas interactivas.
+<p>El Módulo de Movilidad Social Intergeneracional (MMSI) 2016 se levantó en el tercer y cuarto trimestres de 2016. Tuvo como objetivo generar información estadística sobre movilidad social intergeneracional de la población de 25 a 64 años en México, observando la influencia que tienen características como el nivel educativo, el nivel socioeconómico y la ocupación de los ascendentes económicos, a partir de una determinada condición en la posición socioeconómica actual de sus descendientes <a href="https://www.inegi.org.mx/programas/mmsi/2016/#Microdatos">MMSI-2016</a>.</p>
 </div>
+<pre class="r"><code>library(tidyverse)
+library(haven) # importa, entre otros software, de Stata
+library(sjlabelled) # manejar labels de las variables 
+library(openxlsx) # leer archivos de excel
+library(DT) # visualizar a tablas
+library(data.table) # convertir a tablas
+library(highcharter) # gráficas interactivas
+library(webshot)</code></pre>
+<pre class="r"><code>cargar&lt;- function(){
+
+datos_e &lt;&lt;- read_sav(
+                      file  = &quot;Datos/MMSI/MMSI_2016.sav&quot;
+                     )
+}
+
+cargar()
+data_mms1&lt;-datos_e </code></pre>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTcOzZHVsbyBkZSBNb3ZpbGlkYWQgU29jaWFsIEludGVyZ2VuZXJhY2lvbmFsIChNTVNJKSAyMDE2IgphdXRob3I6ICJSYWZhZWwgTWFydMOtbmV6IE1hcnTDrW5leiIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgY29kZV9mb2xkaW5nOiBoaWRlCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFKQpgYGAKCjxkaXYgaWQgPSAianVzdGlmaWNhciI+CkVsIE3Ds2R1bG8gZGUgTW92aWxpZGFkIFNvY2lhbCBJbnRlcmdlbmVyYWNpb25hbCAoTU1TSSkgMjAxNiBzZSBsZXZhbnTDsyBlbiBlbCB0ZXJjZXIgeSBjdWFydG8gdHJpbWVzdHJlcyBkZSAyMDE2LiBUdXZvIGNvbW8gb2JqZXRpdm8gZ2VuZXJhciBpbmZvcm1hY2nDs24gZXN0YWTDrXN0aWNhIHNvYnJlIG1vdmlsaWRhZCBzb2NpYWwgaW50ZXJnZW5lcmFjaW9uYWwgZGUgbGEgcG9ibGFjacOzbiBkZSAyNSBhIDY0IGHDsW9zIGVuIE3DqXhpY28sIG9ic2VydmFuZG8gbGEgaW5mbHVlbmNpYSBxdWUgdGllbmVuIGNhcmFjdGVyw61zdGljYXMgY29tbyBlbCBuaXZlbCBlZHVjYXRpdm8sIGVsIG5pdmVsIHNvY2lvZWNvbsOzbWljbyB5IGxhIG9jdXBhY2nDs24gZGUgbG9zIGFzY2VuZGVudGVzIGVjb27Ds21pY29zLCBhIHBhcnRpciBkZSB1bmEgZGV0ZXJtaW5hZGEgY29uZGljacOzbiBlbiBsYSBwb3NpY2nDs24gc29jaW9lY29uw7NtaWNhIGFjdHVhbCBkZSBzdXMgZGVzY2VuZGllbnRlcyBbTU1TSS0yMDE2XVtdLgo8L2Rpdj4KICBbTU1TSS0yMDE2XTogaHR0cHM6Ly93d3cuaW5lZ2kub3JnLm14L3Byb2dyYW1hcy9tbXNpLzIwMTYvI01pY3JvZGF0b3MKICAKICAKYGBge3IgY2FyZ2FyX2JpbGlvdGVjYXN9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGhhdmVuKSAjIGltcG9ydGEsIGVudHJlIG90cm9zIHNvZnR3YXJlLCBkZSBTdGF0YQpsaWJyYXJ5KHNqbGFiZWxsZWQpICMgbWFuZWphciBsYWJlbHMgZGUgbGFzIHZhcmlhYmxlcyAKbGlicmFyeShvcGVueGxzeCkgIyBsZWVyIGFyY2hpdm9zIGRlIGV4Y2VsCmxpYnJhcnkoRFQpICMgdmlzdWFsaXphciBhIHRhYmxhcwpsaWJyYXJ5KGRhdGEudGFibGUpICMgY29udmVydGlyIGEgdGFibGFzCmxpYnJhcnkoaGlnaGNoYXJ0ZXIpICMgZ3LDoWZpY2FzIGludGVyYWN0aXZhcwpsaWJyYXJ5KHdlYnNob3QpCmBgYAoKYGBge3IgY2FyZ2FyIGRhdG9zfQoKY2FyZ2FyPC0gZnVuY3Rpb24oKXsKCmRhdG9zX2UgPDwtIHJlYWRfc2F2KAogICAgICAgICAgICAgICAgICAgICAgZmlsZSAgPSAiRGF0b3MvTU1TSS9NTVNJXzIwMTYuc2F2IgogICAgICAgICAgICAgICAgICAgICApCn0KCmNhcmdhcigpCmRhdGFfbW1zMTwtZGF0b3NfZSAKYGBgCgoKYGBge3J9CgpgYGAKCg==</div>
 
 
-
+</div>
+</div>
 
 </div>
 
@@ -347,7 +460,39 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("MMSI2016.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
