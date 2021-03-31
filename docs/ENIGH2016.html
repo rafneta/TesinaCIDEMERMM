@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Rafael Martínez Martínez" />
+
+
+<title>Encuesta Nacional de Ingreos y Gastos de los Hogares (ENIGH) 2016</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="estilo.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Tesina CIDE-ME Rafael Martínez-Martínez</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="ESRU2017.html">Datos ESRU - EMOVI 2017</a>
+</li>
+<li>
+  <a href="MMSI2016.html">Datos MMSI 2016</a>
+</li>
+<li>
+  <a href="ENIGH2016.html">Datos ENIGH 2016</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Encuesta Nacional de Ingreos y Gastos de los Hogares (ENIGH) 2016</h1>
+<h4 class="author">Rafael Martínez Martínez</h4>
+
+</div>
+
+
+<div id="justificar">
+<p>La Encuesta Nacional de Ingresos y Gastos de los Hogares 2016 se llevó a cabo del 21 de agosto al 28 de noviembre de 2016. Su objetivo es proporcionar un panorama estadístico del comportamiento de los ingresos y gastos de los hogares en cuanto a su monto, procedencia y distribución; adicionalmente, ofrece información sobre las características ocupacionales y sociodemográficas de los integrantes del hogar, así como las características de la infraestructura de la vivienda y el equipamiento del hogar. <a href="https://www.inegi.org.mx/programas/enigh/nc/2016/">ENIGH-2016</a>.</p>
+</div>
+<pre class="r"><code>library(tidyverse)
+library(haven) # importa, entre otros software, de Stata
+library(sjlabelled) # manejar labels de las variables 
+library(openxlsx) # leer archivos de excel
+library(DT) # visualizar a tablas
+library(data.table) # convertir a tablas
+library(highcharter) # gráficas interactivas
+library(webshot)</code></pre>
+<pre class="r"><code>cargar&lt;- function(docu){
+
+return(read_stata(
+                     path = paste(&quot;Datos/ENIGH-2016/&quot;,docu,&quot;.dta&quot;,sep=&quot;&quot;),
+                     atomic.to.fac = TRUE,
+                     enc = NULL,
+                     ))
+}</code></pre>
+<div id="ingresos" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Ingresos</h1>
+<pre class="r"><code>data_ingresos_enigh2016&lt;-cargar(&quot;ingresos&quot;)
+get_label(data_ingresos_enigh2016$clave)</code></pre>
+<pre><code>## [1] &quot;Claves de ingreso&quot;</code></pre>
+<pre class="r"><code>familias_integrantes &lt;- function(df,folhog,nr){
+  dfn &lt;- df %&gt;%
+    filter(foliohog %in% folhog)%&gt;%
+    filter(numren %in% nr)
+  return(dfn)
+} 
+
+
+
+ingresos_acu &lt;- function(df,clavs=get_labels(ingresos_enigh2016$clave)){
+ dfn &lt;- df %&gt;%
+   group_by(folioviv, foliohog, numren) %&gt;%
+   filter(clave %in% clavs)%&gt;%
+   summarise(
+   claves_a = paste(clave,collapse = &quot;,&quot;),
+  ing_tri_t = sum(ing_tri),
+  ing_men_p = ing_tri_t/3
+  ) %&gt;% ungroup()
+ 
+ 
+ return(dfn)
+}
+
+hogares &lt;- c(&#39;1&#39;)
+personas_h &lt;- c(&#39;01&#39;)
+
+a&lt;-familias_integrantes(data_ingresos_enigh2016,hogares,personas_h)
+head(a)</code></pre>
+<pre><code>##     folioviv foliohog numren clave mes_1 mes_2 mes_3 mes_4 mes_5 mes_6 ing_1
+## 1 0100003801        1     01  P001    09    08    07    06    05    04 18000
+## 2 0100003801        1     01  P009                                      6000
+## 3 0100003802        1     01  P001    10    09    08    07    06    05 16000
+## 4 0100003803        1     01  P001    09    08    07    06    05    04 28000
+## 5 0100003804        1     01  P001    09    08    07    06    05    04 10000
+## 6 0100003804        1     01  P009                                      5000
+##   ing_2 ing_3 ing_4 ing_5 ing_6  ing_tri
+## 1 18000 18000 18000 18000 18000 53114.75
+## 2    NA    NA    NA    NA    NA  1475.40
+## 3 16000 16000 16000 16000 16000 47213.11
+## 4 28000 28000 28000 28000 28000 82622.95
+## 5 10000 10000 10000 10000 10000 29508.19
+## 6    NA    NA    NA    NA    NA  1229.50</code></pre>
+<pre class="r"><code>claves&lt;-c(&quot;P001&quot;)
+head(ingresos_acu(a,claves) )</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   folioviv   foliohog numren claves_a ing_tri_t ing_men_p
+##   &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+## 1 0100003801 1        01     P001        53115.    17705.
+## 2 0100003802 1        01     P001        47213.    15738.
+## 3 0100003803 1        01     P001        82623.    27541.
+## 4 0100003804 1        01     P001        29508.     9836.
+## 5 0100003805 1        01     P001        35410.    11803.
+## 6 0100010406 1        01     P001        42848.    14283.</code></pre>
+</div>
+<div id="poblacion" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Poblacion</h1>
+<pre class="r"><code>data_poblacion_enigh2016&lt;-cargar(&quot;poblacion&quot;)</code></pre>
+<div id="filtrado-de-jefes-de-familia" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> filtrado de jefes de familia</h2>
+<pre class="r"><code># 101 Jefe(a)
+# 102 Persona sola
+# 201 Esposo(a), compañero(a), cónyuge, pareja, marido, mujer, señor(a), # # 202 consorte Concubino(a)
+# 203 Amasio(a)
+# 204 Querido(a), amante
+# 205 Pareja del mismo sexo
+
+familias_jefes &lt;- function(df,folhog,jefes){
+  dfn &lt;- df %&gt;%
+    filter(foliohog %in% folhog)%&gt;%
+    filter(parentesco %in% jefes)
+  return(dfn)
+} 
+
+#hogares &lt;- unique(data_poblacion_enigh2016$foliohog)
+# ganamos 1000 hogares mas
+hogares &lt;- c(&#39;1&#39;)
+jefes_h &lt;- c(&#39;101&#39;, &#39;102&#39;)
+
+
+a&lt;- familias_jefes(data_poblacion_enigh2016,hogares,jefes_h)
+NROW(a$parentesco)</code></pre>
+<pre><code>## [1] 69169</code></pre>
+</div>
+<div id="selección-de-variables" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Selección de variables</h2>
+<pre class="r"><code>var &lt;- c(&quot;folioviv&quot;,&quot;foliohog&quot;, &quot;numren&quot;, &quot;parentesco&quot;,
+         &quot;sexo&quot;,&quot;edad&quot; )
+
+data_poblacion_sel &lt;- function(df,va){
+  dfn&lt;-df%&gt;% 
+    select(all_of(va))
+  return(dfn)
+}
+
+b&lt;-data_poblacion_sel(a, var)
+head(b)</code></pre>
+<pre><code>##     folioviv foliohog numren parentesco sexo edad
+## 1 0100003801        1     01        101    1   33
+## 2 0100003802        1     01        101    1   29
+## 3 0100003803        1     01        101    1   47
+## 4 0100003804        1     01        101    2   29
+## 5 0100003805        1     01        101    1   55
+## 6 0100010401        1     01        101    1   66</code></pre>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRW5jdWVzdGEgTmFjaW9uYWwgZGUgSW5ncmVvcyB5IEdhc3RvcyBkZSBsb3MgSG9nYXJlcyAoRU5JR0gpIDIwMTYiCmF1dGhvcjogIlJhZmFlbCBNYXJ0w61uZXogTWFydMOtbmV6IgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvY19mbG9hdDogdHJ1ZQogICAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICBjb2RlX2ZvbGRpbmc6IGhpZGUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFLCBtZXNzYWdlID0gRkFMU0UpCmBgYAoKCjxkaXYgaWQgPSAianVzdGlmaWNhciI+CkxhIEVuY3Vlc3RhIE5hY2lvbmFsIGRlIEluZ3Jlc29zIHkgR2FzdG9zIGRlIGxvcyBIb2dhcmVzIDIwMTYgc2UgbGxldsOzIGEgY2FibyBkZWwgMjEgZGUgYWdvc3RvIGFsIDI4IGRlIG5vdmllbWJyZSBkZSAyMDE2LiBTdSBvYmpldGl2byBlcyBwcm9wb3JjaW9uYXIgdW4gcGFub3JhbWEgZXN0YWTDrXN0aWNvIGRlbCBjb21wb3J0YW1pZW50byBkZSBsb3MgaW5ncmVzb3MgeSBnYXN0b3MgZGUgbG9zIGhvZ2FyZXMgZW4gY3VhbnRvIGEgc3UgbW9udG8sIHByb2NlZGVuY2lhIHkgZGlzdHJpYnVjacOzbjsgYWRpY2lvbmFsbWVudGUsIG9mcmVjZSBpbmZvcm1hY2nDs24gc29icmUgbGFzIGNhcmFjdGVyw61zdGljYXMgb2N1cGFjaW9uYWxlcyB5IHNvY2lvZGVtb2dyw6FmaWNhcyBkZSBsb3MgaW50ZWdyYW50ZXMgZGVsIGhvZ2FyLCBhc8OtIGNvbW8gbGFzIGNhcmFjdGVyw61zdGljYXMgZGUgbGEgaW5mcmFlc3RydWN0dXJhIGRlIGxhIHZpdmllbmRhIHkgZWwgZXF1aXBhbWllbnRvIGRlbCBob2dhci4gW0VOSUdILTIwMTZdW10uCjwvZGl2PgogIFtFTklHSC0yMDE2XTogaHR0cHM6Ly93d3cuaW5lZ2kub3JnLm14L3Byb2dyYW1hcy9lbmlnaC9uYy8yMDE2LwoKYGBge3IgY2FyZ2FyX2JpbGlvdGVjYXN9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGhhdmVuKSAjIGltcG9ydGEsIGVudHJlIG90cm9zIHNvZnR3YXJlLCBkZSBTdGF0YQpsaWJyYXJ5KHNqbGFiZWxsZWQpICMgbWFuZWphciBsYWJlbHMgZGUgbGFzIHZhcmlhYmxlcyAKbGlicmFyeShvcGVueGxzeCkgIyBsZWVyIGFyY2hpdm9zIGRlIGV4Y2VsCmxpYnJhcnkoRFQpICMgdmlzdWFsaXphciBhIHRhYmxhcwpsaWJyYXJ5KGRhdGEudGFibGUpICMgY29udmVydGlyIGEgdGFibGFzCmxpYnJhcnkoaGlnaGNoYXJ0ZXIpICMgZ3LDoWZpY2FzIGludGVyYWN0aXZhcwpsaWJyYXJ5KHdlYnNob3QpCmBgYAoKCmBgYHtyIGNhcmdhciBkYXRvc30KCmNhcmdhcjwtIGZ1bmN0aW9uKGRvY3UpewoKcmV0dXJuKHJlYWRfc3RhdGEoCiAgICAgICAgICAgICAgICAgICAgIHBhdGggPSBwYXN0ZSgiRGF0b3MvRU5JR0gtMjAxNi8iLGRvY3UsIi5kdGEiLHNlcD0iIiksCiAgICAgICAgICAgICAgICAgICAgIGF0b21pYy50by5mYWMgPSBUUlVFLAogICAgICAgICAgICAgICAgICAgICBlbmMgPSBOVUxMLAogICAgICAgICAgICAgICAgICAgICApKQp9CgoKCmBgYAoKCgojIEluZ3Jlc29zCgpgYGB7cn0KCmRhdGFfaW5ncmVzb3NfZW5pZ2gyMDE2PC1jYXJnYXIoImluZ3Jlc29zIikKZ2V0X2xhYmVsKGRhdGFfaW5ncmVzb3NfZW5pZ2gyMDE2JGNsYXZlKQpgYGAKYGBge3IgZnVuY2lvbmVzfQpmYW1pbGlhc19pbnRlZ3JhbnRlcyA8LSBmdW5jdGlvbihkZixmb2xob2csbnIpewogIGRmbiA8LSBkZiAlPiUKICAgIGZpbHRlcihmb2xpb2hvZyAlaW4lIGZvbGhvZyklPiUKICAgIGZpbHRlcihudW1yZW4gJWluJSBucikKICByZXR1cm4oZGZuKQp9IAoKCgppbmdyZXNvc19hY3UgPC0gZnVuY3Rpb24oZGYsY2xhdnM9Z2V0X2xhYmVscyhpbmdyZXNvc19lbmlnaDIwMTYkY2xhdmUpKXsKIGRmbiA8LSBkZiAlPiUKICAgZ3JvdXBfYnkoZm9saW92aXYsIGZvbGlvaG9nLCBudW1yZW4pICU+JQogICBmaWx0ZXIoY2xhdmUgJWluJSBjbGF2cyklPiUKICAgc3VtbWFyaXNlKAogICBjbGF2ZXNfYSA9IHBhc3RlKGNsYXZlLGNvbGxhcHNlID0gIiwiKSwKICBpbmdfdHJpX3QgPSBzdW0oaW5nX3RyaSksCiAgaW5nX21lbl9wID0gaW5nX3RyaV90LzMKICApICU+JSB1bmdyb3VwKCkKIAogCiByZXR1cm4oZGZuKQp9Cgpob2dhcmVzIDwtIGMoJzEnKQpwZXJzb25hc19oIDwtIGMoJzAxJykKCmE8LWZhbWlsaWFzX2ludGVncmFudGVzKGRhdGFfaW5ncmVzb3NfZW5pZ2gyMDE2LGhvZ2FyZXMscGVyc29uYXNfaCkKaGVhZChhKQpjbGF2ZXM8LWMoIlAwMDEiKQpoZWFkKGluZ3Jlc29zX2FjdShhLGNsYXZlcykgKQpgYGAKCgojIFBvYmxhY2lvbgoKYGBge3J9CmRhdGFfcG9ibGFjaW9uX2VuaWdoMjAxNjwtY2FyZ2FyKCJwb2JsYWNpb24iKQoKYGBgCgoKIyMgZmlsdHJhZG8gZGUgamVmZXMgZGUgZmFtaWxpYQoKYGBge3J9CiMgMTAxIEplZmUoYSkKIyAxMDIgUGVyc29uYSBzb2xhCiMgMjAxIEVzcG9zbyhhKSwgY29tcGHDsWVybyhhKSwgY8Ozbnl1Z2UsIHBhcmVqYSwgbWFyaWRvLCBtdWplciwgc2XDsW9yKGEpLCAjICMgMjAyIGNvbnNvcnRlIENvbmN1YmlubyhhKQojIDIwMyBBbWFzaW8oYSkKIyAyMDQgUXVlcmlkbyhhKSwgYW1hbnRlCiMgMjA1IFBhcmVqYSBkZWwgbWlzbW8gc2V4bwoKZmFtaWxpYXNfamVmZXMgPC0gZnVuY3Rpb24oZGYsZm9saG9nLGplZmVzKXsKICBkZm4gPC0gZGYgJT4lCiAgICBmaWx0ZXIoZm9saW9ob2cgJWluJSBmb2xob2cpJT4lCiAgICBmaWx0ZXIocGFyZW50ZXNjbyAlaW4lIGplZmVzKQogIHJldHVybihkZm4pCn0gCgojaG9nYXJlcyA8LSB1bmlxdWUoZGF0YV9wb2JsYWNpb25fZW5pZ2gyMDE2JGZvbGlvaG9nKQojIGdhbmFtb3MgMTAwMCBob2dhcmVzIG1hcwpob2dhcmVzIDwtIGMoJzEnKQpqZWZlc19oIDwtIGMoJzEwMScsICcxMDInKQoKCmE8LSBmYW1pbGlhc19qZWZlcyhkYXRhX3BvYmxhY2lvbl9lbmlnaDIwMTYsaG9nYXJlcyxqZWZlc19oKQpOUk9XKGEkcGFyZW50ZXNjbykKCgpgYGAKCiMjIFNlbGVjY2nDs24gZGUgdmFyaWFibGVzCgpgYGB7cn0KdmFyIDwtIGMoImZvbGlvdml2IiwiZm9saW9ob2ciLCAibnVtcmVuIiwgInBhcmVudGVzY28iLAogICAgICAgICAic2V4byIsImVkYWQiICkKCmRhdGFfcG9ibGFjaW9uX3NlbCA8LSBmdW5jdGlvbihkZix2YSl7CiAgZGZuPC1kZiU+JSAKICAgIHNlbGVjdChhbGxfb2YodmEpKQogIHJldHVybihkZm4pCn0KCmI8LWRhdGFfcG9ibGFjaW9uX3NlbChhLCB2YXIpCmhlYWQoYikKYGBgCgoK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("ENIGH2016.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
