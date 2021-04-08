@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Rafael Martínez Martínez" />
+
+
+<title>Ingreso Hijos</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="estilo.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Tesina CIDE-ME Rafael Martínez-Martínez</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Estimacion.html">Estimación</a>
+</li>
+<li>
+  <a href="ESRU2017.html">Datos ESRU - EMOVI 2017</a>
+</li>
+<li>
+  <a href="MMSI2016.html">Datos MMSI 2016</a>
+</li>
+<li>
+  <a href="ENIGH2016.html">Datos ENIGH 2016</a>
+</li>
+<li>
+  <a href="hijos.html">Ingreso Hijos </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Ingreso Hijos</h1>
+<h4 class="author">Rafael Martínez Martínez</h4>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)
+library(haven) # importa, entre otros software, de Stata
+library(sjlabelled) # manejar labels de las variables 
+library(openxlsx) # leer archivos de excel
+library(DT) # visualizar a tablas
+library(data.table) # convertir a tablas
+library(highcharter) # gráficas interactivas
+library(webshot)</code></pre>
+<pre class="r"><code>cargar_enigh&lt;- function(docu){
+
+return(read_stata(
+                     path = paste(&quot;Datos/ENIGH-2016/&quot;,docu,&quot;.dta&quot;,sep=&quot;&quot;),
+                     atomic.to.fac = TRUE,
+                     enc = NULL,
+                     ))
+}
+
+cargar_enigh_sav&lt;- function(docu){
+
+return(read_spss(
+                     path = paste(&quot;Datos/ENIGH-2016/&quot;,docu,&quot;.sav&quot;,sep=&quot;&quot;),
+                     atomic.to.fac = TRUE,
+                     enc = NULL,
+                     ))
+}
+
+
+
+hijos_mmsi &lt;- readRDS(file=&quot;Datos/hijos_mmsi.Rda&quot;)</code></pre>
+<pre class="r"><code>get_labels(hijos_mmsi)
+nrow(hijos_mmsi)</code></pre>
+<p>Seleccionamos:</p>
+<ul>
+<li>Entidad Federativa (ent_ENH, en cualquiera enigh 2 digitos del folio de vivienda)</li>
+<li>Estrato socieconómico (est_socio_ENH, concentradohogar est_socio)</li>
+<li>Sexo (P1_1, poblacion sexo)</li>
+<li>Edad (P1_2, poblacion edad)</li>
+<li>Parentesco (P1_3, poblacion numren(parentesco))</li>
+<li>Nivel de educación informante, (NivEsc_Inf, concentradohogar educa_jefe)</li>
+<li>Division de ocuapción del informante (DivOcu_Act, trabajos sinco)</li>
+</ul>
+<div id="justificar">
+<p>Estraemos de población, la vivienda, el hogar el indiviudo, el sexo la edad, el parenresco pero eso es numren, lo comprobamos de todas maneras y fue cierto</p>
+</div>
+<div id="construcción-mmsi" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Construcción mmsi</h1>
+<pre class="r"><code>poblacion&lt;-cargar_enigh_sav(&quot;poblacion&quot;) 
+concentrado&lt;-cargar_enigh_sav(&quot;concentradohogar&quot;)
+trabajos&lt;-cargar_enigh_sav(&quot;trabajos&quot;)</code></pre>
+<p>parentesco y numren es equivalente, filtramos al jefe del hogar</p>
+<pre class="r"><code>poblacionf&lt;- poblacion%&gt;%
+  select(folioviv,foliohog,numren,sexo,edad)%&gt;%
+  filter(numren==&quot;01&quot;)
+nrow(poblacionf)</code></pre>
+<p>Insertaso estrato socieconomico y educación del jefe, del concetrado. EL estrato socieconomico es para la misma vivienda, y la educación solo es la del jefe del hogar. Estraemos el estrato socieconomico del</p>
+<pre class="r"><code>poblacionf &lt;- poblacionf %&gt;%
+  mutate(edu_jefe = concentrado$educa_jefe,
+         est_socio = concentrado$est_socio)
+
+NROW(poblacionf)
+unique(poblacionf$numren)</code></pre>
+<div id="trabajos-mmsi" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> trabajos mmsi</h2>
+<p>Filtrams los trabajjos de los jefes de familia</p>
+<pre class="r"><code>trabajosf&lt;-trabajos%&gt;%
+  filter(numren ==&quot;01&quot;)%&gt;%
+ select(folioviv,foliohog,numren,sinco)
+NROW(trabajosf)
+#NROW(trabajos)
+sum(is.na(trabajosf))</code></pre>
+<pre class="r"><code>#62642
+
+enigh&lt;- full_join(poblacionf,trabajosf)%&gt;%
+  filter(!is.na(sinco))
+nrow(enigh)
+sum(is.na(enigh))</code></pre>
+</div>
+<div id="cambio-de-etiquetado" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> cambio de etiquetado</h2>
+<p>Pasamos las etiqeuteas de educación de enigh a</p>
+<pre class="r"><code>enighe&lt;- enigh %&gt;%
+  mutate(edu_jefe_m = ifelse(as.integer(edu_jefe) %in% c(1,2),&quot;1&quot;,
+                      ifelse(as.integer(edu_jefe) == 3,&quot;2&quot;,
+                      ifelse(as.integer(edu_jefe) == 4,&quot;3&quot;,
+                      ifelse(as.integer(edu_jefe) == 5,&quot;4&quot;,
+                      ifelse(as.integer(edu_jefe)== 6,&quot;5&quot;,
+                      ifelse(as.integer(edu_jefe) %in% c(7,8),6,&quot;7&quot;)))))))
+unique(enighe$edu_jefe_m)</code></pre>
+</div>
+<div id="buscar-folios-con-caracteristicas" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> buscar folios con caracteristicas</h2>
+<pre class="r"><code>busca&lt;-function(i){
+return(enighe%&gt;%
+  filter(substr(folioviv,1,2)==hijos_mmsi[i,]$ent_ENH &amp;
+  est_socio==hijos_mmsi[i,]$est_socio_ENH &amp;
+    sexo == hijos_mmsi[i,]$P1_1 &amp;
+    edad == hijos_mmsi[i,]$P1_2 &amp;
+   edu_jefe_m == hijos_mmsi[i,]$NivEsc_Inf)%&gt;%
+  select(folioviv,foliohog)
+)
+}
+
+  
+#a&lt;-lapply(1:nrow(hijos_mmsi), busca)
+
+
+
+#contador&lt;-0
+#for(i in 1:nrow(hijos_mmsi))
+#{if(nrow(a[[i]])&gt;0)
+#  contador&lt;-contador +1
+#}
+#contador</code></pre>
+</div>
+<div id="guardamos-folios" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Guardamos folios</h2>
+<pre class="r"><code>saveRDS(a, file=&quot;Datos/folhijos_enihg.Rda&quot;)</code></pre>
+<pre class="r"><code>folhijos_enigh &lt;- readRDS(file=&quot;Datos/folhijos_enihg.Rda&quot;)</code></pre>
+<pre class="r"><code>names(folhijos_enigh) &lt;- as.character(1:nrow(hijos_mmsi))
+length(folhijos_enigh)</code></pre>
+</div>
+<div id="hijos-que-se-pudieron-encontrar-en-enigh" class="section level2" number="1.5">
+<h2 number="1.5"><span class="header-section-number">1.5</span> hijos que se pudieron encontrar en enigh</h2>
+<pre class="r"><code>L &lt;- c()
+for(i in 1:length(folhijos_enigh)){
+  if(!(nrow(folhijos_enigh[[i]])&gt;0)){
+    L&lt;-c(L,i)}
+}
+# Solo hijos que se les pudo encontrar en enigh-2016 (60%)
+folhijos_enighf&lt;-folhijos_enigh[-L]
+    
+
+length(folhijos_enighf)
+
+names(folhijos_enighf)
+names(folhijos_enigh)</code></pre>
+</div>
+<div id="edades-de-interés" class="section level2" number="1.6">
+<h2 number="1.6"><span class="header-section-number">1.6</span> Edades de interés</h2>
+<pre class="r"><code>hijos_mmsi%&gt;%
+  slice(as.integer(names(folhijos_enighf)))%&gt;%
+  filter(P1_2 %in% as.character(25:45))%&gt;%
+  select(P1_2)%&gt;%
+  count(P1_2)%&gt;%
+    hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Número de personas&quot;),
+           categories = as.character(25:45)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="estados" class="section level2" number="1.7">
+<h2 number="1.7"><span class="header-section-number">1.7</span> Estados</h2>
+<pre class="r"><code>hijos_mmsi%&gt;%
+  slice(as.integer(names(folhijos_enighf)))%&gt;%
+  filter(P1_2 %in% as.character(25:45))%&gt;%
+  count(ent_ENH)%&gt;%
+    hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Número de personas&quot;),
+           categories = get_labels(hijos_mmsi$ent_ENH)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+<p>Si tenemos ingresos de todos los estados,</p>
+</div>
+<div id="estados-por-edad" class="section level2" number="1.8">
+<h2 number="1.8"><span class="header-section-number">1.8</span> Estados por edad</h2>
+<pre class="r"><code>hijos_mmsi%&gt;%
+  slice(as.integer(names(folhijos_enighf)))%&gt;%
+  filter(P1_2 %in% as.character(25:45))%&gt;%
+  count(ent_ENH, P1_2)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(P1_2)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Número de entrevistados por estado edad&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Estados&quot;),
+           categories = get_labels(hijos_mmsi$ent_ENH)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+<p>Tenemos todos los estados de todas las edades, pero algunos estados solo tienen un individuo de una edad determinada.</p>
+</div>
+<div id="unicos-folios-diferentes-trabajos" class="section level2" number="1.9">
+<h2 number="1.9"><span class="header-section-number">1.9</span> Unicos folios, diferentes trabajos</h2>
+<pre class="r"><code>unicos_folios&lt;-function(i){
+folhijos_enighf[[i]]%&gt;%
+  distinct()
+}
+
+# filtramos unicos folios por diferentes trabajos de la misma persona
+a&lt;-lapply(1:length(folhijos_enighf), unicos_folios)
+names(a)&lt;-names(folhijos_enighf)
+length(a)
+
+folhijos_enighf2&lt;-a</code></pre>
+</div>
+<div id="ingreso-hijo" class="section level2" number="1.10">
+<h2 number="1.10"><span class="header-section-number">1.10</span> Ingreso hijo</h2>
+<pre class="r"><code>ingreso_hijo&lt;-function(i){
+  ingre_enigha%&gt;%
+  filter(folioviv %in% folhijos_enighf2[[i]]$folioviv &amp;
+    foliohog %in% folhijos_enighf2[[i]]$foliohog)%&gt;%summarise(
+     id_hijo = names(folhijos_enighf2[i]),
+     edad = hijos_mmsi[as.integer(names(folhijos_enighf2[i])),&quot;P1_2&quot;],
+      ing_men_p_h =mean(ing_men_p),
+     
+    )
+}
+
+# ingreso hijo pero ualgunos no podrian estar por no tener registro de salrio
+
+a&lt;-lapply(1:length(folhijos_enighf2), ingreso_hijo)
+ingreso_hijoc&lt;-a</code></pre>
+</div>
+<div id="filtro-si-si-tenemos-salario" class="section level2" number="1.11">
+<h2 number="1.11"><span class="header-section-number">1.11</span> filtro si si tenemos salario</h2>
+<pre class="r"><code># filtramos por edad[25-45] de tal manera que si se pudo encontrar su ingreso
+L &lt;- c()
+for(i in 1:length(ingreso_hijoc)){
+  if(is.nan(ingreso_hijoc[[i]]$ing_men_p_h)){
+    L&lt;-c(L,i)}
+}
+ingre_hijenc&lt;-ingreso_hijoc[-L]
+
+length(ingre_hijenc)
+
+
+ingre_hij_f1&lt;-bind_rows(ingre_hijenc[1:length(ingre_hijenc)])
+
+# vemos que pasa con la edad 
+
+ingre_hij_f1%&gt;%
+  group_by(edad)%&gt;%
+  summarise(
+   pro_ing = mean(ing_men_p_h)
+  )%&gt;%
+  hchart( &quot;line&quot;, hcaes(x = edad, y = pro_ing),name=&quot;ingreso promedio&quot;)</code></pre>
+<pre class="r"><code>ingre_hij_f &lt;- ingre_hij_f1%&gt;%
+  filter(between(as.integer(edad), 25, 45))
+
+ingre_hij_f%&gt;%
+  group_by(edad)%&gt;%
+  summarise(
+   pro_ing = mean(ing_men_p_h)
+  )%&gt;%
+  hchart( &quot;line&quot;, hcaes(x = edad, y = pro_ing),name=&quot;ingreso promedio&quot;)
+
+nrow(ingre_hij_f)</code></pre>
+<pre class="r"><code>saveRDS(ingre_hij_f, file=&quot;Datos/ingreso_hij_f.Rda&quot;)</code></pre>
+<pre class="r"><code>ingre_hij_f%&gt;%
+  select(id_hijo)</code></pre>
+</div>
+</div>
+<div id="construcción-emovi" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Construcción emovi</h1>
+<pre class="r"><code>poblacion&lt;-cargar_enigh_sav(&quot;poblacion&quot;) 
+concentrado&lt;-cargar_enigh_sav(&quot;concentradohogar&quot;)
+trabajos&lt;-cargar_enigh_sav(&quot;trabajos&quot;)</code></pre>
+<pre class="r"><code>poblacionf&lt;- poblacion%&gt;%
+  #filter(asis_esc == &quot;2&quot;)%&gt;% # ya no asiste a la escuela
+  select(folioviv,foliohog,numren,sexo,edad,nivelaprob)%&gt;%
+  filter(between(as.integer(edad),25,40))
+# no filtramos por jefe de hogar
+
+nrow(poblacionf)
+sum(is.na(poblacionf))</code></pre>
+<div id="trabajos-emovi" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> trabajos emovi</h2>
+<p>Filtrams los trabajos</p>
+<pre class="r"><code>trabajosf&lt;-trabajos%&gt;%
+select(folioviv,foliohog,numren)#%&gt;%
+ # filter(!is.na(sinco))
+NROW(trabajosf)
+#NROW(trabajos)
+sum(is.na(trabajosf))</code></pre>
+</div>
+<div id="concentrado" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> COncentrado</h2>
+<pre class="r"><code>#concentrado &lt;- concentrado %&gt;%
+#  select(folioviv,foliohog, est_socio)</code></pre>
+<pre class="r"><code>#62642
+
+enigh&lt;- full_join(poblacionf,trabajosf)%&gt;%
+   drop_na()
+#enigh&lt;-full_join(enigh,concentrado)%&gt;%
+ # drop_na()
+nrow(enigh)
+sum(is.na(enigh))</code></pre>
+</div>
+<div id="cambio-de-etiquetado-1" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> cambio de etiquetado</h2>
+<p>Pasamos las etiqeuteas de educación de emovi a</p>
+<pre class="r"><code>hijos_emovi &lt;- readRDS(file=&quot;Datos/hijos_emovi2017.Rda&quot;)
+hijos_emovi&lt;- hijos_emovi %&gt;%
+  mutate(p13_m = ifelse(p13 %in% c(1),&quot;1&quot;,
+                      ifelse( p13 == 2,&quot;2&quot;,
+                      ifelse(p13 %in% c(3,4),&quot;3&quot;,
+                      ifelse( p13 %in% c(5,6),&quot;4&quot;,
+                      ifelse(p13 %in% c(7,8),&quot;6&quot;,
+                      ifelse(p13 %in% c(9,10),&quot;5&quot;,
+                      ifelse(p13==11,&quot;7&quot;,
+                      ifelse(p13==12,&quot;8&quot;,&quot;0&quot;)))))))))
+unique(hijos_emovi$p13_m)
+
+enigh&lt;-enigh%&gt;%
+  mutate(nivelaprob=ifelse(nivelaprob==&quot;9&quot;,&quot;8&quot;,nivelaprob))
+
+enigh&lt;-enigh%&gt;%
+  filter(nivelaprob %in% unique(hijos_emovi$p13_m))
+
+nrow(enigh)</code></pre>
+</div>
+<div id="buscar-folios-con-caracteristicas-1" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> buscar folios con caracteristicas</h2>
+<pre class="r"><code>busca&lt;-function(i){
+return(enigh%&gt;%
+  filter(
+    as.integer(substr(folioviv,1,2))==hijos_emovi[i,]$Estado &amp;
+    sexo == hijos_emovi[i,]$p06 &amp;
+    edad == hijos_emovi[i,]$p05 &amp;
+    #sinco == hijos_emovi[i,]$SINCO3 &amp;
+    nivelaprob == hijos_emovi[i,]$p13_m)%&gt;%
+  select(folioviv,foliohog))
+}
+
+  
+a&lt;-lapply(1:nrow(hijos_emovi), busca)
+
+
+
+contador&lt;-0
+for(i in 1:nrow(hijos_emovi))
+{if(nrow(a[[i]])&gt;0)
+  contador&lt;-contador +1
+}
+contador</code></pre>
+</div>
+<div id="guardamos-folios-1" class="section level2" number="2.5">
+<h2 number="2.5"><span class="header-section-number">2.5</span> Guardamos folios</h2>
+<pre class="r"><code>saveRDS(a, file=&quot;Datos/folhijos_emovi.Rda&quot;)</code></pre>
+<pre class="r"><code>folhijos_emovi &lt;- readRDS(file=&quot;Datos/folhijos_emovi.Rda&quot;)</code></pre>
+<pre class="r"><code>names(folhijos_emovi) &lt;- as.character(1:nrow(hijos_emovi))
+length(folhijos_emovi)</code></pre>
+</div>
+<div id="hijos-que-se-pudieron-encontrar-en-enigh-1" class="section level2" number="2.6">
+<h2 number="2.6"><span class="header-section-number">2.6</span> hijos que se pudieron encontrar en enigh</h2>
+<pre class="r"><code>L &lt;- c()
+for(i in 1:length(folhijos_emovi)){
+  if(!(nrow(folhijos_emovi[[i]])&gt;0)){
+    L&lt;-c(L,i)}
+}
+# Solo hijos que se les pudo encontrar en enigh-2016 (60%)
+folhijos_emovif&lt;-folhijos_emovi[-L]
+    
+
+length(folhijos_emovif)
+
+#names(folhijos_emovif)
+#names(folhijos_emovi)</code></pre>
+</div>
+<div id="edades-de-interés-1" class="section level2" number="2.7">
+<h2 number="2.7"><span class="header-section-number">2.7</span> Edades de interés</h2>
+<pre class="r"><code>hijos_emovi%&gt;%
+  slice(as.integer(names(folhijos_emovif)))%&gt;%
+  select(p05)%&gt;%
+  count(p05)%&gt;%
+    hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Número de personas&quot;),
+           categories = as.character(25:45)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="estados-1" class="section level2" number="2.8">
+<h2 number="2.8"><span class="header-section-number">2.8</span> Estados</h2>
+<pre class="r"><code>hijos_emovi%&gt;%
+  slice(as.integer(names(folhijos_emovif)))%&gt;%
+  count(Estado)%&gt;%
+    hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Número de personas&quot;),
+           categories = get_labels(hijos_emovi$Estado)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="unicos-folios-diferentes-trabajos-1" class="section level2" number="2.9">
+<h2 number="2.9"><span class="header-section-number">2.9</span> Unicos folios, diferentes trabajos</h2>
+<pre class="r"><code>unicos_folios&lt;-function(i){
+folhijos_emovif[[i]]%&gt;%
+  distinct()
+}
+
+# filtramos unicos folios por diferentes trabajos de la misma persona
+a&lt;-lapply(1:length(folhijos_emovif), unicos_folios)
+names(a)&lt;-names(folhijos_emovif)
+length(a)
+
+folhijos_emovif2&lt;-a</code></pre>
+</div>
+<div id="ingreso-hijo-1" class="section level2" number="2.10">
+<h2 number="2.10"><span class="header-section-number">2.10</span> Ingreso hijo</h2>
+<pre class="r"><code>#cuidaddo generear ingre_enigha
+
+ingreso_hijo_emovi&lt;-function(i){
+  ingre_enigha%&gt;%
+  filter(folioviv %in% folhijos_emovif2[[i]]$folioviv &amp;
+    foliohog %in% folhijos_emovif2[[i]]$foliohog)%&gt;%summarise(
+     id_hijo = names(folhijos_emovif2[i]),
+     id_ho = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;id_ho&quot;],
+     mov= hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;mov&quot;],
+     regionh = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;region&quot;],
+     edad = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;p05&quot;],
+      ing_men_p_h =mean(ing_men_p),
+     cohort = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;p133&quot;],
+    estrato = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;estrato&quot;],
+    estado = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;Estado&quot;],
+    sexo = hijos_emovi[as.integer(names(folhijos_emovif2[i])),&quot;p06&quot;]
+     )
+}
+
+# ingreso hijo pero ualgunos no podrian estar por no tener registro de salario
+
+a&lt;-lapply(1:length(folhijos_emovif2), ingreso_hijo_emovi)
+ingreso_hijoc&lt;-a
+length(ingreso_hijoc)</code></pre>
+</div>
+<div id="filtro-si-si-tenemos-salario-1" class="section level2" number="2.11">
+<h2 number="2.11"><span class="header-section-number">2.11</span> filtro si si tenemos salario</h2>
+<pre class="r"><code>L &lt;- c()
+for(i in 1:length(ingreso_hijoc)){
+  if(is.nan(ingreso_hijoc[[i]]$ing_men_p_h)){
+    L&lt;-c(L,i)}
+}
+
+ingre_hijenc&lt;-ingreso_hijoc[-L]
+
+length(ingre_hijenc)
+
+
+ingre_hij_f1&lt;-bind_rows(ingre_hijenc[1:length(ingre_hijenc)])
+
+# vemos que pasa con la edad 
+
+ingre_hij_f1%&gt;%
+  group_by(edad)%&gt;%
+  summarise(
+   pro_ing = mean(ing_men_p_h)
+  )%&gt;%
+  hchart( &quot;line&quot;, hcaes(x = edad, y = pro_ing),name=&quot;ingreso promedio&quot;)</code></pre>
+</div>
+<div id="verificamos-que-tan-buena-es-la-construcción" class="section level2" number="2.12">
+<h2 number="2.12"><span class="header-section-number">2.12</span> verificamos que tan buena es la construcción</h2>
+<pre class="r"><code>ingre_hij_f2&lt;-ingre_hij_f1%&gt;%
+  mutate(cohort_e = ifelse(ing_men_p_h&lt;=2400,1,
+                          ifelse(ing_men_p_h&lt;=4800,2,
+                          ifelse(ing_men_p_h&lt;=7200,3,
+                          ifelse(ing_men_p_h&lt;=12000,4,
+                          ifelse(ing_men_p_h&lt;=24000,5,6))))),
+         cohort_dif=cohort-cohort_e)
+ingre_hij_f2%&gt;%
+count(cohort_dif)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Cohorts estimados&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;&quot;)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+<p>Cuando se utiliza l aocupación no se tiene una mejor estomación pero por la base no se tienen datos suficientes, cabe señalar que los salarios pormedios poredad cambian sustancialmente (mayor en los 30’s)</p>
+<pre class="r"><code>ingre_hij_f2%&gt;%
+count(cohort_dif)</code></pre>
+<pre class="r"><code>a&lt;-ingre_hij_f2%&gt;%
+  filter(cohort_dif==0)
+
+sort(unique(a$edad))
+sort(unique(a$estado))
+sort(unique(a$estrato))</code></pre>
+<pre class="r"><code>  hcboxplot(x = a$ing_men_p_h, var = a$edad)
+  
+
+
+saveRDS(a, file=&quot;Datos/ingreso_hij_f_emovi.Rda&quot;)</code></pre>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW5ncmVzbyBIaWpvcyAiCmF1dGhvcjogIlJhZmFlbCBNYXJ0w61uZXogTWFydMOtbmV6IgpvdXRwdXQ6IAogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvY19mbG9hdDogdHJ1ZQogICAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICBjb2RlX2ZvbGRpbmc6IHNob3cKLS0tCgoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFLCBldmFsID0gRkFMU0UpCmBgYAoKCmBgYHtyIGNhcmdhcl9iaWxpb3RlY2FzfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShoYXZlbikgIyBpbXBvcnRhLCBlbnRyZSBvdHJvcyBzb2Z0d2FyZSwgZGUgU3RhdGEKbGlicmFyeShzamxhYmVsbGVkKSAjIG1hbmVqYXIgbGFiZWxzIGRlIGxhcyB2YXJpYWJsZXMgCmxpYnJhcnkob3Blbnhsc3gpICMgbGVlciBhcmNoaXZvcyBkZSBleGNlbApsaWJyYXJ5KERUKSAjIHZpc3VhbGl6YXIgYSB0YWJsYXMKbGlicmFyeShkYXRhLnRhYmxlKSAjIGNvbnZlcnRpciBhIHRhYmxhcwpsaWJyYXJ5KGhpZ2hjaGFydGVyKSAjIGdyw6FmaWNhcyBpbnRlcmFjdGl2YXMKbGlicmFyeSh3ZWJzaG90KQpgYGAKCgpgYGB7ciBjYXJhZ2FyX2VuaWdofQpjYXJnYXJfZW5pZ2g8LSBmdW5jdGlvbihkb2N1KXsKCnJldHVybihyZWFkX3N0YXRhKAogICAgICAgICAgICAgICAgICAgICBwYXRoID0gcGFzdGUoIkRhdG9zL0VOSUdILTIwMTYvIixkb2N1LCIuZHRhIixzZXA9IiIpLAogICAgICAgICAgICAgICAgICAgICBhdG9taWMudG8uZmFjID0gVFJVRSwKICAgICAgICAgICAgICAgICAgICAgZW5jID0gTlVMTCwKICAgICAgICAgICAgICAgICAgICAgKSkKfQoKY2FyZ2FyX2VuaWdoX3NhdjwtIGZ1bmN0aW9uKGRvY3UpewoKcmV0dXJuKHJlYWRfc3BzcygKICAgICAgICAgICAgICAgICAgICAgcGF0aCA9IHBhc3RlKCJEYXRvcy9FTklHSC0yMDE2LyIsZG9jdSwiLnNhdiIsc2VwPSIiKSwKICAgICAgICAgICAgICAgICAgICAgYXRvbWljLnRvLmZhYyA9IFRSVUUsCiAgICAgICAgICAgICAgICAgICAgIGVuYyA9IE5VTEwsCiAgICAgICAgICAgICAgICAgICAgICkpCn0KCgoKaGlqb3NfbW1zaSA8LSByZWFkUkRTKGZpbGU9IkRhdG9zL2hpam9zX21tc2kuUmRhIikKYGBgCgpgYGB7ciBldGlxdWV0YXNfdmVyfQpnZXRfbGFiZWxzKGhpam9zX21tc2kpCm5yb3coaGlqb3NfbW1zaSkKYGBgCgpTZWxlY2Npb25hbW9zOgoKLSBFbnRpZGFkIEZlZGVyYXRpdmEgKGVudF9FTkgsIGVuIGN1YWxxdWllcmEgZW5pZ2ggMiBkaWdpdG9zIGRlbCBmb2xpbyBkZSB2aXZpZW5kYSkKLSBFc3RyYXRvIHNvY2llY29uw7NtaWNvIChlc3Rfc29jaW9fRU5ILCBjb25jZW50cmFkb2hvZ2FyIGVzdF9zb2NpbykKLSBTZXhvIChQMV8xLCBwb2JsYWNpb24gc2V4bykKLSBFZGFkIChQMV8yLCBwb2JsYWNpb24gZWRhZCkKLSBQYXJlbnRlc2NvIChQMV8zLCBwb2JsYWNpb24gbnVtcmVuKHBhcmVudGVzY28pKQotIE5pdmVsIGRlIGVkdWNhY2nDs24gaW5mb3JtYW50ZSwgKE5pdkVzY19JbmYsIGNvbmNlbnRyYWRvaG9nYXIgZWR1Y2FfamVmZSkKLSBEaXZpc2lvbiBkZSBvY3VhcGNpw7NuIGRlbCBpbmZvcm1hbnRlIChEaXZPY3VfQWN0LCB0cmFiYWpvcyBzaW5jbykKCjxkaXYgaWQgPSAianVzdGlmaWNhciI+CkVzdHJhZW1vcyBkZSBwb2JsYWNpw7NuLCBsYSB2aXZpZW5kYSwgZWwgaG9nYXIgZWwgaW5kaXZpdWRvLCBlbCBzZXhvIGxhIGVkYWQsIGVsIHBhcmVucmVzY28gcGVybyBlc28gZXMgbnVtcmVuLCBsbyBjb21wcm9iYW1vcyBkZSB0b2RhcyBtYW5lcmFzIHkgZnVlIGNpZXJ0bwo8L2Rpdj4KCiMgQ29uc3RydWNjacOzbiBtbXNpCgpgYGB7ciBjYXJnYXJfcG9ibGFfY29uY2VuX3RyYWJham9zfQpwb2JsYWNpb248LWNhcmdhcl9lbmlnaF9zYXYoInBvYmxhY2lvbiIpIApjb25jZW50cmFkbzwtY2FyZ2FyX2VuaWdoX3NhdigiY29uY2VudHJhZG9ob2dhciIpCnRyYWJham9zPC1jYXJnYXJfZW5pZ2hfc2F2KCJ0cmFiYWpvcyIpCmBgYAoKcGFyZW50ZXNjbyB5IG51bXJlbiBlcyBlcXVpdmFsZW50ZSwgZmlsdHJhbW9zIGFsIGplZmUgZGVsIGhvZ2FyCgpgYGB7ciBmaWx0cmFtb3NfcG9ifQpwb2JsYWNpb25mPC0gcG9ibGFjaW9uJT4lCiAgc2VsZWN0KGZvbGlvdml2LGZvbGlvaG9nLG51bXJlbixzZXhvLGVkYWQpJT4lCiAgZmlsdGVyKG51bXJlbj09IjAxIikKbnJvdyhwb2JsYWNpb25mKQpgYGAKCkluc2VydGFzbyBlc3RyYXRvIHNvY2llY29ub21pY28geSBlZHVjYWNpw7NuIGRlbCBqZWZlLCBkZWwgY29uY2V0cmFkby4gRUwgZXN0cmF0byBzb2NpZWNvbm9taWNvIGVzIHBhcmEgbGEgbWlzbWEgdml2aWVuZGEsIHkgbGEgZWR1Y2FjacOzbiBzb2xvIGVzIGxhIGRlbCBqZWZlIGRlbCBob2dhci4gRXN0cmFlbW9zIGVsIGVzdHJhdG8gc29jaWVjb25vbWljbyBkZWwgCgpgYGB7ciwgYWdyZWdhbW9zIH0KcG9ibGFjaW9uZiA8LSBwb2JsYWNpb25mICU+JQogIG11dGF0ZShlZHVfamVmZSA9IGNvbmNlbnRyYWRvJGVkdWNhX2plZmUsCiAgICAgICAgIGVzdF9zb2NpbyA9IGNvbmNlbnRyYWRvJGVzdF9zb2NpbykKCk5ST1cocG9ibGFjaW9uZikKdW5pcXVlKHBvYmxhY2lvbmYkbnVtcmVuKQpgYGAKCiMjIHRyYWJham9zIG1tc2kKRmlsdHJhbXMgbG9zIHRyYWJhampvcyBkZSBsb3MgamVmZXMgZGUgZmFtaWxpYQoKYGBge3J9CnRyYWJham9zZjwtdHJhYmFqb3MlPiUKICBmaWx0ZXIobnVtcmVuID09IjAxIiklPiUKIHNlbGVjdChmb2xpb3Zpdixmb2xpb2hvZyxudW1yZW4sc2luY28pCk5ST1codHJhYmFqb3NmKQojTlJPVyh0cmFiYWpvcykKc3VtKGlzLm5hKHRyYWJham9zZikpCgpgYGAKCgpgYGB7cn0KIzYyNjQyCgplbmlnaDwtIGZ1bGxfam9pbihwb2JsYWNpb25mLHRyYWJham9zZiklPiUKICBmaWx0ZXIoIWlzLm5hKHNpbmNvKSkKbnJvdyhlbmlnaCkKc3VtKGlzLm5hKGVuaWdoKSkKYGBgCgojIyBjYW1iaW8gZGUgZXRpcXVldGFkbwpQYXNhbW9zIGxhcyBldGlxZXV0ZWFzIGRlIGVkdWNhY2nDs24gZGUgZW5pZ2ggYSAKCmBgYHtyfQplbmlnaGU8LSBlbmlnaCAlPiUKICBtdXRhdGUoZWR1X2plZmVfbSA9IGlmZWxzZShhcy5pbnRlZ2VyKGVkdV9qZWZlKSAlaW4lIGMoMSwyKSwiMSIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoYXMuaW50ZWdlcihlZHVfamVmZSkgPT0gMywiMiIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoYXMuaW50ZWdlcihlZHVfamVmZSkgPT0gNCwiMyIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoYXMuaW50ZWdlcihlZHVfamVmZSkgPT0gNSwiNCIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoYXMuaW50ZWdlcihlZHVfamVmZSk9PSA2LCI1IiwKICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShhcy5pbnRlZ2VyKGVkdV9qZWZlKSAlaW4lIGMoNyw4KSw2LCI3IikpKSkpKSkKdW5pcXVlKGVuaWdoZSRlZHVfamVmZV9tKQpgYGAKCiMjIGJ1c2NhciBmb2xpb3MgY29uIGNhcmFjdGVyaXN0aWNhcwoKYGBge3J9CmJ1c2NhPC1mdW5jdGlvbihpKXsKcmV0dXJuKGVuaWdoZSU+JQogIGZpbHRlcihzdWJzdHIoZm9saW92aXYsMSwyKT09aGlqb3NfbW1zaVtpLF0kZW50X0VOSCAmCiAgZXN0X3NvY2lvPT1oaWpvc19tbXNpW2ksXSRlc3Rfc29jaW9fRU5IICYKICAgIHNleG8gPT0gaGlqb3NfbW1zaVtpLF0kUDFfMSAmCiAgICBlZGFkID09IGhpam9zX21tc2lbaSxdJFAxXzIgJgogICBlZHVfamVmZV9tID09IGhpam9zX21tc2lbaSxdJE5pdkVzY19JbmYpJT4lCiAgc2VsZWN0KGZvbGlvdml2LGZvbGlvaG9nKQopCn0KCiAgCiNhPC1sYXBwbHkoMTpucm93KGhpam9zX21tc2kpLCBidXNjYSkKCgoKI2NvbnRhZG9yPC0wCiNmb3IoaSBpbiAxOm5yb3coaGlqb3NfbW1zaSkpCiN7aWYobnJvdyhhW1tpXV0pPjApCiMgIGNvbnRhZG9yPC1jb250YWRvciArMQojfQojY29udGFkb3IKCmBgYAojIyBHdWFyZGFtb3MgZm9saW9zCgpgYGB7cn0Kc2F2ZVJEUyhhLCBmaWxlPSJEYXRvcy9mb2xoaWpvc19lbmloZy5SZGEiKQpgYGAKCgpgYGB7cn0KZm9saGlqb3NfZW5pZ2ggPC0gcmVhZFJEUyhmaWxlPSJEYXRvcy9mb2xoaWpvc19lbmloZy5SZGEiKQpgYGAKCgpgYGB7cn0KbmFtZXMoZm9saGlqb3NfZW5pZ2gpIDwtIGFzLmNoYXJhY3RlcigxOm5yb3coaGlqb3NfbW1zaSkpCmxlbmd0aChmb2xoaWpvc19lbmlnaCkKYGBgCgojIyBoaWpvcyBxdWUgc2UgcHVkaWVyb24gZW5jb250cmFyIGVuIGVuaWdoCgpgYGB7cn0KTCA8LSBjKCkKZm9yKGkgaW4gMTpsZW5ndGgoZm9saGlqb3NfZW5pZ2gpKXsKICBpZighKG5yb3coZm9saGlqb3NfZW5pZ2hbW2ldXSk+MCkpewogICAgTDwtYyhMLGkpfQp9CiMgU29sbyBoaWpvcyBxdWUgc2UgbGVzIHB1ZG8gZW5jb250cmFyIGVuIGVuaWdoLTIwMTYgKDYwJSkKZm9saGlqb3NfZW5pZ2hmPC1mb2xoaWpvc19lbmlnaFstTF0KICAgIAoKbGVuZ3RoKGZvbGhpam9zX2VuaWdoZikKCm5hbWVzKGZvbGhpam9zX2VuaWdoZikKbmFtZXMoZm9saGlqb3NfZW5pZ2gpCmBgYAoKCiMjIEVkYWRlcyBkZSBpbnRlcsOpcwoKYGBge3J9Cmhpam9zX21tc2klPiUKICBzbGljZShhcy5pbnRlZ2VyKG5hbWVzKGZvbGhpam9zX2VuaWdoZikpKSU+JQogIGZpbHRlcihQMV8yICVpbiUgYXMuY2hhcmFjdGVyKDI1OjQ1KSklPiUKICBzZWxlY3QoUDFfMiklPiUKICBjb3VudChQMV8yKSU+JQogICAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICduJykpJT4lCiAgaGNfYWRkX3RoZW1lKGhjX3RoZW1lX2ZmeCgpKSU+JQogIGhjX3RpdGxlKAogICAgdGV4dCA9ICIiCiAgKSAlPiUKICAjaGNfc3VidGl0bGUodGV4dCA9ICJMYXMgZWRhZGVzIGVzdMOhbiBhZ3J1cGFkYXMgZW4gaW50ZXJ2YWxvcyAKICAgIyAgICAgICAgICAgZGUgMTAgYcOxb3MgKGRhIGNsaWMgc29icmUgRiBvIE0pIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIk7Dum1lcm8gZGUgcGFydGljaXBhbnRlcyIpKSU+JQogIGhjX3hBeGlzKHRpdGxlPWxpc3QodGV4dD0iTsO6bWVybyBkZSBwZXJzb25hcyIpLAogICAgICAgICAgIGNhdGVnb3JpZXMgPSBhcy5jaGFyYWN0ZXIoMjU6NDUpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKCmBgYAoKCiMjIEVzdGFkb3MKCmBgYHtyfQpoaWpvc19tbXNpJT4lCiAgc2xpY2UoYXMuaW50ZWdlcihuYW1lcyhmb2xoaWpvc19lbmlnaGYpKSklPiUKICBmaWx0ZXIoUDFfMiAlaW4lIGFzLmNoYXJhY3RlcigyNTo0NSkpJT4lCiAgY291bnQoZW50X0VOSCklPiUKICAgIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiIgogICkgJT4lCiAgI2hjX3N1YnRpdGxlKHRleHQgPSAiTGFzIGVkYWRlcyBlc3TDoW4gYWdydXBhZGFzIGVuIGludGVydmFsb3MgCiAgICMgICAgICAgICAgIGRlIDEwIGHDsW9zIChkYSBjbGljIHNvYnJlIEYgbyBNKSIpICU+JQogICMgaGNfY3JlZGl0cygKICAjICBlbmFibGVkID0gVFJVRSwgdGV4dCA9ICJTb3VyY2U6IFNTUyIsCiAgIyAgc3R5bGUgPSBsaXN0KGZvbnRTaXplID0gIjEycHgiKSklPiUKICBoY195QXhpcyh0aXRsZSA9IGxpc3QodGV4dCA9ICJOw7ptZXJvIGRlIHBhcnRpY2lwYW50ZXMiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9Ik7Dum1lcm8gZGUgcGVyc29uYXMiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhoaWpvc19tbXNpJGVudF9FTkgpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKCmBgYAoKU2kgdGVuZW1vcyBpbmdyZXNvcyBkZSB0b2RvcyBsb3MgZXN0YWRvcywKCiMjIEVzdGFkb3MgcG9yIGVkYWQKCmBgYHtyfQpoaWpvc19tbXNpJT4lCiAgc2xpY2UoYXMuaW50ZWdlcihuYW1lcyhmb2xoaWpvc19lbmlnaGYpKSklPiUKICBmaWx0ZXIoUDFfMiAlaW4lIGFzLmNoYXJhY3RlcigyNTo0NSkpJT4lCiAgY291bnQoZW50X0VOSCwgUDFfMiklPiUgCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICduJywgIGdyb3VwID0gYXNfbGFiZWwoUDFfMikpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiTsO6bWVybyBkZSBlbnRyZXZpc3RhZG9zIHBvciBlc3RhZG8gZWRhZCIKICApICU+JQogICNoY19zdWJ0aXRsZSh0ZXh0ID0gIkxhcyBlZGFkZXMgZXN0w6FuIGFncnVwYWRhcyBlbiBpbnRlcnZhbG9zIAogICAjICAgICAgICAgICBkZSAxMCBhw7FvcyAoZGEgY2xpYyBzb2JyZSBGIG8gTSkiKSAlPiUKICAjIGhjX2NyZWRpdHMoCiAgIyAgZW5hYmxlZCA9IFRSVUUsIHRleHQgPSAiU291cmNlOiBTU1MiLAogICMgIHN0eWxlID0gbGlzdChmb250U2l6ZSA9ICIxMnB4IikpJT4lCiAgaGNfeUF4aXModGl0bGUgPSBsaXN0KHRleHQgPSAiTsO6bWVybyBkZSBwYXJ0aWNpcGFudGVzIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJFc3RhZG9zIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGdldF9sYWJlbHMoaGlqb3NfbW1zaSRlbnRfRU5IKSkgJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKYGBgCgpUZW5lbW9zIHRvZG9zIGxvcyBlc3RhZG9zIGRlIHRvZGFzIGxhcyBlZGFkZXMsIHBlcm8gYWxndW5vcyBlc3RhZG9zIHNvbG8gdGllbmVuIHVuIGluZGl2aWR1byBkZSB1bmEgZWRhZCBkZXRlcm1pbmFkYS4gCgoKCiMjIFVuaWNvcyBmb2xpb3MsIGRpZmVyZW50ZXMgdHJhYmFqb3MKCmBgYHtyfQp1bmljb3NfZm9saW9zPC1mdW5jdGlvbihpKXsKZm9saGlqb3NfZW5pZ2hmW1tpXV0lPiUKICBkaXN0aW5jdCgpCn0KCiMgZmlsdHJhbW9zIHVuaWNvcyBmb2xpb3MgcG9yIGRpZmVyZW50ZXMgdHJhYmFqb3MgZGUgbGEgbWlzbWEgcGVyc29uYQphPC1sYXBwbHkoMTpsZW5ndGgoZm9saGlqb3NfZW5pZ2hmKSwgdW5pY29zX2ZvbGlvcykKbmFtZXMoYSk8LW5hbWVzKGZvbGhpam9zX2VuaWdoZikKbGVuZ3RoKGEpCgpmb2xoaWpvc19lbmlnaGYyPC1hCgpgYGAKCgojIyBJbmdyZXNvIGhpam8KCmBgYHtyfQppbmdyZXNvX2hpam88LWZ1bmN0aW9uKGkpewogIGluZ3JlX2VuaWdoYSU+JQogIGZpbHRlcihmb2xpb3ZpdiAlaW4lIGZvbGhpam9zX2VuaWdoZjJbW2ldXSRmb2xpb3ZpdiAmCiAgICBmb2xpb2hvZyAlaW4lIGZvbGhpam9zX2VuaWdoZjJbW2ldXSRmb2xpb2hvZyklPiVzdW1tYXJpc2UoCiAgICAgaWRfaGlqbyA9IG5hbWVzKGZvbGhpam9zX2VuaWdoZjJbaV0pLAogICAgIGVkYWQgPSBoaWpvc19tbXNpW2FzLmludGVnZXIobmFtZXMoZm9saGlqb3NfZW5pZ2hmMltpXSkpLCJQMV8yIl0sCiAgICAgIGluZ19tZW5fcF9oID1tZWFuKGluZ19tZW5fcCksCiAgICAgCiAgICApCn0KCiMgaW5ncmVzbyBoaWpvIHBlcm8gdWFsZ3Vub3Mgbm8gcG9kcmlhbiBlc3RhciBwb3Igbm8gdGVuZXIgcmVnaXN0cm8gZGUgc2FscmlvCgphPC1sYXBwbHkoMTpsZW5ndGgoZm9saGlqb3NfZW5pZ2hmMiksIGluZ3Jlc29faGlqbykKaW5ncmVzb19oaWpvYzwtYQpgYGAKCgojIyBmaWx0cm8gc2kgc2kgdGVuZW1vcyBzYWxhcmlvCgpgYGB7cn0KIyBmaWx0cmFtb3MgcG9yIGVkYWRbMjUtNDVdIGRlIHRhbCBtYW5lcmEgcXVlIHNpIHNlIHB1ZG8gZW5jb250cmFyIHN1IGluZ3Jlc28KTCA8LSBjKCkKZm9yKGkgaW4gMTpsZW5ndGgoaW5ncmVzb19oaWpvYykpewogIGlmKGlzLm5hbihpbmdyZXNvX2hpam9jW1tpXV0kaW5nX21lbl9wX2gpKXsKICAgIEw8LWMoTCxpKX0KfQppbmdyZV9oaWplbmM8LWluZ3Jlc29faGlqb2NbLUxdCgpsZW5ndGgoaW5ncmVfaGlqZW5jKQoKCmluZ3JlX2hpal9mMTwtYmluZF9yb3dzKGluZ3JlX2hpamVuY1sxOmxlbmd0aChpbmdyZV9oaWplbmMpXSkKCiMgdmVtb3MgcXVlIHBhc2EgY29uIGxhIGVkYWQgCgppbmdyZV9oaWpfZjElPiUKICBncm91cF9ieShlZGFkKSU+JQogIHN1bW1hcmlzZSgKICAgcHJvX2luZyA9IG1lYW4oaW5nX21lbl9wX2gpCiAgKSU+JQogIGhjaGFydCggImxpbmUiLCBoY2Flcyh4ID0gZWRhZCwgeSA9IHByb19pbmcpLG5hbWU9ImluZ3Jlc28gcHJvbWVkaW8iKQogIApgYGAKCmBgYHtyfQppbmdyZV9oaWpfZiA8LSBpbmdyZV9oaWpfZjElPiUKICBmaWx0ZXIoYmV0d2Vlbihhcy5pbnRlZ2VyKGVkYWQpLCAyNSwgNDUpKQoKaW5ncmVfaGlqX2YlPiUKICBncm91cF9ieShlZGFkKSU+JQogIHN1bW1hcmlzZSgKICAgcHJvX2luZyA9IG1lYW4oaW5nX21lbl9wX2gpCiAgKSU+JQogIGhjaGFydCggImxpbmUiLCBoY2Flcyh4ID0gZWRhZCwgeSA9IHByb19pbmcpLG5hbWU9ImluZ3Jlc28gcHJvbWVkaW8iKQoKbnJvdyhpbmdyZV9oaWpfZikKYGBgCgoKYGBge3J9CnNhdmVSRFMoaW5ncmVfaGlqX2YsIGZpbGU9IkRhdG9zL2luZ3Jlc29faGlqX2YuUmRhIikKYGBgCgoKYGBge3J9CmluZ3JlX2hpal9mJT4lCiAgc2VsZWN0KGlkX2hpam8pCiAgCmBgYAoKCgojIENvbnN0cnVjY2nDs24gZW1vdmkKCgpgYGB7cn0KcG9ibGFjaW9uPC1jYXJnYXJfZW5pZ2hfc2F2KCJwb2JsYWNpb24iKSAKY29uY2VudHJhZG88LWNhcmdhcl9lbmlnaF9zYXYoImNvbmNlbnRyYWRvaG9nYXIiKQp0cmFiYWpvczwtY2FyZ2FyX2VuaWdoX3NhdigidHJhYmFqb3MiKQpgYGAKCgpgYGB7cn0KcG9ibGFjaW9uZjwtIHBvYmxhY2lvbiU+JQogICNmaWx0ZXIoYXNpc19lc2MgPT0gIjIiKSU+JSAjIHlhIG5vIGFzaXN0ZSBhIGxhIGVzY3VlbGEKICBzZWxlY3QoZm9saW92aXYsZm9saW9ob2csbnVtcmVuLHNleG8sZWRhZCxuaXZlbGFwcm9iKSU+JQogIGZpbHRlcihiZXR3ZWVuKGFzLmludGVnZXIoZWRhZCksMjUsNDApKQojIG5vIGZpbHRyYW1vcyBwb3IgamVmZSBkZSBob2dhcgoKbnJvdyhwb2JsYWNpb25mKQpzdW0oaXMubmEocG9ibGFjaW9uZikpCgpgYGAKCgojIyB0cmFiYWpvcyBlbW92aQoKRmlsdHJhbXMgbG9zIHRyYWJham9zCgpgYGB7cn0KdHJhYmFqb3NmPC10cmFiYWpvcyU+JQpzZWxlY3QoZm9saW92aXYsZm9saW9ob2csbnVtcmVuKSMlPiUKICMgZmlsdGVyKCFpcy5uYShzaW5jbykpCk5ST1codHJhYmFqb3NmKQojTlJPVyh0cmFiYWpvcykKc3VtKGlzLm5hKHRyYWJham9zZikpCgpgYGAKCiMjIENPbmNlbnRyYWRvCgpgYGB7cn0KI2NvbmNlbnRyYWRvIDwtIGNvbmNlbnRyYWRvICU+JQojICBzZWxlY3QoZm9saW92aXYsZm9saW9ob2csIGVzdF9zb2NpbykKYGBgCgoKYGBge3J9CiM2MjY0MgoKZW5pZ2g8LSBmdWxsX2pvaW4ocG9ibGFjaW9uZix0cmFiYWpvc2YpJT4lCiAgIGRyb3BfbmEoKQojZW5pZ2g8LWZ1bGxfam9pbihlbmlnaCxjb25jZW50cmFkbyklPiUKICMgZHJvcF9uYSgpCm5yb3coZW5pZ2gpCnN1bShpcy5uYShlbmlnaCkpCmBgYAoKIyMgY2FtYmlvIGRlIGV0aXF1ZXRhZG8KUGFzYW1vcyBsYXMgZXRpcWV1dGVhcyBkZSBlZHVjYWNpw7NuIGRlIGVtb3ZpIGEgCgpgYGB7cn0KaGlqb3NfZW1vdmkgPC0gcmVhZFJEUyhmaWxlPSJEYXRvcy9oaWpvc19lbW92aTIwMTcuUmRhIikKaGlqb3NfZW1vdmk8LSBoaWpvc19lbW92aSAlPiUKICBtdXRhdGUocDEzX20gPSBpZmVsc2UocDEzICVpbiUgYygxKSwiMSIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoIHAxMyA9PSAyLCIyIiwKICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShwMTMgJWluJSBjKDMsNCksIjMiLAogICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKCBwMTMgJWluJSBjKDUsNiksIjQiLAogICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHAxMyAlaW4lIGMoNyw4KSwiNiIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocDEzICVpbiUgYyg5LDEwKSwiNSIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocDEzPT0xMSwiNyIsCiAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocDEzPT0xMiwiOCIsIjAiKSkpKSkpKSkpCnVuaXF1ZShoaWpvc19lbW92aSRwMTNfbSkKCmVuaWdoPC1lbmlnaCU+JQogIG11dGF0ZShuaXZlbGFwcm9iPWlmZWxzZShuaXZlbGFwcm9iPT0iOSIsIjgiLG5pdmVsYXByb2IpKQoKZW5pZ2g8LWVuaWdoJT4lCiAgZmlsdGVyKG5pdmVsYXByb2IgJWluJSB1bmlxdWUoaGlqb3NfZW1vdmkkcDEzX20pKQoKbnJvdyhlbmlnaCkKYGBgCgojIyBidXNjYXIgZm9saW9zIGNvbiBjYXJhY3RlcmlzdGljYXMKCmBgYHtyfQpidXNjYTwtZnVuY3Rpb24oaSl7CnJldHVybihlbmlnaCU+JQogIGZpbHRlcigKICAgIGFzLmludGVnZXIoc3Vic3RyKGZvbGlvdml2LDEsMikpPT1oaWpvc19lbW92aVtpLF0kRXN0YWRvICYKICAgIHNleG8gPT0gaGlqb3NfZW1vdmlbaSxdJHAwNiAmCiAgICBlZGFkID09IGhpam9zX2Vtb3ZpW2ksXSRwMDUgJgogICAgI3NpbmNvID09IGhpam9zX2Vtb3ZpW2ksXSRTSU5DTzMgJgogICAgbml2ZWxhcHJvYiA9PSBoaWpvc19lbW92aVtpLF0kcDEzX20pJT4lCiAgc2VsZWN0KGZvbGlvdml2LGZvbGlvaG9nKSkKfQoKICAKYTwtbGFwcGx5KDE6bnJvdyhoaWpvc19lbW92aSksIGJ1c2NhKQoKCgpjb250YWRvcjwtMApmb3IoaSBpbiAxOm5yb3coaGlqb3NfZW1vdmkpKQp7aWYobnJvdyhhW1tpXV0pPjApCiAgY29udGFkb3I8LWNvbnRhZG9yICsxCn0KY29udGFkb3IKCmBgYAoKIyMgR3VhcmRhbW9zIGZvbGlvcwoKYGBge3J9CnNhdmVSRFMoYSwgZmlsZT0iRGF0b3MvZm9saGlqb3NfZW1vdmkuUmRhIikKYGBgCgoKYGBge3J9CmZvbGhpam9zX2Vtb3ZpIDwtIHJlYWRSRFMoZmlsZT0iRGF0b3MvZm9saGlqb3NfZW1vdmkuUmRhIikKYGBgCgoKYGBge3J9Cm5hbWVzKGZvbGhpam9zX2Vtb3ZpKSA8LSBhcy5jaGFyYWN0ZXIoMTpucm93KGhpam9zX2Vtb3ZpKSkKbGVuZ3RoKGZvbGhpam9zX2Vtb3ZpKQpgYGAKCgojIyBoaWpvcyBxdWUgc2UgcHVkaWVyb24gZW5jb250cmFyIGVuIGVuaWdoCgpgYGB7cn0KTCA8LSBjKCkKZm9yKGkgaW4gMTpsZW5ndGgoZm9saGlqb3NfZW1vdmkpKXsKICBpZighKG5yb3coZm9saGlqb3NfZW1vdmlbW2ldXSk+MCkpewogICAgTDwtYyhMLGkpfQp9CiMgU29sbyBoaWpvcyBxdWUgc2UgbGVzIHB1ZG8gZW5jb250cmFyIGVuIGVuaWdoLTIwMTYgKDYwJSkKZm9saGlqb3NfZW1vdmlmPC1mb2xoaWpvc19lbW92aVstTF0KICAgIAoKbGVuZ3RoKGZvbGhpam9zX2Vtb3ZpZikKCiNuYW1lcyhmb2xoaWpvc19lbW92aWYpCiNuYW1lcyhmb2xoaWpvc19lbW92aSkKYGBgCgojIyBFZGFkZXMgZGUgaW50ZXLDqXMKCmBgYHtyfQpoaWpvc19lbW92aSU+JQogIHNsaWNlKGFzLmludGVnZXIobmFtZXMoZm9saGlqb3NfZW1vdmlmKSkpJT4lCiAgc2VsZWN0KHAwNSklPiUKICBjb3VudChwMDUpJT4lCiAgICBoY2hhcnQoJ2NvbHVtbicsCiAgICAgICAgIGhjYWVzKCB5ID0gJ24nKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIiIKICApICU+JQogICNoY19zdWJ0aXRsZSh0ZXh0ID0gIkxhcyBlZGFkZXMgZXN0w6FuIGFncnVwYWRhcyBlbiBpbnRlcnZhbG9zIAogICAjICAgICAgICAgICBkZSAxMCBhw7FvcyAoZGEgY2xpYyBzb2JyZSBGIG8gTSkiKSAlPiUKICAjIGhjX2NyZWRpdHMoCiAgIyAgZW5hYmxlZCA9IFRSVUUsIHRleHQgPSAiU291cmNlOiBTU1MiLAogICMgIHN0eWxlID0gbGlzdChmb250U2l6ZSA9ICIxMnB4IikpJT4lCiAgaGNfeUF4aXModGl0bGUgPSBsaXN0KHRleHQgPSAiTsO6bWVybyBkZSBwYXJ0aWNpcGFudGVzIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJOw7ptZXJvIGRlIHBlcnNvbmFzIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGFzLmNoYXJhY3RlcigyNTo0NSkpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCgoKYGBgCgojIyBFc3RhZG9zCgpgYGB7cn0KaGlqb3NfZW1vdmklPiUKICBzbGljZShhcy5pbnRlZ2VyKG5hbWVzKGZvbGhpam9zX2Vtb3ZpZikpKSU+JQogIGNvdW50KEVzdGFkbyklPiUKICAgIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiIgogICkgJT4lCiAgI2hjX3N1YnRpdGxlKHRleHQgPSAiTGFzIGVkYWRlcyBlc3TDoW4gYWdydXBhZGFzIGVuIGludGVydmFsb3MgCiAgICMgICAgICAgICAgIGRlIDEwIGHDsW9zIChkYSBjbGljIHNvYnJlIEYgbyBNKSIpICU+JQogICMgaGNfY3JlZGl0cygKICAjICBlbmFibGVkID0gVFJVRSwgdGV4dCA9ICJTb3VyY2U6IFNTUyIsCiAgIyAgc3R5bGUgPSBsaXN0KGZvbnRTaXplID0gIjEycHgiKSklPiUKICBoY195QXhpcyh0aXRsZSA9IGxpc3QodGV4dCA9ICJOw7ptZXJvIGRlIHBhcnRpY2lwYW50ZXMiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9Ik7Dum1lcm8gZGUgcGVyc29uYXMiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhoaWpvc19lbW92aSRFc3RhZG8pKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKCmBgYAoKIyMgVW5pY29zIGZvbGlvcywgZGlmZXJlbnRlcyB0cmFiYWpvcwoKYGBge3J9CnVuaWNvc19mb2xpb3M8LWZ1bmN0aW9uKGkpewpmb2xoaWpvc19lbW92aWZbW2ldXSU+JQogIGRpc3RpbmN0KCkKfQoKIyBmaWx0cmFtb3MgdW5pY29zIGZvbGlvcyBwb3IgZGlmZXJlbnRlcyB0cmFiYWpvcyBkZSBsYSBtaXNtYSBwZXJzb25hCmE8LWxhcHBseSgxOmxlbmd0aChmb2xoaWpvc19lbW92aWYpLCB1bmljb3NfZm9saW9zKQpuYW1lcyhhKTwtbmFtZXMoZm9saGlqb3NfZW1vdmlmKQpsZW5ndGgoYSkKCmZvbGhpam9zX2Vtb3ZpZjI8LWEKCmBgYAoKCiMjIEluZ3Jlc28gaGlqbwoKYGBge3J9CiNjdWlkYWRkbyBnZW5lcmVhciBpbmdyZV9lbmlnaGEKCmluZ3Jlc29faGlqb19lbW92aTwtZnVuY3Rpb24oaSl7CiAgaW5ncmVfZW5pZ2hhJT4lCiAgZmlsdGVyKGZvbGlvdml2ICVpbiUgZm9saGlqb3NfZW1vdmlmMltbaV1dJGZvbGlvdml2ICYKICAgIGZvbGlvaG9nICVpbiUgZm9saGlqb3NfZW1vdmlmMltbaV1dJGZvbGlvaG9nKSU+JXN1bW1hcmlzZSgKICAgICBpZF9oaWpvID0gbmFtZXMoZm9saGlqb3NfZW1vdmlmMltpXSksCiAgICAgaWRfaG8gPSBoaWpvc19lbW92aVthcy5pbnRlZ2VyKG5hbWVzKGZvbGhpam9zX2Vtb3ZpZjJbaV0pKSwiaWRfaG8iXSwKICAgICBtb3Y9IGhpam9zX2Vtb3ZpW2FzLmludGVnZXIobmFtZXMoZm9saGlqb3NfZW1vdmlmMltpXSkpLCJtb3YiXSwKICAgICByZWdpb25oID0gaGlqb3NfZW1vdmlbYXMuaW50ZWdlcihuYW1lcyhmb2xoaWpvc19lbW92aWYyW2ldKSksInJlZ2lvbiJdLAogICAgIGVkYWQgPSBoaWpvc19lbW92aVthcy5pbnRlZ2VyKG5hbWVzKGZvbGhpam9zX2Vtb3ZpZjJbaV0pKSwicDA1Il0sCiAgICAgIGluZ19tZW5fcF9oID1tZWFuKGluZ19tZW5fcCksCiAgICAgY29ob3J0ID0gaGlqb3NfZW1vdmlbYXMuaW50ZWdlcihuYW1lcyhmb2xoaWpvc19lbW92aWYyW2ldKSksInAxMzMiXSwKICAgIGVzdHJhdG8gPSBoaWpvc19lbW92aVthcy5pbnRlZ2VyKG5hbWVzKGZvbGhpam9zX2Vtb3ZpZjJbaV0pKSwiZXN0cmF0byJdLAogICAgZXN0YWRvID0gaGlqb3NfZW1vdmlbYXMuaW50ZWdlcihuYW1lcyhmb2xoaWpvc19lbW92aWYyW2ldKSksIkVzdGFkbyJdLAogICAgc2V4byA9IGhpam9zX2Vtb3ZpW2FzLmludGVnZXIobmFtZXMoZm9saGlqb3NfZW1vdmlmMltpXSkpLCJwMDYiXQogICAgICkKfQoKIyBpbmdyZXNvIGhpam8gcGVybyB1YWxndW5vcyBubyBwb2RyaWFuIGVzdGFyIHBvciBubyB0ZW5lciByZWdpc3RybyBkZSBzYWxhcmlvCgphPC1sYXBwbHkoMTpsZW5ndGgoZm9saGlqb3NfZW1vdmlmMiksIGluZ3Jlc29faGlqb19lbW92aSkKaW5ncmVzb19oaWpvYzwtYQpsZW5ndGgoaW5ncmVzb19oaWpvYykKYGBgCgojIyBmaWx0cm8gc2kgc2kgdGVuZW1vcyBzYWxhcmlvCgpgYGB7cn0KCkwgPC0gYygpCmZvcihpIGluIDE6bGVuZ3RoKGluZ3Jlc29faGlqb2MpKXsKICBpZihpcy5uYW4oaW5ncmVzb19oaWpvY1tbaV1dJGluZ19tZW5fcF9oKSl7CiAgICBMPC1jKEwsaSl9Cn0KCmluZ3JlX2hpamVuYzwtaW5ncmVzb19oaWpvY1stTF0KCmxlbmd0aChpbmdyZV9oaWplbmMpCgoKaW5ncmVfaGlqX2YxPC1iaW5kX3Jvd3MoaW5ncmVfaGlqZW5jWzE6bGVuZ3RoKGluZ3JlX2hpamVuYyldKQoKIyB2ZW1vcyBxdWUgcGFzYSBjb24gbGEgZWRhZCAKCmluZ3JlX2hpal9mMSU+JQogIGdyb3VwX2J5KGVkYWQpJT4lCiAgc3VtbWFyaXNlKAogICBwcm9faW5nID0gbWVhbihpbmdfbWVuX3BfaCkKICApJT4lCiAgaGNoYXJ0KCAibGluZSIsIGhjYWVzKHggPSBlZGFkLCB5ID0gcHJvX2luZyksbmFtZT0iaW5ncmVzbyBwcm9tZWRpbyIpCgpgYGAKCgojIyB2ZXJpZmljYW1vcyBxdWUgdGFuIGJ1ZW5hIGVzIGxhIGNvbnN0cnVjY2nDs24KCmBgYHtyfQppbmdyZV9oaWpfZjI8LWluZ3JlX2hpal9mMSU+JQogIG11dGF0ZShjb2hvcnRfZSA9IGlmZWxzZShpbmdfbWVuX3BfaDw9MjQwMCwxLAogICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShpbmdfbWVuX3BfaDw9NDgwMCwyLAogICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShpbmdfbWVuX3BfaDw9NzIwMCwzLAogICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShpbmdfbWVuX3BfaDw9MTIwMDAsNCwKICAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoaW5nX21lbl9wX2g8PTI0MDAwLDUsNikpKSkpLAogICAgICAgICBjb2hvcnRfZGlmPWNvaG9ydC1jb2hvcnRfZSkKaW5ncmVfaGlqX2YyJT4lCmNvdW50KGNvaG9ydF9kaWYpJT4lIAogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiQ29ob3J0cyBlc3RpbWFkb3MiCiAgKSAlPiUKICAjaGNfc3VidGl0bGUodGV4dCA9ICJMYXMgZWRhZGVzIGVzdMOhbiBhZ3J1cGFkYXMgZW4gaW50ZXJ2YWxvcyAKICAgIyAgICAgICAgICAgZGUgMTAgYcOxb3MgKGRhIGNsaWMgc29icmUgRiBvIE0pIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIk7Dum1lcm8gZGUgcGFydGljaXBhbnRlcyIpKSU+JQogIGhjX3hBeGlzKHRpdGxlPWxpc3QodGV4dD0iIikpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCgpgYGAKQ3VhbmRvIHNlIHV0aWxpemEgbCBhb2N1cGFjacOzbiBubyBzZSB0aWVuZSB1bmEgbWVqb3IgZXN0b21hY2nDs24gcGVybyBwb3IgbGEgYmFzZSBubyBzZSB0aWVuZW4gZGF0b3Mgc3VmaWNpZW50ZXMsIGNhYmUgc2XDsWFsYXIgcXVlIGxvcyBzYWxhcmlvcyBwb3JtZWRpb3MgcG9yZWRhZCBjYW1iaWFuIHN1c3RhbmNpYWxtZW50ZSAobWF5b3IgZW4gbG9zIDMwJ3MpCgpgYGB7cn0KaW5ncmVfaGlqX2YyJT4lCmNvdW50KGNvaG9ydF9kaWYpCmBgYAoKYGBge3J9CmE8LWluZ3JlX2hpal9mMiU+JQogIGZpbHRlcihjb2hvcnRfZGlmPT0wKQoKc29ydCh1bmlxdWUoYSRlZGFkKSkKc29ydCh1bmlxdWUoYSRlc3RhZG8pKQpzb3J0KHVuaXF1ZShhJGVzdHJhdG8pKQogIApgYGAKCgoKYGBge3J9CgogIGhjYm94cGxvdCh4ID0gYSRpbmdfbWVuX3BfaCwgdmFyID0gYSRlZGFkKQogIAoKCnNhdmVSRFMoYSwgZmlsZT0iRGF0b3MvaW5ncmVzb19oaWpfZl9lbW92aS5SZGEiKQoKYGBgCgoKCgo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Hijos.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

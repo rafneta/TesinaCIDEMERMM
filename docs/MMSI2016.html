@@ -15,7 +15,7 @@
 <title>Módulo de Movilidad Social Intergeneracional (MMSI) 2016</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="site_libs/jquery-3.5.0/jquery.min.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -31,48 +31,6 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="site_libs/htmlwidgets-1.5.3.9000/htmlwidgets.js"></script>
-<script src="site_libs/proj4js-2.3.15/proj4.js"></script>
-<link href="site_libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
-<script src="site_libs/highcharts-8.1.2/highcharts.js"></script>
-<script src="site_libs/highcharts-8.1.2/highcharts-3d.js"></script>
-<script src="site_libs/highcharts-8.1.2/highcharts-more.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/stock.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/map.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/annotations.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/data.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/drilldown.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/item-series.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/exporting.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/export-data.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/funnel.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/heatmap.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/treemap.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/sankey.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/organization.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/streamgraph.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/sunburst.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/vector.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/wordcloud.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/xrange.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/tilemap.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/venn.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/gantt.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/timeline.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/bullet.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/coloraxis.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/dumbbell.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/lollipop.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/series-label.js"></script>
-<script src="site_libs/highcharts-8.1.2/plugins/motion.js"></script>
-<script src="site_libs/highcharts-8.1.2/custom/reset.js"></script>
-<script src="site_libs/highcharts-8.1.2/modules/boost.js"></script>
-<script src="site_libs/highchart-binding-0.8.2/highchart.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -412,6 +370,9 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="Estimacion.html">Estimación</a>
+</li>
+<li>
   <a href="ESRU2017.html">Datos ESRU - EMOVI 2017</a>
 </li>
 <li>
@@ -419,6 +380,9 @@ div.tocify {
 </li>
 <li>
   <a href="ENIGH2016.html">Datos ENIGH 2016</a>
+</li>
+<li>
+  <a href="hijos.html">Ingreso Hijos </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -459,39 +423,27 @@ library(DT) # visualizar a tablas
 library(data.table) # convertir a tablas
 library(highcharter) # gráficas interactivas
 library(webshot)</code></pre>
-<pre class="r"><code>cargar&lt;- function(){
+<pre class="r"><code>cargar_mmsi&lt;- function(){
 
-datos_e &lt;&lt;- read_spss(
+return( read_spss(
                       path  = &quot;Datos/MMSI/MMSI_2016.sav&quot;,
                       atomic.to.fac = TRUE
                       #user_na = FALSE,
-                     )
+                     ))
 }
 
-cargar()
-data_mmsi&lt;-datos_e 
+
+data_mmsi&lt;-cargar_mmsi()
 data_mmsi[data_mmsi==&quot;&quot;]&lt;-NA</code></pre>
+<div id="información-nacional" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Información Nacional</h1>
 <pre class="r"><code>#AGREGAMOS ETIQUETA A LOS MISSINGS PARA LAS GRAFICAS
 data_mmsi$P8_3N&lt;-add_labels(
                           data_mmsi$P8_3N,
                           labels = c(&quot;NA&quot; = NA))</code></pre>
 <pre class="r"><code>get_labels(data_mmsi$P8_3N)</code></pre>
-<pre><code>##  [1] &quot;Ninguno&quot;                                                   
-##  [2] &quot;Preescolar o kinder&quot;                                       
-##  [3] &quot;Primaria&quot;                                                  
-##  [4] &quot;Secundaria&quot;                                                
-##  [5] &quot;Preparatoria o bachillerato&quot;                               
-##  [6] &quot;Normal básica&quot;                                             
-##  [7] &quot;Estudios técnicos o comerciales con primaria terminada&quot;    
-##  [8] &quot;Estudios técnicos o comerciales con secundaria terminada&quot;  
-##  [9] &quot;Estudios técnicos o comerciales con preparatoria terminada&quot;
-## [10] &quot;Normal de licenciatura&quot;                                    
-## [11] &quot;Licenciatura o profesional&quot;                                
-## [12] &quot;Maestría&quot;                                                  
-## [13] &quot;Doctorado&quot;                                                 
-## [14] &quot;NA&quot;</code></pre>
-<div id="entrevistados-por-estado" class="section level2" number="0.1">
-<h2 number="0.1"><span class="header-section-number">0.1</span> Entrevistados por estado</h2>
+<div id="entrevistados-por-estado" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Entrevistados por estado</h2>
 <pre class="r"><code>myMenuItems &lt;- c(&quot;downloadPNG&quot;, &quot;downloadJPEG&quot;, &quot;downloadPDF&quot;, &#39;downloadSVG&#39;, &#39;printChart&#39;)
 
 
@@ -517,11 +469,9 @@ gra_tol_est &lt;- function(df){
 }
 
 gra_tol_est(data_mmsi)</code></pre>
-<div id="htmlwidget-12e9d0a4884b02b5dd8d" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-12e9d0a4884b02b5dd8d">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Número de entrevistados por estado"},"yAxis":{"title":{"text":[]},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"archivo","sourceWidth":1000,"sourceHeight":640,"scale":10,"buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"colorAxis":{"auxpar":null},"series":[{"group":"group","data":[{"ent_ENH":"01","n":815,"value":815,"colorValue":815,"name":"Aguascalientes (815)"},{"ent_ENH":"02","n":743,"value":743,"colorValue":743,"name":"Baja California (743)"},{"ent_ENH":"03","n":831,"value":831,"colorValue":831,"name":"Baja California Sur (831)"},{"ent_ENH":"04","n":846,"value":846,"colorValue":846,"name":"Campeche (846)"},{"ent_ENH":"05","n":773,"value":773,"colorValue":773,"name":"Coahuila de Zaragoza (773)"},{"ent_ENH":"06","n":747,"value":747,"colorValue":747,"name":"Colima (747)"},{"ent_ENH":"07","n":837,"value":837,"colorValue":837,"name":"Chiapas (837)"},{"ent_ENH":"08","n":754,"value":754,"colorValue":754,"name":"Chihuahua (754)"},{"ent_ENH":"09","n":783,"value":783,"colorValue":783,"name":"Ciudad de México (783)"},{"ent_ENH":"10","n":791,"value":791,"colorValue":791,"name":"Durango (791)"},{"ent_ENH":"11","n":913,"value":913,"colorValue":913,"name":"Guanajuato (913)"},{"ent_ENH":"12","n":735,"value":735,"colorValue":735,"name":"Guerrero (735)"},{"ent_ENH":"13","n":768,"value":768,"colorValue":768,"name":"Hidalgo (768)"},{"ent_ENH":"14","n":824,"value":824,"colorValue":824,"name":"Jalisco (824)"},{"ent_ENH":"15","n":844,"value":844,"colorValue":844,"name":"México (844)"},{"ent_ENH":"16","n":786,"value":786,"colorValue":786,"name":"Michoacán de Ocampo (786)"},{"ent_ENH":"17","n":794,"value":794,"colorValue":794,"name":"Morelos (794)"},{"ent_ENH":"18","n":785,"value":785,"colorValue":785,"name":"Nayarit (785)"},{"ent_ENH":"19","n":818,"value":818,"colorValue":818,"name":"Nuevo León (818)"},{"ent_ENH":"20","n":758,"value":758,"colorValue":758,"name":"Oaxaca (758)"},{"ent_ENH":"21","n":792,"value":792,"colorValue":792,"name":"Puebla (792)"},{"ent_ENH":"22","n":834,"value":834,"colorValue":834,"name":"Querétaro (834)"},{"ent_ENH":"23","n":813,"value":813,"colorValue":813,"name":"Quintana Roo (813)"},{"ent_ENH":"24","n":770,"value":770,"colorValue":770,"name":"San Luis Potosí (770)"},{"ent_ENH":"25","n":876,"value":876,"colorValue":876,"name":"Sinaloa (876)"},{"ent_ENH":"26","n":781,"value":781,"colorValue":781,"name":"Sonora (781)"},{"ent_ENH":"27","n":855,"value":855,"colorValue":855,"name":"Tabasco (855)"},{"ent_ENH":"28","n":753,"value":753,"colorValue":753,"name":"Tamaulipas (753)"},{"ent_ENH":"29","n":805,"value":805,"colorValue":805,"name":"Tlaxcala (805)"},{"ent_ENH":"30","n":754,"value":754,"colorValue":754,"name":"Veracruz de Ignacio de la Llave (754)"},{"ent_ENH":"31","n":835,"value":835,"colorValue":835,"name":"Yucatán (835)"},{"ent_ENH":"32","n":821,"value":821,"colorValue":821,"name":"Zacatecas (821)"}],"type":"treemap"}],"xAxis":{"type":"category","title":{"text":["paste","get_labels(ent_ENH)"," ","(","n",")",""]},"categories":null},"subtitle":{"text":"Total de participates:  25634"}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="sexo-por-estado" class="section level2" number="0.2">
-<h2 number="0.2"><span class="header-section-number">0.2</span> Sexo por estado</h2>
+<div id="sexo-por-estado" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Sexo por estado</h2>
 <pre class="r"><code>gra_sex_est&lt;- function(df){
 
 df %&gt;%
@@ -546,11 +496,9 @@ df %&gt;%
 }
 
 gra_sex_est(data_mmsi)</code></pre>
-<div id="htmlwidget-0d339b7f166887d294d1" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0d339b7f166887d294d1">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Número de entrevistados por estado y sexo"},"yAxis":{"title":{"text":"Número de participantes"}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":"Hombre","data":[{"ent_ENH":"01","P1_1":"1","n":329,"y":329},{"ent_ENH":"02","P1_1":"1","n":384,"y":384},{"ent_ENH":"03","P1_1":"1","n":409,"y":409},{"ent_ENH":"04","P1_1":"1","n":383,"y":383},{"ent_ENH":"05","P1_1":"1","n":365,"y":365},{"ent_ENH":"06","P1_1":"1","n":359,"y":359},{"ent_ENH":"07","P1_1":"1","n":295,"y":295},{"ent_ENH":"08","P1_1":"1","n":313,"y":313},{"ent_ENH":"09","P1_1":"1","n":333,"y":333},{"ent_ENH":"10","P1_1":"1","n":374,"y":374},{"ent_ENH":"11","P1_1":"1","n":368,"y":368},{"ent_ENH":"12","P1_1":"1","n":293,"y":293},{"ent_ENH":"13","P1_1":"1","n":309,"y":309},{"ent_ENH":"14","P1_1":"1","n":311,"y":311},{"ent_ENH":"15","P1_1":"1","n":327,"y":327},{"ent_ENH":"16","P1_1":"1","n":337,"y":337},{"ent_ENH":"17","P1_1":"1","n":342,"y":342},{"ent_ENH":"18","P1_1":"1","n":352,"y":352},{"ent_ENH":"19","P1_1":"1","n":373,"y":373},{"ent_ENH":"20","P1_1":"1","n":295,"y":295},{"ent_ENH":"21","P1_1":"1","n":310,"y":310},{"ent_ENH":"22","P1_1":"1","n":336,"y":336},{"ent_ENH":"23","P1_1":"1","n":413,"y":413},{"ent_ENH":"24","P1_1":"1","n":349,"y":349},{"ent_ENH":"25","P1_1":"1","n":346,"y":346},{"ent_ENH":"26","P1_1":"1","n":343,"y":343},{"ent_ENH":"27","P1_1":"1","n":292,"y":292},{"ent_ENH":"28","P1_1":"1","n":349,"y":349},{"ent_ENH":"29","P1_1":"1","n":332,"y":332},{"ent_ENH":"30","P1_1":"1","n":313,"y":313},{"ent_ENH":"31","P1_1":"1","n":347,"y":347},{"ent_ENH":"32","P1_1":"1","n":328,"y":328}],"type":"column"},{"name":"Mujer","data":[{"ent_ENH":"01","P1_1":"2","n":486,"y":486},{"ent_ENH":"02","P1_1":"2","n":359,"y":359},{"ent_ENH":"03","P1_1":"2","n":422,"y":422},{"ent_ENH":"04","P1_1":"2","n":463,"y":463},{"ent_ENH":"05","P1_1":"2","n":408,"y":408},{"ent_ENH":"06","P1_1":"2","n":388,"y":388},{"ent_ENH":"07","P1_1":"2","n":542,"y":542},{"ent_ENH":"08","P1_1":"2","n":441,"y":441},{"ent_ENH":"09","P1_1":"2","n":450,"y":450},{"ent_ENH":"10","P1_1":"2","n":417,"y":417},{"ent_ENH":"11","P1_1":"2","n":545,"y":545},{"ent_ENH":"12","P1_1":"2","n":442,"y":442},{"ent_ENH":"13","P1_1":"2","n":459,"y":459},{"ent_ENH":"14","P1_1":"2","n":513,"y":513},{"ent_ENH":"15","P1_1":"2","n":517,"y":517},{"ent_ENH":"16","P1_1":"2","n":449,"y":449},{"ent_ENH":"17","P1_1":"2","n":452,"y":452},{"ent_ENH":"18","P1_1":"2","n":433,"y":433},{"ent_ENH":"19","P1_1":"2","n":445,"y":445},{"ent_ENH":"20","P1_1":"2","n":463,"y":463},{"ent_ENH":"21","P1_1":"2","n":482,"y":482},{"ent_ENH":"22","P1_1":"2","n":498,"y":498},{"ent_ENH":"23","P1_1":"2","n":400,"y":400},{"ent_ENH":"24","P1_1":"2","n":421,"y":421},{"ent_ENH":"25","P1_1":"2","n":530,"y":530},{"ent_ENH":"26","P1_1":"2","n":438,"y":438},{"ent_ENH":"27","P1_1":"2","n":563,"y":563},{"ent_ENH":"28","P1_1":"2","n":404,"y":404},{"ent_ENH":"29","P1_1":"2","n":473,"y":473},{"ent_ENH":"30","P1_1":"2","n":441,"y":441},{"ent_ENH":"31","P1_1":"2","n":488,"y":488},{"ent_ENH":"32","P1_1":"2","n":493,"y":493}],"type":"column"}],"xAxis":{"title":{"text":"Estados"},"categories":["Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila de Zaragoza","Colima","Chiapas","Chihuahua","Ciudad de México","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco","México","Michoacán de Ocampo","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo","San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz de Ignacio de la Llave","Yucatán","Zacatecas"]}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="escolaridad-sexo" class="section level2" number="0.3">
-<h2 number="0.3"><span class="header-section-number">0.3</span> Escolaridad sexo</h2>
+<div id="escolaridad-sexo" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Escolaridad sexo</h2>
 <pre class="r"><code>gra_sex_edu &lt;- function(df){
 df %&gt;%
   count(P8_3N,P1_1)%&gt;% 
@@ -574,8 +522,10 @@ df %&gt;%
 }
 
 gra_sex_edu(data_mmsi)</code></pre>
-<p><div id="htmlwidget-11469d964338af3c1fa3" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-11469d964338af3c1fa3">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Escolaridad por  sexo"},"yAxis":{"title":{"text":"Número de participantes"}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":"Hombre","data":[{"P8_3N":"00","P1_1":"1","n":32,"y":32},{"P8_3N":"01","P1_1":"1","n":4,"y":4},{"P8_3N":"02","P1_1":"1","n":2755,"y":2755},{"P8_3N":"03","P1_1":"1","n":3045,"y":3045},{"P8_3N":"04","P1_1":"1","n":1954,"y":1954},{"P8_3N":"05","P1_1":"1","n":48,"y":48},{"P8_3N":"06","P1_1":"1","n":19,"y":19},{"P8_3N":"07","P1_1":"1","n":348,"y":348},{"P8_3N":"08","P1_1":"1","n":71,"y":71},{"P8_3N":"09","P1_1":"1","n":71,"y":71},{"P8_3N":"10","P1_1":"1","n":1966,"y":1966},{"P8_3N":"11","P1_1":"1","n":278,"y":278},{"P8_3N":"12","P1_1":"1","n":33,"y":33},{"P8_3N":null,"P1_1":"1","n":285,"y":285}],"type":"column"},{"name":"Mujer","data":[{"P8_3N":"00","P1_1":"2","n":63,"y":63},{"P8_3N":"01","P1_1":"2","n":11,"y":11},{"P8_3N":"02","P1_1":"2","n":3876,"y":3876},{"P8_3N":"03","P1_1":"2","n":4425,"y":4425},{"P8_3N":"04","P1_1":"2","n":2063,"y":2063},{"P8_3N":"05","P1_1":"2","n":104,"y":104},{"P8_3N":"06","P1_1":"2","n":96,"y":96},{"P8_3N":"07","P1_1":"2","n":996,"y":996},{"P8_3N":"08","P1_1":"2","n":73,"y":73},{"P8_3N":"09","P1_1":"2","n":144,"y":144},{"P8_3N":"10","P1_1":"2","n":2012,"y":2012},{"P8_3N":"11","P1_1":"2","n":269,"y":269},{"P8_3N":"12","P1_1":"2","n":36,"y":36},{"P8_3N":null,"P1_1":"2","n":557,"y":557}],"type":"column"}],"xAxis":{"title":{"text":"Escolaridad"},"categories":["Ninguno","Preescolar o kinder","Primaria","Secundaria","Preparatoria o bachillerato","Normal básica","Estudios técnicos o comerciales con primaria terminada","Estudios técnicos o comerciales con secundaria terminada","Estudios técnicos o comerciales con preparatoria terminada","Normal de licenciatura","Licenciatura o profesional","Maestría","Doctorado","NA"]}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script> # Percepción de la situación economica</p>
+</div>
+</div>
+<div id="percepción-de-la-situación-economica" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Percepción de la situación economica</h1>
 <pre class="r"><code>gra_per_eco_act&lt;- function(df){
   df%&gt;%
   count(P12_1)%&gt;% 
@@ -598,8 +548,6 @@ gra_sex_edu(data_mmsi)</code></pre>
                buttons = list(contextButton = list(menuItems = myMenuItems)))
 }
 gra_per_eco_act(data_mmsi)</code></pre>
-<div id="htmlwidget-5e4355fc907b0104a5b0" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5e4355fc907b0104a5b0">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Opinión sobre situación económica actual"},"yAxis":{"title":{"text":"Número de participantes"}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"P12_1":"01","n":1960,"y":1960},{"P12_1":"02","n":1737,"y":1737},{"P12_1":"03","n":2528,"y":2528},{"P12_1":"04","n":3215,"y":3215},{"P12_1":"05","n":6764,"y":6764},{"P12_1":"06","n":3506,"y":3506},{"P12_1":"07","n":3417,"y":3417},{"P12_1":"08","n":2016,"y":2016},{"P12_1":"09","n":268,"y":268},{"P12_1":"10","n":223,"y":223}],"type":"column"}],"xAxis":{"title":{"text":"Posición económica"},"categories":["1 Más bajo","2","3","4","5","6","7","8","9","10 Más alto"]}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>gra_per_eco_ant&lt;- function(df){
   df%&gt;%
   count(P12_2)%&gt;% 
@@ -622,31 +570,23 @@ gra_per_eco_act(data_mmsi)</code></pre>
                buttons = list(contextButton = list(menuItems = myMenuItems)))
 }
 gra_per_eco_ant(data_mmsi)</code></pre>
-<div id="htmlwidget-d958bd2fc02cb63d8c2b" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d958bd2fc02cb63d8c2b">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Opinión sobre situación económica de los padres"},"yAxis":{"title":{"text":"Número de participantes"}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"P12_2":"01","n":4820,"y":4820},{"P12_2":"02","n":3352,"y":3352},{"P12_2":"03","n":3591,"y":3591},{"P12_2":"04","n":2758,"y":2758},{"P12_2":"05","n":3517,"y":3517},{"P12_2":"06","n":2008,"y":2008},{"P12_2":"07","n":1860,"y":1860},{"P12_2":"08","n":2107,"y":2107},{"P12_2":"09","n":906,"y":906},{"P12_2":"10","n":715,"y":715}],"type":"column"}],"xAxis":{"title":{"text":"Posición económica"},"categories":["1 Más bajo","2","3","4","5","6","7","8","9","10 Más alto"]}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>skey&lt;-data_mmsi%&gt;%
   select(P12_2,P12_1)%&gt;%
   data_to_sankey()
 
-skey</code></pre>
-<pre><code>## # A tibble: 100 x 4
-##    from  to    weight id   
-##    &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;
-##  1 01    01      1266 0101 
-##  2 01    02       897 0102 
-##  3 01    03       952 0103 
-##  4 01    04       581 0104 
-##  5 01    05       732 0105 
-##  6 01    06       197 0106 
-##  7 01    07        93 0107 
-##  8 01    08        57 0108 
-##  9 01    09        15 0109 
-## 10 01    10        30 0110 
-## # … with 90 more rows</code></pre>
-<pre class="r"><code>for (a in unique(skey$from)){
+#skey
+
+for (a in unique(skey$from)){
 skey$from[skey$from == a] &lt;-paste(a,&#39;p&#39;)
 }
 
+#skey$weight&lt;-as.double(skey$weight)
+
+#for (a in unique(skey$from)){
+#skey[skey$from ==a, &quot;weight&quot;] &lt;- round(skey[skey$from ==a, &quot;weight&quot;] / #sum(skey[skey$from==a,3]),2)
+#}
+
+#skey
 
 skey%&gt;%
 hchart(&#39;sankey&#39;,nodeWidth=50,
@@ -660,29 +600,13 @@ hchart(&#39;sankey&#39;,nodeWidth=50,
     hc_exporting(enabled = TRUE,
                filename = &quot;datos&quot;,
                buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
-<div id="htmlwidget-198e22ad0edb479126de" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-198e22ad0edb479126de">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Percepción de movilidad relativa"},"yAxis":{"title":{"text":[]}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"from":"01 p","to":"01","weight":1266,"id":"0101"},{"from":"01 p","to":"02","weight":897,"id":"0102"},{"from":"01 p","to":"03","weight":952,"id":"0103"},{"from":"01 p","to":"04","weight":581,"id":"0104"},{"from":"01 p","to":"05","weight":732,"id":"0105"},{"from":"01 p","to":"06","weight":197,"id":"0106"},{"from":"01 p","to":"07","weight":93,"id":"0107"},{"from":"01 p","to":"08","weight":57,"id":"0108"},{"from":"01 p","to":"09","weight":15,"id":"0109"},{"from":"01 p","to":"10","weight":30,"id":"0110"},{"from":"02 p","to":"01","weight":169,"id":"0201"},{"from":"02 p","to":"02","weight":352,"id":"0202"},{"from":"02 p","to":"03","weight":516,"id":"0203"},{"from":"02 p","to":"04","weight":847,"id":"0204"},{"from":"02 p","to":"05","weight":951,"id":"0205"},{"from":"02 p","to":"06","weight":314,"id":"0206"},{"from":"02 p","to":"07","weight":122,"id":"0207"},{"from":"02 p","to":"08","weight":63,"id":"0208"},{"from":"02 p","to":"09","weight":13,"id":"0209"},{"from":"02 p","to":"10","weight":5,"id":"0210"},{"from":"03 p","to":"01","weight":104,"id":"0301"},{"from":"03 p","to":"02","weight":142,"id":"0302"},{"from":"03 p","to":"03","weight":373,"id":"0303"},{"from":"03 p","to":"04","weight":489,"id":"0304"},{"from":"03 p","to":"05","weight":1573,"id":"0305"},{"from":"03 p","to":"06","weight":518,"id":"0306"},{"from":"03 p","to":"07","weight":271,"id":"0307"},{"from":"03 p","to":"08","weight":96,"id":"0308"},{"from":"03 p","to":"09","weight":16,"id":"0309"},{"from":"03 p","to":"10","weight":9,"id":"0310"},{"from":"04 p","to":"01","weight":65,"id":"0401"},{"from":"04 p","to":"02","weight":77,"id":"0402"},{"from":"04 p","to":"03","weight":131,"id":"0403"},{"from":"04 p","to":"04","weight":391,"id":"0404"},{"from":"04 p","to":"05","weight":735,"id":"0405"},{"from":"04 p","to":"06","weight":673,"id":"0406"},{"from":"04 p","to":"07","weight":504,"id":"0407"},{"from":"04 p","to":"08","weight":159,"id":"0408"},{"from":"04 p","to":"09","weight":12,"id":"0409"},{"from":"04 p","to":"10","weight":11,"id":"0410"},{"from":"05 p","to":"01","weight":139,"id":"0501"},{"from":"05 p","to":"02","weight":92,"id":"0502"},{"from":"05 p","to":"03","weight":232,"id":"0503"},{"from":"05 p","to":"04","weight":236,"id":"0504"},{"from":"05 p","to":"05","weight":1249,"id":"0505"},{"from":"05 p","to":"06","weight":440,"id":"0506"},{"from":"05 p","to":"07","weight":751,"id":"0507"},{"from":"05 p","to":"08","weight":330,"id":"0508"},{"from":"05 p","to":"09","weight":25,"id":"0509"},{"from":"05 p","to":"10","weight":23,"id":"0510"},{"from":"06 p","to":"01","weight":44,"id":"0601"},{"from":"06 p","to":"02","weight":43,"id":"0602"},{"from":"06 p","to":"03","weight":115,"id":"0603"},{"from":"06 p","to":"04","weight":243,"id":"0604"},{"from":"06 p","to":"05","weight":282,"id":"0605"},{"from":"06 p","to":"06","weight":517,"id":"0606"},{"from":"06 p","to":"07","weight":382,"id":"0607"},{"from":"06 p","to":"08","weight":336,"id":"0608"},{"from":"06 p","to":"09","weight":28,"id":"0609"},{"from":"06 p","to":"10","weight":18,"id":"0610"},{"from":"07 p","to":"01","weight":31,"id":"0701"},{"from":"07 p","to":"02","weight":35,"id":"0702"},{"from":"07 p","to":"03","weight":67,"id":"0703"},{"from":"07 p","to":"04","weight":176,"id":"0704"},{"from":"07 p","to":"05","weight":457,"id":"0705"},{"from":"07 p","to":"06","weight":239,"id":"0706"},{"from":"07 p","to":"07","weight":529,"id":"0707"},{"from":"07 p","to":"08","weight":270,"id":"0708"},{"from":"07 p","to":"09","weight":36,"id":"0709"},{"from":"07 p","to":"10","weight":20,"id":"0710"},{"from":"08 p","to":"01","weight":57,"id":"0801"},{"from":"08 p","to":"02","weight":44,"id":"0802"},{"from":"08 p","to":"03","weight":86,"id":"0803"},{"from":"08 p","to":"04","weight":155,"id":"0804"},{"from":"08 p","to":"05","weight":517,"id":"0805"},{"from":"08 p","to":"06","weight":402,"id":"0806"},{"from":"08 p","to":"07","weight":382,"id":"0807"},{"from":"08 p","to":"08","weight":396,"id":"0808"},{"from":"08 p","to":"09","weight":43,"id":"0809"},{"from":"08 p","to":"10","weight":25,"id":"0810"},{"from":"09 p","to":"01","weight":23,"id":"0901"},{"from":"09 p","to":"02","weight":28,"id":"0902"},{"from":"09 p","to":"03","weight":23,"id":"0903"},{"from":"09 p","to":"04","weight":50,"id":"0904"},{"from":"09 p","to":"05","weight":148,"id":"0905"},{"from":"09 p","to":"06","weight":127,"id":"0906"},{"from":"09 p","to":"07","weight":276,"id":"0907"},{"from":"09 p","to":"08","weight":181,"id":"0908"},{"from":"09 p","to":"09","weight":44,"id":"0909"},{"from":"09 p","to":"10","weight":6,"id":"0910"},{"from":"10 p","to":"01","weight":62,"id":"1001"},{"from":"10 p","to":"02","weight":27,"id":"1002"},{"from":"10 p","to":"03","weight":33,"id":"1003"},{"from":"10 p","to":"04","weight":47,"id":"1004"},{"from":"10 p","to":"05","weight":120,"id":"1005"},{"from":"10 p","to":"06","weight":79,"id":"1006"},{"from":"10 p","to":"07","weight":107,"id":"1007"},{"from":"10 p","to":"08","weight":128,"id":"1008"},{"from":"10 p","to":"09","weight":36,"id":"1009"},{"from":"10 p","to":"10","weight":76,"id":"1010"}],"type":"sankey","nodeWidth":50,"opacity":1,"linkOpacity":0.05,"minLinkWidth":2,"name":"Movilidad","nodePadding":15,"clip":false,"description":"hola"}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>skey&lt;-data_mmsi%&gt;%
   filter(P1_1==1)%&gt;%
   select(P12_2,P12_1)%&gt;%
   data_to_sankey()
 
-skey</code></pre>
-<pre><code>## # A tibble: 100 x 4
-##    from  to    weight id   
-##    &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;
-##  1 01    01       517 0101 
-##  2 01    02       361 0102 
-##  3 01    03       373 0103 
-##  4 01    04       211 0104 
-##  5 01    05       260 0105 
-##  6 01    06        76 0106 
-##  7 01    07        25 0107 
-##  8 01    08        17 0108 
-##  9 01    09         2 0109 
-## 10 01    10        13 0110 
-## # … with 90 more rows</code></pre>
-<pre class="r"><code>for (a in unique(skey$from)){
+
+for (a in unique(skey$from)){
 skey$from[skey$from == a] &lt;-paste(a,&#39;p&#39;)
 }
 
@@ -696,32 +620,17 @@ hchart(&#39;sankey&#39;,nodeWidth=50,
   hc_title(
     text = &quot;Percepción de movilidad relativa&quot;
   )%&gt;%
+  hc_subtitle(text = &quot;Hombres&quot;) %&gt;%
     hc_exporting(enabled = TRUE,
                filename = &quot;datos&quot;,
                buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
-<div id="htmlwidget-93fb74c6acec2df23527" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-93fb74c6acec2df23527">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Percepción de movilidad relativa"},"yAxis":{"title":{"text":[]}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"from":"01 p","to":"01","weight":517,"id":"0101"},{"from":"01 p","to":"02","weight":361,"id":"0102"},{"from":"01 p","to":"03","weight":373,"id":"0103"},{"from":"01 p","to":"04","weight":211,"id":"0104"},{"from":"01 p","to":"05","weight":260,"id":"0105"},{"from":"01 p","to":"06","weight":76,"id":"0106"},{"from":"01 p","to":"07","weight":25,"id":"0107"},{"from":"01 p","to":"08","weight":17,"id":"0108"},{"from":"01 p","to":"09","weight":2,"id":"0109"},{"from":"01 p","to":"10","weight":13,"id":"0110"},{"from":"02 p","to":"01","weight":69,"id":"0201"},{"from":"02 p","to":"02","weight":178,"id":"0202"},{"from":"02 p","to":"03","weight":240,"id":"0203"},{"from":"02 p","to":"04","weight":386,"id":"0204"},{"from":"02 p","to":"05","weight":369,"id":"0205"},{"from":"02 p","to":"06","weight":133,"id":"0206"},{"from":"02 p","to":"07","weight":50,"id":"0207"},{"from":"02 p","to":"08","weight":24,"id":"0208"},{"from":"02 p","to":"09","weight":1,"id":"0209"},{"from":"02 p","to":"10","weight":1,"id":"0210"},{"from":"03 p","to":"01","weight":58,"id":"0301"},{"from":"03 p","to":"02","weight":69,"id":"0302"},{"from":"03 p","to":"03","weight":182,"id":"0303"},{"from":"03 p","to":"04","weight":245,"id":"0304"},{"from":"03 p","to":"05","weight":629,"id":"0305"},{"from":"03 p","to":"06","weight":223,"id":"0306"},{"from":"03 p","to":"07","weight":105,"id":"0307"},{"from":"03 p","to":"08","weight":38,"id":"0308"},{"from":"03 p","to":"09","weight":7,"id":"0309"},{"from":"03 p","to":"10","weight":3,"id":"0310"},{"from":"04 p","to":"01","weight":33,"id":"0401"},{"from":"04 p","to":"02","weight":27,"id":"0402"},{"from":"04 p","to":"03","weight":65,"id":"0403"},{"from":"04 p","to":"04","weight":193,"id":"0404"},{"from":"04 p","to":"05","weight":315,"id":"0405"},{"from":"04 p","to":"06","weight":298,"id":"0406"},{"from":"04 p","to":"07","weight":240,"id":"0407"},{"from":"04 p","to":"08","weight":74,"id":"0408"},{"from":"04 p","to":"09","weight":5,"id":"0409"},{"from":"04 p","to":"10","weight":3,"id":"0410"},{"from":"05 p","to":"01","weight":63,"id":"0501"},{"from":"05 p","to":"02","weight":36,"id":"0502"},{"from":"05 p","to":"03","weight":95,"id":"0503"},{"from":"05 p","to":"04","weight":101,"id":"0504"},{"from":"05 p","to":"05","weight":535,"id":"0505"},{"from":"05 p","to":"06","weight":200,"id":"0506"},{"from":"05 p","to":"07","weight":346,"id":"0507"},{"from":"05 p","to":"08","weight":146,"id":"0508"},{"from":"05 p","to":"09","weight":7,"id":"0509"},{"from":"05 p","to":"10","weight":6,"id":"0510"},{"from":"06 p","to":"01","weight":17,"id":"0601"},{"from":"06 p","to":"02","weight":22,"id":"0602"},{"from":"06 p","to":"03","weight":43,"id":"0603"},{"from":"06 p","to":"04","weight":110,"id":"0604"},{"from":"06 p","to":"05","weight":129,"id":"0605"},{"from":"06 p","to":"06","weight":252,"id":"0606"},{"from":"06 p","to":"07","weight":189,"id":"0607"},{"from":"06 p","to":"08","weight":150,"id":"0608"},{"from":"06 p","to":"09","weight":8,"id":"0609"},{"from":"06 p","to":"10","weight":8,"id":"0610"},{"from":"07 p","to":"01","weight":8,"id":"0701"},{"from":"07 p","to":"02","weight":15,"id":"0702"},{"from":"07 p","to":"03","weight":28,"id":"0703"},{"from":"07 p","to":"04","weight":83,"id":"0704"},{"from":"07 p","to":"05","weight":189,"id":"0705"},{"from":"07 p","to":"06","weight":118,"id":"0706"},{"from":"07 p","to":"07","weight":258,"id":"0707"},{"from":"07 p","to":"08","weight":133,"id":"0708"},{"from":"07 p","to":"09","weight":13,"id":"0709"},{"from":"07 p","to":"10","weight":10,"id":"0710"},{"from":"08 p","to":"01","weight":29,"id":"0801"},{"from":"08 p","to":"02","weight":20,"id":"0802"},{"from":"08 p","to":"03","weight":26,"id":"0803"},{"from":"08 p","to":"04","weight":62,"id":"0804"},{"from":"08 p","to":"05","weight":193,"id":"0805"},{"from":"08 p","to":"06","weight":184,"id":"0806"},{"from":"08 p","to":"07","weight":170,"id":"0807"},{"from":"08 p","to":"08","weight":194,"id":"0808"},{"from":"08 p","to":"09","weight":24,"id":"0809"},{"from":"08 p","to":"10","weight":11,"id":"0810"},{"from":"09 p","to":"01","weight":5,"id":"0901"},{"from":"09 p","to":"02","weight":8,"id":"0902"},{"from":"09 p","to":"03","weight":8,"id":"0903"},{"from":"09 p","to":"04","weight":15,"id":"0904"},{"from":"09 p","to":"05","weight":38,"id":"0905"},{"from":"09 p","to":"06","weight":43,"id":"0906"},{"from":"09 p","to":"07","weight":111,"id":"0907"},{"from":"09 p","to":"08","weight":69,"id":"0908"},{"from":"09 p","to":"09","weight":11,"id":"0909"},{"from":"09 p","to":"10","weight":2,"id":"0910"},{"from":"10 p","to":"01","weight":18,"id":"1001"},{"from":"10 p","to":"02","weight":9,"id":"1002"},{"from":"10 p","to":"03","weight":9,"id":"1003"},{"from":"10 p","to":"04","weight":19,"id":"1004"},{"from":"10 p","to":"05","weight":35,"id":"1005"},{"from":"10 p","to":"06","weight":24,"id":"1006"},{"from":"10 p","to":"07","weight":45,"id":"1007"},{"from":"10 p","to":"08","weight":48,"id":"1008"},{"from":"10 p","to":"09","weight":17,"id":"1009"},{"from":"10 p","to":"10","weight":26,"id":"1010"}],"type":"sankey","nodeWidth":50,"opacity":1,"linkOpacity":0.05,"minLinkWidth":2,"name":"Movilidad","nodePadding":15,"clip":false,"description":"hola"}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>skey&lt;-data_mmsi%&gt;%
   filter(P1_1==2)%&gt;%
   select(P12_2,P12_1)%&gt;%
   data_to_sankey()
 
-skey</code></pre>
-<pre><code>## # A tibble: 100 x 4
-##    from  to    weight id   
-##    &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;
-##  1 01    01       749 0101 
-##  2 01    02       536 0102 
-##  3 01    03       579 0103 
-##  4 01    04       370 0104 
-##  5 01    05       472 0105 
-##  6 01    06       121 0106 
-##  7 01    07        68 0107 
-##  8 01    08        40 0108 
-##  9 01    09        13 0109 
-## 10 01    10        17 0110 
-## # … with 90 more rows</code></pre>
-<pre class="r"><code>for (a in unique(skey$from)){
+
+for (a in unique(skey$from)){
 skey$from[skey$from == a] &lt;-paste(a,&#39;p&#39;)
 }
 
@@ -735,30 +644,350 @@ hchart(&#39;sankey&#39;,nodeWidth=50,
   hc_title(
     text = &quot;Percepción de movilidad relativa&quot;
   )%&gt;%
+  hc_subtitle(text = &quot;Mujeres&quot;) %&gt;%
     hc_exporting(enabled = TRUE,
                filename = &quot;datos&quot;,
                buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
-<div id="htmlwidget-7839bd31adf708adaa0b" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7839bd31adf708adaa0b">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Percepción de movilidad relativa"},"yAxis":{"title":{"text":[]}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"from":"01 p","to":"01","weight":749,"id":"0101"},{"from":"01 p","to":"02","weight":536,"id":"0102"},{"from":"01 p","to":"03","weight":579,"id":"0103"},{"from":"01 p","to":"04","weight":370,"id":"0104"},{"from":"01 p","to":"05","weight":472,"id":"0105"},{"from":"01 p","to":"06","weight":121,"id":"0106"},{"from":"01 p","to":"07","weight":68,"id":"0107"},{"from":"01 p","to":"08","weight":40,"id":"0108"},{"from":"01 p","to":"09","weight":13,"id":"0109"},{"from":"01 p","to":"10","weight":17,"id":"0110"},{"from":"02 p","to":"01","weight":100,"id":"0201"},{"from":"02 p","to":"02","weight":174,"id":"0202"},{"from":"02 p","to":"03","weight":276,"id":"0203"},{"from":"02 p","to":"04","weight":461,"id":"0204"},{"from":"02 p","to":"05","weight":582,"id":"0205"},{"from":"02 p","to":"06","weight":181,"id":"0206"},{"from":"02 p","to":"07","weight":72,"id":"0207"},{"from":"02 p","to":"08","weight":39,"id":"0208"},{"from":"02 p","to":"09","weight":12,"id":"0209"},{"from":"02 p","to":"10","weight":4,"id":"0210"},{"from":"03 p","to":"01","weight":46,"id":"0301"},{"from":"03 p","to":"02","weight":73,"id":"0302"},{"from":"03 p","to":"03","weight":191,"id":"0303"},{"from":"03 p","to":"04","weight":244,"id":"0304"},{"from":"03 p","to":"05","weight":944,"id":"0305"},{"from":"03 p","to":"06","weight":295,"id":"0306"},{"from":"03 p","to":"07","weight":166,"id":"0307"},{"from":"03 p","to":"08","weight":58,"id":"0308"},{"from":"03 p","to":"09","weight":9,"id":"0309"},{"from":"03 p","to":"10","weight":6,"id":"0310"},{"from":"04 p","to":"01","weight":32,"id":"0401"},{"from":"04 p","to":"02","weight":50,"id":"0402"},{"from":"04 p","to":"03","weight":66,"id":"0403"},{"from":"04 p","to":"04","weight":198,"id":"0404"},{"from":"04 p","to":"05","weight":420,"id":"0405"},{"from":"04 p","to":"06","weight":375,"id":"0406"},{"from":"04 p","to":"07","weight":264,"id":"0407"},{"from":"04 p","to":"08","weight":85,"id":"0408"},{"from":"04 p","to":"09","weight":7,"id":"0409"},{"from":"04 p","to":"10","weight":8,"id":"0410"},{"from":"05 p","to":"01","weight":76,"id":"0501"},{"from":"05 p","to":"02","weight":56,"id":"0502"},{"from":"05 p","to":"03","weight":137,"id":"0503"},{"from":"05 p","to":"04","weight":135,"id":"0504"},{"from":"05 p","to":"05","weight":714,"id":"0505"},{"from":"05 p","to":"06","weight":240,"id":"0506"},{"from":"05 p","to":"07","weight":405,"id":"0507"},{"from":"05 p","to":"08","weight":184,"id":"0508"},{"from":"05 p","to":"09","weight":18,"id":"0509"},{"from":"05 p","to":"10","weight":17,"id":"0510"},{"from":"06 p","to":"01","weight":27,"id":"0601"},{"from":"06 p","to":"02","weight":21,"id":"0602"},{"from":"06 p","to":"03","weight":72,"id":"0603"},{"from":"06 p","to":"04","weight":133,"id":"0604"},{"from":"06 p","to":"05","weight":153,"id":"0605"},{"from":"06 p","to":"06","weight":265,"id":"0606"},{"from":"06 p","to":"07","weight":193,"id":"0607"},{"from":"06 p","to":"08","weight":186,"id":"0608"},{"from":"06 p","to":"09","weight":20,"id":"0609"},{"from":"06 p","to":"10","weight":10,"id":"0610"},{"from":"07 p","to":"01","weight":23,"id":"0701"},{"from":"07 p","to":"02","weight":20,"id":"0702"},{"from":"07 p","to":"03","weight":39,"id":"0703"},{"from":"07 p","to":"04","weight":93,"id":"0704"},{"from":"07 p","to":"05","weight":268,"id":"0705"},{"from":"07 p","to":"06","weight":121,"id":"0706"},{"from":"07 p","to":"07","weight":271,"id":"0707"},{"from":"07 p","to":"08","weight":137,"id":"0708"},{"from":"07 p","to":"09","weight":23,"id":"0709"},{"from":"07 p","to":"10","weight":10,"id":"0710"},{"from":"08 p","to":"01","weight":28,"id":"0801"},{"from":"08 p","to":"02","weight":24,"id":"0802"},{"from":"08 p","to":"03","weight":60,"id":"0803"},{"from":"08 p","to":"04","weight":93,"id":"0804"},{"from":"08 p","to":"05","weight":324,"id":"0805"},{"from":"08 p","to":"06","weight":218,"id":"0806"},{"from":"08 p","to":"07","weight":212,"id":"0807"},{"from":"08 p","to":"08","weight":202,"id":"0808"},{"from":"08 p","to":"09","weight":19,"id":"0809"},{"from":"08 p","to":"10","weight":14,"id":"0810"},{"from":"09 p","to":"01","weight":18,"id":"0901"},{"from":"09 p","to":"02","weight":20,"id":"0902"},{"from":"09 p","to":"03","weight":15,"id":"0903"},{"from":"09 p","to":"04","weight":35,"id":"0904"},{"from":"09 p","to":"05","weight":110,"id":"0905"},{"from":"09 p","to":"06","weight":84,"id":"0906"},{"from":"09 p","to":"07","weight":165,"id":"0907"},{"from":"09 p","to":"08","weight":112,"id":"0908"},{"from":"09 p","to":"09","weight":33,"id":"0909"},{"from":"09 p","to":"10","weight":4,"id":"0910"},{"from":"10 p","to":"01","weight":44,"id":"1001"},{"from":"10 p","to":"02","weight":18,"id":"1002"},{"from":"10 p","to":"03","weight":24,"id":"1003"},{"from":"10 p","to":"04","weight":28,"id":"1004"},{"from":"10 p","to":"05","weight":85,"id":"1005"},{"from":"10 p","to":"06","weight":55,"id":"1006"},{"from":"10 p","to":"07","weight":62,"id":"1007"},{"from":"10 p","to":"08","weight":80,"id":"1008"},{"from":"10 p","to":"09","weight":19,"id":"1009"},{"from":"10 p","to":"10","weight":50,"id":"1010"}],"type":"sankey","nodeWidth":50,"opacity":1,"linkOpacity":0.05,"minLinkWidth":2,"name":"Movilidad","nodePadding":15,"clip":false,"description":"hola"}],"xAxis":{"type":null,"title":{"text":[]},"categories":null}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
+<div id="percepción-de-movilidad-por-grupo-de-edad-decenal" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Percepción de movilidad por grupo de edad (decenal)</h2>
+<pre class="r"><code># Per_SitEco
+data_mmsi %&gt;%
+  count(Edad_Ag2,Per_SitEco)%&gt;% 
+  group_by(Edad_Ag2) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo al grupo de edad&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Grupo de edad&quot;),
+           categories = get_labels(data_mmsi$Edad_Ag2)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
 </div>
-<div id="filtrado-de-datos-de-los-hijos" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Filtrado de datos de los hijos</h1>
-<p>Tomamos al entrevistado que es el jefe de hogar, lo cual nos da un total de <em>25634</em> observaciones (aproximadamente 1.5 el número total de ESRU-2017)</p>
+<div id="percepción-de-movilidad-por-grupo-de-edad-quinquenal" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Percepción de movilidad por grupo de edad (quinquenal)</h2>
+<pre class="r"><code># Per_SitEco
+data_mmsi %&gt;%
+  count(Edad_Ag1,Per_SitEco)%&gt;% 
+  group_by(Edad_Ag1) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo al grupo de edad&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 5 años&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Grupo de edad&quot;),
+           categories = get_labels(data_mmsi$Edad_Ag1)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="percepción-de-movilidad-por-nivel-de-escolaridad" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Percepción de movilidad por nivel de escolaridad</h2>
+<pre class="r"><code># Per_SitEco
+
+data_mmsi %&gt;%
+  count(NivEsc_Inf,Per_SitEco)%&gt;% 
+  group_by(NivEsc_Inf) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo al nivel de escolaridad&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;El nivel de escolaridad del informante&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Nivel Escolar&quot;),
+           categories = get_labels(data_mmsi$NivEsc_Inf)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="percepción-de-movilidad-por-nivel-de-escolaridad-del-provedor-principal" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> Percepción de movilidad por nivel de escolaridad del provedor principal</h2>
+<pre class="r"><code># Per_SitEco
+
+data_mmsi %&gt;%
+  count(NivEsc_PP2,Per_SitEco)%&gt;% 
+  group_by(NivEsc_PP2) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo al nivel de escolaridad&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;El nivel de escolaridad del provedor principal&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Nivel Escolar&quot;),
+           categories = get_labels(data_mmsi$NivEsc_PP2)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="percepción-de-movilidad-por-división-de-oucpación-del-informante" class="section level2" number="2.5">
+<h2 number="2.5"><span class="header-section-number">2.5</span> Percepción de movilidad por división de oucpación del informante</h2>
+<pre class="r"><code># Per_SitEco
+
+
+data_mmsi %&gt;%
+  count(DivOcu_Act,Per_SitEco)%&gt;% 
+  group_by(DivOcu_Act) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de por división de ocupación&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;El nivel de ocuapción del informante&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Nivel de ocuapción&quot;),
+           categories = get_labels(data_mmsi$DivOcu_Act)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="percepción-de-movilidad-por-división-de-acupación-del-provedor-principal" class="section level2" number="2.6">
+<h2 number="2.6"><span class="header-section-number">2.6</span> Percepción de movilidad por división de acupación del provedor principal</h2>
+<pre class="r"><code># Per_SitEco
+
+data_mmsi %&gt;%
+  count(DivOcu_PP,Per_SitEco)%&gt;% 
+  group_by(DivOcu_PP) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de por división de ocupación&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;El nivel de ocuapción del provedor principal&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Nivel de ocuapción&quot;),
+           categories = get_labels(data_mmsi$DivOcu_PP)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="percepción-de-movilidad-por-autodescripción-étnica" class="section level2" number="2.7">
+<h2 number="2.7"><span class="header-section-number">2.7</span> Percepción de movilidad por autodescripción étnica</h2>
+<pre class="r"><code># Per_SitEco
+
+data_mmsi %&gt;%
+  count(P10_3,Per_SitEco)%&gt;% 
+  group_by(P10_3) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 1))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo al grupo étnico&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Grupo étnico&quot;),
+           categories = get_labels(data_mmsi$P10_3)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="percepción-de-movilidad-por-autoclasifiación-de-color-de-piel" class="section level2" number="2.8">
+<h2 number="2.8"><span class="header-section-number">2.8</span> Percepción de movilidad por autoclasifiación de color de piel</h2>
+<pre class="r"><code># Per_SitEco
+
+data_mmsi %&gt;%
+  count(P10_2,Per_SitEco)%&gt;% 
+  group_by(P10_2) %&gt;%
+  mutate(freq = round(100 * n/sum(n), 0))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;,  group = as_label(Per_SitEco)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo al color de piel&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;Para el color de piel se revisa la escala&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Color de piel&quot;),
+           categories = get_labels(data_mmsi$P10_2)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+<div id="movilidad-por-entidad-federativa" class="section level2" number="2.9">
+<h2 number="2.9"><span class="header-section-number">2.9</span> Movilidad por entidad federativa</h2>
+<pre class="r"><code>mov_estado&lt;-function(a_){
+  skey&lt;-data_mmsi%&gt;%
+  filter(ent_ENH==a_)%&gt;%
+  select(P12_2,P12_1)%&gt;%
+  data_to_sankey()
+
+for (a in unique(skey$from)){
+skey$from[skey$from == a] &lt;-paste(a,&#39;p&#39;)
+}
+
+for (a in unique(skey$to)){
+skey$to[skey$to == a] &lt;-paste(a,&#39;h&#39;)
+}
+  
+skey%&gt;%
+hchart(&#39;sankey&#39;,nodeWidth=50,
+       opacity=1, linkOpacity=0.05, minLinkWidth=2,
+       name = &quot;Movilidad&quot;,nodePadding = 15,clip=FALSE,
+       description = &quot;hola&quot;)%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad relativa&quot;
+  )%&gt;%
+   hc_subtitle(text = get_labels(data_mmsi$ent_ENH)[as.integer(a_)]) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+}
+
+mov_estado_h&lt;-function(a_){
+
+skey&lt;-data_mmsi%&gt;%
+  filter(P1_1==1 &amp; ent_ENH==a_ )%&gt;%
+  select(P12_2,P12_1)%&gt;%
+  data_to_sankey()
+
+
+for (a in unique(skey$from)){
+skey$from[skey$from == a] &lt;-paste(a,&#39;p&#39;)
+}
+
+for (a in unique(skey$to)){
+skey$to[skey$to == a] &lt;-paste(a,&#39;h&#39;)
+}
+
+
+skey%&gt;%
+hchart(&#39;sankey&#39;,nodeWidth=50,
+       opacity=1, linkOpacity=0.05, minLinkWidth=2,
+       name = &quot;Movilidad&quot;,nodePadding = 15,clip=FALSE,
+       description = &quot;hola&quot;)%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad relativa&quot;
+  )%&gt;%
+  hc_subtitle(text = paste(get_labels(data_mmsi$ent_ENH)[as.integer(a_)],&quot;Hombres&quot;,
+                           sep =&quot;: &quot;)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+
+}
+
+mov_estado_m&lt;-function(a_){
+skey&lt;-data_mmsi%&gt;%
+  filter(P1_1==2 &amp; ent_ENH==a_ )%&gt;%
+  select(P12_2,P12_1)%&gt;%
+  data_to_sankey()
+
+
+for (a in unique(skey$from)){
+skey$from[skey$from == a] &lt;-paste(a,&#39;p&#39;)
+}
+
+for (a in unique(skey$to)){
+skey$to[skey$to == a] &lt;-paste(a,&#39;h&#39;)
+}
+
+skey%&gt;%
+hchart(&#39;sankey&#39;,nodeWidth=50,
+       opacity=1, linkOpacity=0.05, minLinkWidth=2,
+       name = &quot;Movilidad&quot;,nodePadding = 15,clip=FALSE,
+       description = &quot;hola&quot;)%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad relativa&quot;
+  )%&gt;%
+  hc_subtitle(text = paste(get_labels(data_mmsi$ent_ENH)[as.integer(a_)],&quot;Mujeres&quot;,
+                           sep =&quot;: &quot;)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+}
+
+mov_estado(&quot;01&quot;)
+mov_estado_h(&quot;01&quot;)
+mov_estado_m(&quot;01&quot;)
+
+mov_estado(&quot;02&quot;)
+mov_estado_h(&quot;02&quot;)
+mov_estado_m(&quot;02&quot;)
+
+mov_estado(&quot;03&quot;)
+mov_estado_h(&quot;03&quot;)
+mov_estado_m(&quot;03&quot;)
+
+mov_estado(&quot;04&quot;)
+mov_estado_h(&quot;04&quot;)
+mov_estado_m(&quot;04&quot;)
+
+mov_estado(&quot;05&quot;)
+mov_estado_h(&quot;05&quot;)
+mov_estado_m(&quot;05&quot;)</code></pre>
+</div>
+</div>
+<div id="filtrado-de-datos-de-los-hijos" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Filtrado de datos de los hijos</h1>
+<p>Selección de variables de los hijos para su mapeo a enig-2016.</p>
 <pre class="r"><code>var&lt;-c()
 
 #Folioviv -&gt; diferente 
 #Foliohog -&gt; diferente
 #Id_pobla -&gt; diferente
-#ent_ENH -&gt;  cualquiera 2 digitos de folio (primeros)
+#ent_ENH -&gt;  cualquiera 2 digitos de Folioviv (primeros)
 #est_socio_ENH -&gt; viviendas est_socio
 varg &lt;- c(&quot;Folioviv&quot;,&quot;Foliohog&quot;,&quot;Id_pobla&quot;,&quot;ent_ENH&quot;,&quot;est_socio_ENH&quot;)
 var &lt;-c(var, varg)
+
 
 #P1_1 -&gt; poblacion sexo
 #P1_2 -&gt; poblacion edad
 #P1_3 -&gt; poblacion parentesco
 varid &lt;- c(&quot;P1_1&quot;,&quot;P1_2&quot;,&quot;P1_3&quot;)
 var &lt;- c(var,varid)
+
+
+
 
 #P8_3N -&gt; poblacion nivelaprob #41
 #P8_3G -&gt; poblacion gradoaprob ###42 pendiente para afinar la educación
@@ -824,77 +1053,111 @@ varhog&lt;-c(&quot;P11_7_1&quot;,&quot;P11_7_2&quot;,&quot;P11_7_3&quot;,&quot;P
 var&lt;-c(var,varhog)
 
 
-# P1_3: ¿Qué es usted del jefe del hogar?
-# 1 jefe
-# 2 Espas@ compañera@
+##### Variables creadas
+
+# Condición de ocupación del informante, Actual
+# ConOcu_Act &lt;- Nos quedamso cons los ocupados 1
+
+# División principal de ocupación del informante
+# DivOcu_Act &lt;- trabajos sinco
+
+
+# Nivel de escolaridad del informante
+# NivEsc_Inf &lt;- concentradohogar educa_jefe #12
+
+varvc&lt;-c(&quot;Edad_Ag2&quot;,&quot;Edad_Ag1&quot;,&quot;NivEsc_Inf&quot;,&quot;ConOcu_Act&quot;, &quot;DivOcu_Act&quot;)
+var &lt;- c(var,varvc)
+
+
+
 
 filtrado_var_hijos &lt;- function(df,var){
   dfn&lt;- df %&gt;%
         select(all_of(var))
   return(dfn)
-}  
- 
+}</code></pre>
+<p>Seleccionamos:</p>
+<ul>
+<li>Entidad Federativa (ent_ENH, en cualquiera enigh 2 digitos del folio de vivienda)</li>
+<li>Estrato socieconómico (est_socio_ENH viviendas, viviendas est_soc)</li>
+<li>Sexo (P1_1, poblacion sexo)</li>
+<li>Edad (P1_2, poblacion edad)</li>
+<li>Parentesco (P1_3, poblacion parentesco)</li>
+<li>Nivel de educación informante, (NivEsc_Inf, concentradohogar educa_jefe)</li>
+<li>Division de ocuapción del informante (DivOcu_Act, trabajos sinco)</li>
+</ul>
+<pre class="r"><code>vari &lt;- c(&quot;ent_ENH&quot;, &quot;est_socio_ENH&quot;, &quot;P1_1&quot;,
+          &quot;P1_2&quot;,&quot;P1_3&quot;,&quot;NivEsc_Inf&quot;,&quot;DivOcu_Act&quot;)
+data_mmsi &lt;-cargar_mmsi()
+hijos&lt;-filtrado_var_hijos(data_mmsi,vari)
+
+# jefes de familia
+hijos&lt;-hijos%&gt;%
+  filter(P1_3==&quot;1&quot;)
+nrow(hijos)
+saveRDS(hijos, file=&quot;Datos/hijos_mmsi.Rda&quot;)</code></pre>
+<pre class="r"><code>gra_sex_est(hijos)</code></pre>
+<p>Tomamos al entrevistado que es el jefe de hogar, lo cual nos da un total de <em>12706</em> observaciones (aproximadamente 1.5 el número total de ESRU-2017)</p>
+<pre class="r"><code># P1_3: ¿Qué es usted del jefe del hogar?
+# 1 jefe
+# 2 Espas@ compañera@
+
 filtrado_carac &lt;- function(df){ 
         dfn&lt;- df%&gt;%
               filter(P1_3==&quot;1&quot;)
         return(dfn)
 }
 
-data_mmsi&lt;-datos_e
 
-a&lt;-filtrado_var_hijos(data_mmsi,var)
+a&lt;-filtrado_var_hijos(data_mmsi,vari)
 
 carac_fil&lt;- filtrado_carac(a)
 head(carac_fil)</code></pre>
-<pre><code>##     Folioviv Foliohog Id_pobla ent_ENH est_socio_ENH P1_1 P1_2 P1_3 P8_3N P9_1
-## 1 0100018005        1       01      01             3    1   58    1    10    1
-## 2 0100018068        1       01      01             3    1   56    1    02    2
-## 3 0100025079        1       01      01             3    2   60    1    02    5
-## 4 0100025084        1       01      01             3    1   45    1    04    2
-## 5 0100090009        1       01      01             2    1   34    1    03    1
-## 6 0100090054        1       01      01             2    2   40    1    03    3
-##   P11_1_1 P11_1_2 P11_1_3 P11_2 P11_3 P11_5_2 P11_5_3 P11_6 P11_7_1 P11_7_2
-## 1       2       2       1     1             2       2     2       1       1
-## 2       1       1       2     1             2       2     2       1       1
-## 3       2       2       1     2     1       2       1     2       2       1
-## 4       2       1       2     2     2       2       2     2       1       1
-## 5       2       2       2     2     2       2       2     2       2       1
-## 6       2       2       2     2     3       2       2     2       2       1
-##   P11_7_3 P11_7_4 P11_7_5 P11_7_6 P11_7_7 P11_7_8 P11_7_9 P11_7_10 P11_7_11
-## 1       1       1       1       1       1       1       1        1        1
-## 2       1       1       1       1       2       1       1        1        1
-## 3       1       1       1       1       2       1       2        1        1
-## 4       1       1       1       1       1       1       2        1        1
-## 5       1       2       1       2       1       1       2        1        1
-## 6       1       2       1       2       1       1       2        2        1
-##   P11_7_12 P11_7_13 P11_7_14 P11_7_15 P11_7_16 P11_7_17 P11_7_19 P11_7_20
-## 1        1        1        1        1        1        2        1        1
-## 2        1        1        1        1        2        2        1        1
-## 3        1        1        1        2        2        1        2         
-## 4        1        1        1        2        1        1        1        1
-## 5        1        1        1        2        2        2        2         
-## 6        1        1        1        2        2        2        2</code></pre>
 <p>hola</p>
-<pre class="r"><code>get_label(data_mmsi[c(var)])
-get_labels(data_mmsi[c(var)])</code></pre>
-<div id="gráfica-total-por-estado" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> Gráfica total por estado</h2>
+<pre class="r"><code>#get_label(data_mmsi[c(var)])
+#get_labels(data_mmsi[c(var)])</code></pre>
+<div id="gráfica-total-por-estado" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Gráfica total por estado</h2>
 <pre class="r"><code>gra_tol_est(carac_fil) </code></pre>
-<div id="htmlwidget-9a8321c5dd6671d77e86" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9a8321c5dd6671d77e86">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Número de entrevistados por estado"},"yAxis":{"title":{"text":[]},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"archivo","sourceWidth":1000,"sourceHeight":640,"scale":10,"buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"colorAxis":{"auxpar":null},"series":[{"group":"group","data":[{"ent_ENH":"01","n":385,"value":385,"colorValue":385,"name":"Aguascalientes (385)"},{"ent_ENH":"02","n":434,"value":434,"colorValue":434,"name":"Baja California (434)"},{"ent_ENH":"03","n":463,"value":463,"colorValue":463,"name":"Baja California Sur (463)"},{"ent_ENH":"04","n":416,"value":416,"colorValue":416,"name":"Campeche (416)"},{"ent_ENH":"05","n":418,"value":418,"colorValue":418,"name":"Coahuila de Zaragoza (418)"},{"ent_ENH":"06","n":396,"value":396,"colorValue":396,"name":"Colima (396)"},{"ent_ENH":"07","n":375,"value":375,"colorValue":375,"name":"Chiapas (375)"},{"ent_ENH":"08","n":402,"value":402,"colorValue":402,"name":"Chihuahua (402)"},{"ent_ENH":"09","n":398,"value":398,"colorValue":398,"name":"Ciudad de México (398)"},{"ent_ENH":"10","n":428,"value":428,"colorValue":428,"name":"Durango (428)"},{"ent_ENH":"11","n":433,"value":433,"colorValue":433,"name":"Guanajuato (433)"},{"ent_ENH":"12","n":361,"value":361,"colorValue":361,"name":"Guerrero (361)"},{"ent_ENH":"13","n":367,"value":367,"colorValue":367,"name":"Hidalgo (367)"},{"ent_ENH":"14","n":382,"value":382,"colorValue":382,"name":"Jalisco (382)"},{"ent_ENH":"15","n":385,"value":385,"colorValue":385,"name":"México (385)"},{"ent_ENH":"16","n":403,"value":403,"colorValue":403,"name":"Michoacán de Ocampo (403)"},{"ent_ENH":"17","n":410,"value":410,"colorValue":410,"name":"Morelos (410)"},{"ent_ENH":"18","n":391,"value":391,"colorValue":391,"name":"Nayarit (391)"},{"ent_ENH":"19","n":403,"value":403,"colorValue":403,"name":"Nuevo León (403)"},{"ent_ENH":"20","n":357,"value":357,"colorValue":357,"name":"Oaxaca (357)"},{"ent_ENH":"21","n":376,"value":376,"colorValue":376,"name":"Puebla (376)"},{"ent_ENH":"22","n":404,"value":404,"colorValue":404,"name":"Querétaro (404)"},{"ent_ENH":"23","n":461,"value":461,"colorValue":461,"name":"Quintana Roo (461)"},{"ent_ENH":"24","n":356,"value":356,"colorValue":356,"name":"San Luis Potosí (356)"},{"ent_ENH":"25","n":407,"value":407,"colorValue":407,"name":"Sinaloa (407)"},{"ent_ENH":"26","n":422,"value":422,"colorValue":422,"name":"Sonora (422)"},{"ent_ENH":"27","n":350,"value":350,"colorValue":350,"name":"Tabasco (350)"},{"ent_ENH":"28","n":396,"value":396,"colorValue":396,"name":"Tamaulipas (396)"},{"ent_ENH":"29","n":401,"value":401,"colorValue":401,"name":"Tlaxcala (401)"},{"ent_ENH":"30","n":376,"value":376,"colorValue":376,"name":"Veracruz de Ignacio de la Llave (376)"},{"ent_ENH":"31","n":391,"value":391,"colorValue":391,"name":"Yucatán (391)"},{"ent_ENH":"32","n":359,"value":359,"colorValue":359,"name":"Zacatecas (359)"}],"type":"treemap"}],"xAxis":{"type":"category","title":{"text":["paste","get_labels(ent_ENH)"," ","(","n",")",""]},"categories":null},"subtitle":{"text":"Total de participates:  25634"}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="gráfica-por-estado-y-sexo" class="section level2" number="1.2">
-<h2 number="1.2"><span class="header-section-number">1.2</span> Gráfica por estado y sexo</h2>
+<div id="gráfica-por-estado-y-sexo" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Gráfica por estado y sexo</h2>
 <pre class="r"><code>gra_sex_est(carac_fil)</code></pre>
-<p><div id="htmlwidget-723e60ea394661fa9589" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-723e60ea394661fa9589">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Número de entrevistados por estado y sexo"},"yAxis":{"title":{"text":"Número de participantes"}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":"Hombre","data":[{"ent_ENH":"01","P1_1":"1","n":263,"y":263},{"ent_ENH":"02","P1_1":"1","n":312,"y":312},{"ent_ENH":"03","P1_1":"1","n":316,"y":316},{"ent_ENH":"04","P1_1":"1","n":286,"y":286},{"ent_ENH":"05","P1_1":"1","n":289,"y":289},{"ent_ENH":"06","P1_1":"1","n":270,"y":270},{"ent_ENH":"07","P1_1":"1","n":228,"y":228},{"ent_ENH":"08","P1_1":"1","n":257,"y":257},{"ent_ENH":"09","P1_1":"1","n":223,"y":223},{"ent_ENH":"10","P1_1":"1","n":295,"y":295},{"ent_ENH":"11","P1_1":"1","n":281,"y":281},{"ent_ENH":"12","P1_1":"1","n":214,"y":214},{"ent_ENH":"13","P1_1":"1","n":236,"y":236},{"ent_ENH":"14","P1_1":"1","n":249,"y":249},{"ent_ENH":"15","P1_1":"1","n":250,"y":250},{"ent_ENH":"16","P1_1":"1","n":281,"y":281},{"ent_ENH":"17","P1_1":"1","n":258,"y":258},{"ent_ENH":"18","P1_1":"1","n":271,"y":271},{"ent_ENH":"19","P1_1":"1","n":299,"y":299},{"ent_ENH":"20","P1_1":"1","n":230,"y":230},{"ent_ENH":"21","P1_1":"1","n":234,"y":234},{"ent_ENH":"22","P1_1":"1","n":267,"y":267},{"ent_ENH":"23","P1_1":"1","n":326,"y":326},{"ent_ENH":"24","P1_1":"1","n":250,"y":250},{"ent_ENH":"25","P1_1":"1","n":242,"y":242},{"ent_ENH":"26","P1_1":"1","n":239,"y":239},{"ent_ENH":"27","P1_1":"1","n":214,"y":214},{"ent_ENH":"28","P1_1":"1","n":277,"y":277},{"ent_ENH":"29","P1_1":"1","n":234,"y":234},{"ent_ENH":"30","P1_1":"1","n":247,"y":247},{"ent_ENH":"31","P1_1":"1","n":250,"y":250},{"ent_ENH":"32","P1_1":"1","n":251,"y":251}],"type":"column"},{"name":"Mujer","data":[{"ent_ENH":"01","P1_1":"2","n":122,"y":122},{"ent_ENH":"02","P1_1":"2","n":122,"y":122},{"ent_ENH":"03","P1_1":"2","n":147,"y":147},{"ent_ENH":"04","P1_1":"2","n":130,"y":130},{"ent_ENH":"05","P1_1":"2","n":129,"y":129},{"ent_ENH":"06","P1_1":"2","n":126,"y":126},{"ent_ENH":"07","P1_1":"2","n":147,"y":147},{"ent_ENH":"08","P1_1":"2","n":145,"y":145},{"ent_ENH":"09","P1_1":"2","n":175,"y":175},{"ent_ENH":"10","P1_1":"2","n":133,"y":133},{"ent_ENH":"11","P1_1":"2","n":152,"y":152},{"ent_ENH":"12","P1_1":"2","n":147,"y":147},{"ent_ENH":"13","P1_1":"2","n":131,"y":131},{"ent_ENH":"14","P1_1":"2","n":133,"y":133},{"ent_ENH":"15","P1_1":"2","n":135,"y":135},{"ent_ENH":"16","P1_1":"2","n":122,"y":122},{"ent_ENH":"17","P1_1":"2","n":152,"y":152},{"ent_ENH":"18","P1_1":"2","n":120,"y":120},{"ent_ENH":"19","P1_1":"2","n":104,"y":104},{"ent_ENH":"20","P1_1":"2","n":127,"y":127},{"ent_ENH":"21","P1_1":"2","n":142,"y":142},{"ent_ENH":"22","P1_1":"2","n":137,"y":137},{"ent_ENH":"23","P1_1":"2","n":135,"y":135},{"ent_ENH":"24","P1_1":"2","n":106,"y":106},{"ent_ENH":"25","P1_1":"2","n":165,"y":165},{"ent_ENH":"26","P1_1":"2","n":183,"y":183},{"ent_ENH":"27","P1_1":"2","n":136,"y":136},{"ent_ENH":"28","P1_1":"2","n":119,"y":119},{"ent_ENH":"29","P1_1":"2","n":167,"y":167},{"ent_ENH":"30","P1_1":"2","n":129,"y":129},{"ent_ENH":"31","P1_1":"2","n":141,"y":141},{"ent_ENH":"32","P1_1":"2","n":108,"y":108}],"type":"column"}],"xAxis":{"title":{"text":"Estados"},"categories":["Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila de Zaragoza","Colima","Chiapas","Chihuahua","Ciudad de México","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco","México","Michoacán de Ocampo","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo","San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz de Ignacio de la Llave","Yucatán","Zacatecas"]}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script> ## Gráfica por sexo y educación</p>
-<pre class="r"><code>gra_sex_edu(carac_fil)</code></pre>
-<div id="htmlwidget-c6f09c5cc98af43bc320" style="width:100%;height:500px;" class="highchart html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c6f09c5cc98af43bc320">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Escolaridad por  sexo"},"yAxis":{"title":{"text":"Número de participantes"}},"credits":{"enabled":false},"exporting":{"enabled":true,"filename":"datos","buttons":{"contextButton":{"menuItems":["downloadPNG","downloadJPEG","downloadPDF","downloadSVG","printChart"]}}},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":"Hombre","data":[{"P8_3N":"","P1_1":"1","n":228,"y":228},{"P8_3N":"00","P1_1":"1","n":27,"y":27},{"P8_3N":"01","P1_1":"1","n":2,"y":2},{"P8_3N":"02","P1_1":"1","n":2198,"y":2198},{"P8_3N":"03","P1_1":"1","n":2358,"y":2358},{"P8_3N":"04","P1_1":"1","n":1430,"y":1430},{"P8_3N":"05","P1_1":"1","n":42,"y":42},{"P8_3N":"06","P1_1":"1","n":14,"y":14},{"P8_3N":"07","P1_1":"1","n":277,"y":277},{"P8_3N":"08","P1_1":"1","n":48,"y":48},{"P8_3N":"09","P1_1":"1","n":53,"y":53},{"P8_3N":"10","P1_1":"1","n":1401,"y":1401},{"P8_3N":"11","P1_1":"1","n":232,"y":232},{"P8_3N":"12","P1_1":"1","n":29,"y":29}],"type":"column"},{"name":"Mujer","data":[{"P8_3N":"","P1_1":"2","n":204,"y":204},{"P8_3N":"00","P1_1":"2","n":20,"y":20},{"P8_3N":"01","P1_1":"2","n":5,"y":5},{"P8_3N":"02","P1_1":"2","n":1220,"y":1220},{"P8_3N":"03","P1_1":"2","n":1242,"y":1242},{"P8_3N":"04","P1_1":"2","n":555,"y":555},{"P8_3N":"05","P1_1":"2","n":38,"y":38},{"P8_3N":"06","P1_1":"2","n":43,"y":43},{"P8_3N":"07","P1_1":"2","n":320,"y":320},{"P8_3N":"08","P1_1":"2","n":21,"y":21},{"P8_3N":"09","P1_1":"2","n":41,"y":41},{"P8_3N":"10","P1_1":"2","n":555,"y":555},{"P8_3N":"11","P1_1":"2","n":91,"y":91},{"P8_3N":"12","P1_1":"2","n":12,"y":12}],"type":"column"}],"xAxis":{"title":{"text":"Escolaridad"},"categories":["Ninguno","Preescolar o kinder","Primaria","Secundaria","Preparatoria o bachillerato","Normal básica","Estudios técnicos o comerciales con primaria terminada","Estudios técnicos o comerciales con secundaria terminada","Estudios técnicos o comerciales con preparatoria terminada","Normal de licenciatura","Licenciatura o profesional","Maestría","Doctorado"]}},"theme":{"colors":["#00AACC","#FF4E00","#B90000","#5F9B0A","#CD6723"],"chart":{"backgroundColor":{"linearGradient":[0,0,0,150],"stops":[[0,"#CAE1F4"],[1,"#EEEEEE"]]},"style":{"fontFamily":"Open Sans"}},"title":{"align":"left"},"subtitle":{"align":"left"},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"Open+Sans","debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
+<div id="gráfica-por-sexo-y-educación" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Gráfica por sexo y educación</h2>
+<pre class="r"><code>gra_sex_edu(data_mmsi)</code></pre>
+</div>
+</div>
+<div id="reconocimiento-de-padres" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Reconocimiento de padres</h1>
+<p>Tomamos a los padres para los cuales temenosmos el ingreso del hijo</p>
+<pre class="r"><code>padres_h&lt;-data_mmsi%&gt;%
+  filter(P1_3==&quot;1&quot;)%&gt;%
+  slice(as.integer(unlist(ingre_hij_f%&gt;%select(id_hijo))))%&gt;%
+  mutate(id_hijo =as.vector(ingre_hij_f%&gt;%select(id_hijo) ))
+
+padres_h
+
+unique(padres_h$P1_3)
+nrow(padres_h)
+padres_h$id_hijo</code></pre>
+<p>filtramos las variables de los padres</p>
+<ul>
+<li><p>Estado de residencia pp P2_1EST_D</p></li>
+<li><p>Identificación provedor pricipal P2_5</p></li>
+<li><p>NIvel de escolaridad del padre P3_5N</p></li>
+<li><p>Escolaridad pp NivEsc_PP (nivel)</p></li>
+<li><p>Ocupación pp DivOcu_PP (sinco)</p></li>
+</ul>
+<pre class="r"><code>varph&lt;-c(&quot;P2_1EST_D&quot;,&quot;P2_5&quot;,&quot;P3_5N&quot;, &quot;NivEsc_PP&quot;,&quot;DivOcu_PP&quot;,&quot;id_hijo&quot;)
+padres_hv&lt;- padres_h%&gt;%
+            select(all_of(varph))
+
+padres_hv$DivOcu_PP</code></pre>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTcOzZHVsbyBkZSBNb3ZpbGlkYWQgU29jaWFsIEludGVyZ2VuZXJhY2lvbmFsIChNTVNJKSAyMDE2IgphdXRob3I6ICJSYWZhZWwgTWFydMOtbmV6IE1hcnTDrW5leiIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgY29kZV9mb2xkaW5nOiBoaWRlCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFKQpgYGAKCjxkaXYgaWQgPSAianVzdGlmaWNhciI+CkVsIE3Ds2R1bG8gZGUgTW92aWxpZGFkIFNvY2lhbCBJbnRlcmdlbmVyYWNpb25hbCAoTU1TSSkgMjAxNiBzZSBsZXZhbnTDsyBlbiBlbCB0ZXJjZXIgeSBjdWFydG8gdHJpbWVzdHJlcyBkZSAyMDE2LiBUdXZvIGNvbW8gb2JqZXRpdm8gZ2VuZXJhciBpbmZvcm1hY2nDs24gZXN0YWTDrXN0aWNhIHNvYnJlIG1vdmlsaWRhZCBzb2NpYWwgaW50ZXJnZW5lcmFjaW9uYWwgZGUgbGEgcG9ibGFjacOzbiBkZSAyNSBhIDY0IGHDsW9zIGVuIE3DqXhpY28sIG9ic2VydmFuZG8gbGEgaW5mbHVlbmNpYSBxdWUgdGllbmVuIGNhcmFjdGVyw61zdGljYXMgY29tbyBlbCBuaXZlbCBlZHVjYXRpdm8sIGVsIG5pdmVsIHNvY2lvZWNvbsOzbWljbyB5IGxhIG9jdXBhY2nDs24gZGUgbG9zIGFzY2VuZGVudGVzIGVjb27Ds21pY29zLCBhIHBhcnRpciBkZSB1bmEgZGV0ZXJtaW5hZGEgY29uZGljacOzbiBlbiBsYSBwb3NpY2nDs24gc29jaW9lY29uw7NtaWNhIGFjdHVhbCBkZSBzdXMgZGVzY2VuZGllbnRlcyBbTU1TSS0yMDE2XVtdLgo8L2Rpdj4KICBbTU1TSS0yMDE2XTogaHR0cHM6Ly93d3cuaW5lZ2kub3JnLm14L3Byb2dyYW1hcy9tbXNpLzIwMTYvI01pY3JvZGF0b3MKICAKICAKYGBge3IgY2FyZ2FyX2JpbGlvdGVjYXN9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGhhdmVuKSAjIGltcG9ydGEsIGVudHJlIG90cm9zIHNvZnR3YXJlLCBkZSBTdGF0YQpsaWJyYXJ5KHNqbGFiZWxsZWQpICMgbWFuZWphciBsYWJlbHMgZGUgbGFzIHZhcmlhYmxlcyAKbGlicmFyeShvcGVueGxzeCkgIyBsZWVyIGFyY2hpdm9zIGRlIGV4Y2VsCmxpYnJhcnkoRFQpICMgdmlzdWFsaXphciBhIHRhYmxhcwpsaWJyYXJ5KGRhdGEudGFibGUpICMgY29udmVydGlyIGEgdGFibGFzCmxpYnJhcnkoaGlnaGNoYXJ0ZXIpICMgZ3LDoWZpY2FzIGludGVyYWN0aXZhcwpsaWJyYXJ5KHdlYnNob3QpCmBgYAoKYGBge3IgY2FyZ2FyIGRhdG9zfQoKY2FyZ2FyPC0gZnVuY3Rpb24oKXsKCmRhdG9zX2UgPDwtIHJlYWRfc3BzcygKICAgICAgICAgICAgICAgICAgICAgIHBhdGggID0gIkRhdG9zL01NU0kvTU1TSV8yMDE2LnNhdiIsCiAgICAgICAgICAgICAgICAgICAgICBhdG9taWMudG8uZmFjID0gVFJVRQogICAgICAgICAgICAgICAgICAgICAgI3VzZXJfbmEgPSBGQUxTRSwKICAgICAgICAgICAgICAgICAgICAgKQp9CgpjYXJnYXIoKQpkYXRhX21tc2k8LWRhdG9zX2UgCmRhdGFfbW1zaVtkYXRhX21tc2k9PSIiXTwtTkEKYGBgCgoKYGBge3J9CgojQUdSRUdBTU9TIEVUSVFVRVRBIEEgTE9TIE1JU1NJTkdTIFBBUkEgTEFTIEdSQUZJQ0FTCmRhdGFfbW1zaSRQOF8zTjwtYWRkX2xhYmVscygKICAgICAgICAgICAgICAgICAgICAgICAgICBkYXRhX21tc2kkUDhfM04sCiAgICAgICAgICAgICAgICAgICAgICAgICAgbGFiZWxzID0gYygiTkEiID0gTkEpKQpgYGAKCgpgYGB7cn0KZ2V0X2xhYmVscyhkYXRhX21tc2kkUDhfM04pCmBgYAoKCiMjIEVudHJldmlzdGFkb3MgcG9yIGVzdGFkbwoKYGBge3IgZW50cmV2aXN0YWRvc19lc3RhZG8sIGZpZy53aWR0aCA9IDEwMCwgZmlnLmhlaWdodD0gNDB9CgpteU1lbnVJdGVtcyA8LSBjKCJkb3dubG9hZFBORyIsICJkb3dubG9hZEpQRUciLCAiZG93bmxvYWRQREYiLCAnZG93bmxvYWRTVkcnLCAncHJpbnRDaGFydCcpCgoKZ3JhX3RvbF9lc3QgPC0gZnVuY3Rpb24oZGYpewogZGYgJT4lCiAgY291bnQoZW50X0VOSCkgJT4lCiAgaGNoYXJ0KCd0cmVlbWFwJywKICAgICAgICAgaGNhZXMoeCA9IHBhc3RlKGdldF9sYWJlbHMoZW50X0VOSCksJyAnLCcoJywgbiwnKScsIHNlcCA9ICcnKSwgdmFsdWU9J24nLCBjb2xvciA9ICduJykKICApICU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSkgJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIk7Dum1lcm8gZGUgZW50cmV2aXN0YWRvcyBwb3IgZXN0YWRvIgogICklPiUgCiAgaGNfc3VidGl0bGUodGV4dCA9IHBhc3RlKCJUb3RhbCBkZSBwYXJ0aWNpcGF0ZXM6ICIgLCB0b1N0cmluZyhucm93KGRhdGFfbW1zaSkpKSkgJT4lCiAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJhcmNoaXZvIiwKICAgICAgICAgICAgICAgc291cmNlV2lkdGggPSAgMTAwMCwKICAgICAgICAgICAgICAgc291cmNlSGVpZ2h0ID0gNjQwLAogICAgICAgICAgICAgICBzY2FsZSA9IDEwLAogICAgICAgICAgICAgIAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpCiAgKQp9CgpncmFfdG9sX2VzdChkYXRhX21tc2kpCmBgYAoKIyMgU2V4byBwb3IgZXN0YWRvIAoKYGBge3IgZXN0YWRvX3NleG8sIGZpZy53aWR0aD0xMH0KCgpncmFfc2V4X2VzdDwtIGZ1bmN0aW9uKGRmKXsKCmRmICU+JQogIGNvdW50KGVudF9FTkgsIFAxXzEpJT4lIAogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicsICBncm91cCA9IGFzX2xhYmVsKFAxXzEpKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIk7Dum1lcm8gZGUgZW50cmV2aXN0YWRvcyBwb3IgZXN0YWRvIHkgc2V4byIKICApICU+JQogICNoY19zdWJ0aXRsZSh0ZXh0ID0gIkxhcyBlZGFkZXMgZXN0w6FuIGFncnVwYWRhcyBlbiBpbnRlcnZhbG9zIAogICAjICAgICAgICAgICBkZSAxMCBhw7FvcyAoZGEgY2xpYyBzb2JyZSBGIG8gTSkiKSAlPiUKICAjIGhjX2NyZWRpdHMoCiAgIyAgZW5hYmxlZCA9IFRSVUUsIHRleHQgPSAiU291cmNlOiBTU1MiLAogICMgIHN0eWxlID0gbGlzdChmb250U2l6ZSA9ICIxMnB4IikpJT4lCiAgaGNfeUF4aXModGl0bGUgPSBsaXN0KHRleHQgPSAiTsO6bWVybyBkZSBwYXJ0aWNpcGFudGVzIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJFc3RhZG9zIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGdldF9sYWJlbHMoZGF0YV9tbXNpJGVudF9FTkgpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQp9CgpncmFfc2V4X2VzdChkYXRhX21tc2kpCgpgYGAKCiMjIEVzY29sYXJpZGFkIHNleG8KCmBgYHtyIGVzY29sYXJpZGFkX3NleG8sIGZpZy53aWR0aD0xMH0KCmdyYV9zZXhfZWR1IDwtIGZ1bmN0aW9uKGRmKXsKZGYgJT4lCiAgY291bnQoUDhfM04sUDFfMSklPiUgCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICduJywgIGdyb3VwID0gYXNfbGFiZWwoUDFfMSkpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiRXNjb2xhcmlkYWQgcG9yICBzZXhvIgogICkgJT4lCiAgI2hjX3N1YnRpdGxlKHRleHQgPSAiTGFzIGVkYWRlcyBlc3TDoW4gYWdydXBhZGFzIGVuIGludGVydmFsb3MgCiAgICMgICAgICAgICAgIGRlIDEwIGHDsW9zIChkYSBjbGljIHNvYnJlIEYgbyBNKSIpICU+JQogICMgaGNfY3JlZGl0cygKICAjICBlbmFibGVkID0gVFJVRSwgdGV4dCA9ICJTb3VyY2U6IFNTUyIsCiAgIyAgc3R5bGUgPSBsaXN0KGZvbnRTaXplID0gIjEycHgiKSklPiUKICBoY195QXhpcyh0aXRsZSA9IGxpc3QodGV4dCA9ICJOw7ptZXJvIGRlIHBhcnRpY2lwYW50ZXMiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9IkVzY29sYXJpZGFkIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGdldF9sYWJlbHMoZGF0YV9tbXNpJFA4XzNOKSkgJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKfQoKZ3JhX3NleF9lZHUoZGF0YV9tbXNpKQoKYGBgCiMgUGVyY2VwY2nDs24gZGUgbGEgc2l0dWFjacOzbiBlY29ub21pY2EgCgpgYGB7cn0KCmdyYV9wZXJfZWNvX2FjdDwtIGZ1bmN0aW9uKGRmKXsKICBkZiU+JQogIGNvdW50KFAxMl8xKSU+JSAKICBoY2hhcnQoJ2NvbHVtbicsCiAgICAgICAgIGhjYWVzKCB5ID0gJ24nKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIk9waW5pw7NuIHNvYnJlIHNpdHVhY2nDs24gZWNvbsOzbWljYSBhY3R1YWwiCiAgKSAlPiUKICAjaGNfc3VidGl0bGUodGV4dCA9ICJMYXMgZWRhZGVzIGVzdMOhbiBhZ3J1cGFkYXMgZW4gaW50ZXJ2YWxvcyAKICAgIyAgICAgICAgICAgZGUgMTAgYcOxb3MgKGRhIGNsaWMgc29icmUgRiBvIE0pIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIk7Dum1lcm8gZGUgcGFydGljaXBhbnRlcyIpKSU+JQogIGhjX3hBeGlzKHRpdGxlPWxpc3QodGV4dD0iUG9zaWNpw7NuIGVjb27Ds21pY2EiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkZiRQMTJfMSkpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCn0KZ3JhX3Blcl9lY29fYWN0KGRhdGFfbW1zaSkKYGBgCgoKYGBge3J9CmdyYV9wZXJfZWNvX2FudDwtIGZ1bmN0aW9uKGRmKXsKICBkZiU+JQogIGNvdW50KFAxMl8yKSU+JSAKICBoY2hhcnQoJ2NvbHVtbicsCiAgICAgICAgIGhjYWVzKCB5ID0gJ24nKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIk9waW5pw7NuIHNvYnJlIHNpdHVhY2nDs24gZWNvbsOzbWljYSBkZSBsb3MgcGFkcmVzIgogICkgJT4lCiAgI2hjX3N1YnRpdGxlKHRleHQgPSAiTGFzIGVkYWRlcyBlc3TDoW4gYWdydXBhZGFzIGVuIGludGVydmFsb3MgCiAgICMgICAgICAgICAgIGRlIDEwIGHDsW9zIChkYSBjbGljIHNvYnJlIEYgbyBNKSIpICU+JQogICMgaGNfY3JlZGl0cygKICAjICBlbmFibGVkID0gVFJVRSwgdGV4dCA9ICJTb3VyY2U6IFNTUyIsCiAgIyAgc3R5bGUgPSBsaXN0KGZvbnRTaXplID0gIjEycHgiKSklPiUKICBoY195QXhpcyh0aXRsZSA9IGxpc3QodGV4dCA9ICJOw7ptZXJvIGRlIHBhcnRpY2lwYW50ZXMiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9IlBvc2ljacOzbiBlY29uw7NtaWNhIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGdldF9sYWJlbHMoZGYkUDEyXzIpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQp9CmdyYV9wZXJfZWNvX2FudChkYXRhX21tc2kpCmBgYAoKCmBgYHtyfQoKCnNrZXk8LWRhdGFfbW1zaSU+JQogIHNlbGVjdChQMTJfMixQMTJfMSklPiUKICBkYXRhX3RvX3NhbmtleSgpCgpza2V5Cgpmb3IgKGEgaW4gdW5pcXVlKHNrZXkkZnJvbSkpewpza2V5JGZyb21bc2tleSRmcm9tID09IGFdIDwtcGFzdGUoYSwncCcpCn0KCgpza2V5JT4lCmhjaGFydCgnc2Fua2V5Jyxub2RlV2lkdGg9NTAsCiAgICAgICBvcGFjaXR5PTEsIGxpbmtPcGFjaXR5PTAuMDUsIG1pbkxpbmtXaWR0aD0yLAogICAgICAgbmFtZSA9ICJNb3ZpbGlkYWQiLG5vZGVQYWRkaW5nID0gMTUsY2xpcD1GQUxTRSwKICAgICAgIGRlc2NyaXB0aW9uID0gImhvbGEiKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIHJlbGF0aXZhIgogICklPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgoKYGBge3J9Cgpza2V5PC1kYXRhX21tc2klPiUKICBmaWx0ZXIoUDFfMT09MSklPiUKICBzZWxlY3QoUDEyXzIsUDEyXzEpJT4lCiAgZGF0YV90b19zYW5rZXkoKQoKc2tleQoKZm9yIChhIGluIHVuaXF1ZShza2V5JGZyb20pKXsKc2tleSRmcm9tW3NrZXkkZnJvbSA9PSBhXSA8LXBhc3RlKGEsJ3AnKQp9CgoKc2tleSU+JQpoY2hhcnQoJ3NhbmtleScsbm9kZVdpZHRoPTUwLAogICAgICAgb3BhY2l0eT0xLCBsaW5rT3BhY2l0eT0wLjA1LCBtaW5MaW5rV2lkdGg9MiwKICAgICAgIG5hbWUgPSAiTW92aWxpZGFkIixub2RlUGFkZGluZyA9IDE1LGNsaXA9RkFMU0UsCiAgICAgICBkZXNjcmlwdGlvbiA9ICJob2xhIiklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCByZWxhdGl2YSIKICApJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKCmBgYAoKYGBge3J9Cgpza2V5PC1kYXRhX21tc2klPiUKICBmaWx0ZXIoUDFfMT09MiklPiUKICBzZWxlY3QoUDEyXzIsUDEyXzEpJT4lCiAgZGF0YV90b19zYW5rZXkoKQoKc2tleQoKZm9yIChhIGluIHVuaXF1ZShza2V5JGZyb20pKXsKc2tleSRmcm9tW3NrZXkkZnJvbSA9PSBhXSA8LXBhc3RlKGEsJ3AnKQp9CgoKc2tleSU+JQpoY2hhcnQoJ3NhbmtleScsbm9kZVdpZHRoPTUwLAogICAgICAgb3BhY2l0eT0xLCBsaW5rT3BhY2l0eT0wLjA1LCBtaW5MaW5rV2lkdGg9MiwKICAgICAgIG5hbWUgPSAiTW92aWxpZGFkIixub2RlUGFkZGluZyA9IDE1LGNsaXA9RkFMU0UsCiAgICAgICBkZXNjcmlwdGlvbiA9ICJob2xhIiklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCByZWxhdGl2YSIKICApJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKCmBgYAoKCiMgRmlsdHJhZG8gZGUgZGF0b3MgZGUgbG9zIGhpam9zCgpUb21hbW9zIGFsIGVudHJldmlzdGFkbyBxdWUgZXMgZWwgamVmZSBkZSBob2dhciwgbG8gY3VhbCBub3MgZGEgdW4gdG90YWwgZGUgXzI1NjM0XyBvYnNlcnZhY2lvbmVzIChhcHJveGltYWRhbWVudGUgMS41IGVsIG7Dum1lcm8gdG90YWwgZGUgRVNSVS0yMDE3KQoKYGBge3J9Cgp2YXI8LWMoKQoKI0ZvbGlvdml2IC0+IGRpZmVyZW50ZSAKI0ZvbGlvaG9nIC0+IGRpZmVyZW50ZQojSWRfcG9ibGEgLT4gZGlmZXJlbnRlCiNlbnRfRU5IIC0+ICBjdWFscXVpZXJhIDIgZGlnaXRvcyBkZSBmb2xpbyAocHJpbWVyb3MpCiNlc3Rfc29jaW9fRU5IIC0+IHZpdmllbmRhcyBlc3Rfc29jaW8KdmFyZyA8LSBjKCJGb2xpb3ZpdiIsIkZvbGlvaG9nIiwiSWRfcG9ibGEiLCJlbnRfRU5IIiwiZXN0X3NvY2lvX0VOSCIpCnZhciA8LWModmFyLCB2YXJnKQoKI1AxXzEgLT4gcG9ibGFjaW9uIHNleG8KI1AxXzIgLT4gcG9ibGFjaW9uIGVkYWQKI1AxXzMgLT4gcG9ibGFjaW9uIHBhcmVudGVzY28KdmFyaWQgPC0gYygiUDFfMSIsIlAxXzIiLCJQMV8zIikKdmFyIDwtIGModmFyLHZhcmlkKQoKI1A4XzNOIC0+IHBvYmxhY2lvbiBuaXZlbGFwcm9iICM0MQojUDhfM0cgLT4gcG9ibGFjaW9uIGdyYWRvYXByb2IgIyMjNDIgcGVuZGllbnRlIHBhcmEgYWZpbmFyIGxhIGVkdWNhY2nDs24KdmFyZWR1IDwtIGMoIlA4XzNOIikKdmFyIDwtIGModmFyLCB2YXJlZHUpCgoKCiNQOV8xLT4gcG9ibGFjaW9uIGVkb19jb255dWcgIzQ1CnZhcmNvbnk8LSBjKCJQOV8xIikKdmFyPC1jKHZhcix2YXJjb255KQoKI1AxMV8xXzEtPiBob2dhcmVzIG51bV9waWNrdXAgICM0MwojUDExXzFfMi0+IGhvZ2FyZXMgbnVtX3ZhbiAgIzQyCiNQMTFfMV8zLT4gaG9nYXJlcyBudW1fYXV0byAgIzQwCnZhcmF1dG9zPC1jKCJQMTFfMV8xIiwiUDExXzFfMiIsIlAxMV8xXzMiKQp2YXI8LWModmFyLHZhcmF1dG9zKQoKCiMjUDExXzIgeSBQMTFfMyA8LSB2aXZpZW5kYXMgdGVuZW5jaWEgIzI4CnZhcnZpdjwtYygiUDExXzIiLCJQMTFfMyIpCnZhcjwtYyh2YXIsdmFydml2KQoKIyNQMTFfNF8KCgojI1AxMV81XzIgeSBQXzExXzVfMyAgIDwtIGhvZ2FyZXMgdGFyamV0YSAjMTE2CnZhcnRhcjwtYygiUDExXzVfMiIsIlAxMV81XzMiKQp2YXI8LWModmFyLHZhcnRhcikKCiNQMTFfNiA8LSBnYXN0b3Nob2dhcmVzIGNsYXZlIEMwMjAgCnZhcmRvYzwtYygiUDExXzYiKQp2YXI8LWModmFyLHZhcmRvYykKCgoKI1AxMV83XzE8LSBob2dhcmVzIHRlbGVmb25vICMzNgojUDExXzdfMjwtIGhvZ2FyZXMgY2VsdWxhciAjMzcKI1AxMV83XzM8LSBob2dhcmVzIHR2X3BhZ2EgIzM4CiNQMTFfN180PC0gaG9nYXJlcyBjb25leF9pbnRlICMzOQojUDExXzdfNTwtIGhvZ2FyZXMgbnVtX2VzdGVyLCBudW1fZ3JhYiwgbnVtX3JhZGlvICM1OCw2MCw2MgojUDExXzdfNjwtIGhvZ2FyZXMgbnVtX3R2ZCAjNjcKI1AxMV83Xzc8LSBob2dhcmVzIG51bV9kdmQgIzY4CiNQMTFfN184PC0gaG9nYXJlcyBudW1fbGljdWEgIyA3MgojUDExXzdfOTwtIGhvZ2FyZXMgbnVtX3Rvc3RhICMgNzQKI1AxMV83XzEwPC0gaG9nYXJlcyBudW1fbWljcm8gIyA3NgojUDExXzdfMTE8LSBob2dhcmVzIG51bV9yZWZyaSAjIDc4CiNQMTFfN18xMjwtIGhvZ2FyZXMgbnVtX2VzdHVmICMgODAKI1AxMV83XzEzPC0gaG9nYXJlcyBudW1fbGF2YWQgIyA4MgojUDExXzdfMTQ8LSBob2dhcmVzIG51bV9wbGFuYyAjIDg0CiNQMTFfN18xNTwtIGhvZ2FyZXMgbnVtX21hcXVpICMgODYKI1AxMV83XzE2PC0gaG9nYXJlcyBudW1fdmVudGkgIyA4OAojUDExXzdfMTc8LSBob2dhcmVzIG51bV9qdWVnbyAjIDk2CiMjIyMjUDExXzdfMTg8LSBubyB0ZW5lbW9zIHRhYmxldGFzCiNQMTFfN18xOTwtIGhvZ2FyZXMgbnVtX2NvbXB1ICMgOTIKI1AxMV83XzIwPC0gaG9nYXJlcyBudW1faW1wcmUgIyA5NAojIyMjUDExXzdfMjE8LSBhbmltYWxlcyBkZSB0cmJham8gbm8gc2UgYWdyZWdhcm9uCiMjIyNQMTFfN18yMjwtIGdhbmFuZG8gbm8gc2UgYWdyZWdhcm9uCnZhcmhvZzwtYygiUDExXzdfMSIsIlAxMV83XzIiLCJQMTFfN18zIiwiUDExXzdfNCIsIlAxMV83XzUiLCJQMTFfN182IiwKICAgICAgICAgICJQMTFfN183IiwiUDExXzdfOCIsIlAxMV83XzkiLCJQMTFfN18xMCIsIlAxMV83XzExIiwiUDExXzdfMTIiLAogICAgICAgICAgIlAxMV83XzEzIiwiUDExXzdfMTQiLCJQMTFfN18xNSIsIlAxMV83XzE2IiwiUDExXzdfMTciLCJQMTFfN18xOSIsCiAgICAgICAgICAiUDExXzdfMjAiKQp2YXI8LWModmFyLHZhcmhvZykKCgojIFAxXzM6IMK/UXXDqSBlcyB1c3RlZCBkZWwgamVmZSBkZWwgaG9nYXI/CiMgMSBqZWZlCiMgMiBFc3Bhc0AgY29tcGHDsWVyYUAKCmZpbHRyYWRvX3Zhcl9oaWpvcyA8LSBmdW5jdGlvbihkZix2YXIpewogIGRmbjwtIGRmICU+JQogICAgICAgIHNlbGVjdChhbGxfb2YodmFyKSkKICByZXR1cm4oZGZuKQp9ICAKIApmaWx0cmFkb19jYXJhYyA8LSBmdW5jdGlvbihkZil7IAogICAgICAgIGRmbjwtIGRmJT4lCiAgICAgICAgICAgICAgZmlsdGVyKFAxXzM9PSIxIikKICAgICAgICByZXR1cm4oZGZuKQp9CgpkYXRhX21tc2k8LWRhdG9zX2UKCmE8LWZpbHRyYWRvX3Zhcl9oaWpvcyhkYXRhX21tc2ksdmFyKQoKY2FyYWNfZmlsPC0gZmlsdHJhZG9fY2FyYWMoYSkKaGVhZChjYXJhY19maWwpCmBgYAoKCmhvbGEKCmBgYHtyLCBldmFsPUZBTFNFfQpnZXRfbGFiZWwoZGF0YV9tbXNpW2ModmFyKV0pCmdldF9sYWJlbHMoZGF0YV9tbXNpW2ModmFyKV0pCmBgYAoKCgoKIyMgR3LDoWZpY2EgdG90YWwgcG9yIGVzdGFkbwoKYGBge3J9CmdyYV90b2xfZXN0KGNhcmFjX2ZpbCkgCmBgYAoKIyMgR3LDoWZpY2EgcG9yIGVzdGFkbyB5IHNleG8KCmBgYHtyfQpncmFfc2V4X2VzdChjYXJhY19maWwpCmBgYAojIyBHcsOhZmljYSBwb3Igc2V4byB5IGVkdWNhY2nDs24gCgpgYGB7cn0KZ3JhX3NleF9lZHUoY2FyYWNfZmlsKQpgYGAKCgoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTcOzZHVsbyBkZSBNb3ZpbGlkYWQgU29jaWFsIEludGVyZ2VuZXJhY2lvbmFsIChNTVNJKSAyMDE2IgphdXRob3I6ICJSYWZhZWwgTWFydMOtbmV6IE1hcnTDrW5leiIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQogICAgY29kZV9mb2xkaW5nOiBzaG93Ci0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgbWVzc2FnZSA9IEZBTFNFLGV2YWw9RkFMU0UpCmBgYAoKPGRpdiBpZCA9ICJqdXN0aWZpY2FyIj4KRWwgTcOzZHVsbyBkZSBNb3ZpbGlkYWQgU29jaWFsIEludGVyZ2VuZXJhY2lvbmFsIChNTVNJKSAyMDE2IHNlIGxldmFudMOzIGVuIGVsIHRlcmNlciB5IGN1YXJ0byB0cmltZXN0cmVzIGRlIDIwMTYuIFR1dm8gY29tbyBvYmpldGl2byBnZW5lcmFyIGluZm9ybWFjacOzbiBlc3RhZMOtc3RpY2Egc29icmUgbW92aWxpZGFkIHNvY2lhbCBpbnRlcmdlbmVyYWNpb25hbCBkZSBsYSBwb2JsYWNpw7NuIGRlIDI1IGEgNjQgYcOxb3MgZW4gTcOpeGljbywgb2JzZXJ2YW5kbyBsYSBpbmZsdWVuY2lhIHF1ZSB0aWVuZW4gY2FyYWN0ZXLDrXN0aWNhcyBjb21vIGVsIG5pdmVsIGVkdWNhdGl2bywgZWwgbml2ZWwgc29jaW9lY29uw7NtaWNvIHkgbGEgb2N1cGFjacOzbiBkZSBsb3MgYXNjZW5kZW50ZXMgZWNvbsOzbWljb3MsIGEgcGFydGlyIGRlIHVuYSBkZXRlcm1pbmFkYSBjb25kaWNpw7NuIGVuIGxhIHBvc2ljacOzbiBzb2Npb2Vjb27Ds21pY2EgYWN0dWFsIGRlIHN1cyBkZXNjZW5kaWVudGVzIFtNTVNJLTIwMTZdW10uCjwvZGl2PgogIFtNTVNJLTIwMTZdOiBodHRwczovL3d3dy5pbmVnaS5vcmcubXgvcHJvZ3JhbWFzL21tc2kvMjAxNi8jTWljcm9kYXRvcwogIAogIApgYGB7ciBjYXJnYXJfYmlsaW90ZWNhc30KbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoaGF2ZW4pICMgaW1wb3J0YSwgZW50cmUgb3Ryb3Mgc29mdHdhcmUsIGRlIFN0YXRhCmxpYnJhcnkoc2psYWJlbGxlZCkgIyBtYW5lamFyIGxhYmVscyBkZSBsYXMgdmFyaWFibGVzIApsaWJyYXJ5KG9wZW54bHN4KSAjIGxlZXIgYXJjaGl2b3MgZGUgZXhjZWwKbGlicmFyeShEVCkgIyB2aXN1YWxpemFyIGEgdGFibGFzCmxpYnJhcnkoZGF0YS50YWJsZSkgIyBjb252ZXJ0aXIgYSB0YWJsYXMKbGlicmFyeShoaWdoY2hhcnRlcikgIyBncsOhZmljYXMgaW50ZXJhY3RpdmFzCmxpYnJhcnkod2Vic2hvdCkKYGBgCgpgYGB7ciBjYXJnYXIgZGF0b3N9CgpjYXJnYXJfbW1zaTwtIGZ1bmN0aW9uKCl7CgpyZXR1cm4oIHJlYWRfc3BzcygKICAgICAgICAgICAgICAgICAgICAgIHBhdGggID0gIkRhdG9zL01NU0kvTU1TSV8yMDE2LnNhdiIsCiAgICAgICAgICAgICAgICAgICAgICBhdG9taWMudG8uZmFjID0gVFJVRQogICAgICAgICAgICAgICAgICAgICAgI3VzZXJfbmEgPSBGQUxTRSwKICAgICAgICAgICAgICAgICAgICAgKSkKfQoKCmRhdGFfbW1zaTwtY2FyZ2FyX21tc2koKQpkYXRhX21tc2lbZGF0YV9tbXNpPT0iIl08LU5BCmBgYAoKIyBJbmZvcm1hY2nDs24gTmFjaW9uYWwKCmBgYHtyfQoKI0FHUkVHQU1PUyBFVElRVUVUQSBBIExPUyBNSVNTSU5HUyBQQVJBIExBUyBHUkFGSUNBUwpkYXRhX21tc2kkUDhfM048LWFkZF9sYWJlbHMoCiAgICAgICAgICAgICAgICAgICAgICAgICAgZGF0YV9tbXNpJFA4XzNOLAogICAgICAgICAgICAgICAgICAgICAgICAgIGxhYmVscyA9IGMoIk5BIiA9IE5BKSkKYGBgCgoKYGBge3J9CmdldF9sYWJlbHMoZGF0YV9tbXNpJFA4XzNOKQpgYGAKCgojIyBFbnRyZXZpc3RhZG9zIHBvciBlc3RhZG8KCmBgYHtyIGVudHJldmlzdGFkb3NfZXN0YWRvLCBmaWcud2lkdGggPSAxMDAsIGZpZy5oZWlnaHQ9IDQwfQoKbXlNZW51SXRlbXMgPC0gYygiZG93bmxvYWRQTkciLCAiZG93bmxvYWRKUEVHIiwgImRvd25sb2FkUERGIiwgJ2Rvd25sb2FkU1ZHJywgJ3ByaW50Q2hhcnQnKQoKCmdyYV90b2xfZXN0IDwtIGZ1bmN0aW9uKGRmKXsKIGRmICU+JQogIGNvdW50KGVudF9FTkgpICU+JQogIGhjaGFydCgndHJlZW1hcCcsCiAgICAgICAgIGhjYWVzKHggPSBwYXN0ZShnZXRfbGFiZWxzKGVudF9FTkgpLCcgJywnKCcsIG4sJyknLCBzZXAgPSAnJyksIHZhbHVlPSduJywgY29sb3IgPSAnbicpCiAgKSAlPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpICU+JQogIGhjX3RpdGxlKAogICAgdGV4dCA9ICJOw7ptZXJvIGRlIGVudHJldmlzdGFkb3MgcG9yIGVzdGFkbyIKICApJT4lIAogIGhjX3N1YnRpdGxlKHRleHQgPSBwYXN0ZSgiVG90YWwgZGUgcGFydGljaXBhdGVzOiAiICwgdG9TdHJpbmcobnJvdyhkYXRhX21tc2kpKSkpICU+JQogIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiYXJjaGl2byIsCiAgICAgICAgICAgICAgIHNvdXJjZVdpZHRoID0gIDEwMDAsCiAgICAgICAgICAgICAgIHNvdXJjZUhlaWdodCA9IDY0MCwKICAgICAgICAgICAgICAgc2NhbGUgPSAxMCwKICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKQogICkKfQoKZ3JhX3RvbF9lc3QoZGF0YV9tbXNpKQpgYGAKCiMjIFNleG8gcG9yIGVzdGFkbyAKCmBgYHtyIGVzdGFkb19zZXhvLCBmaWcud2lkdGg9MTB9CgoKZ3JhX3NleF9lc3Q8LSBmdW5jdGlvbihkZil7CgpkZiAlPiUKICBjb3VudChlbnRfRU5ILCBQMV8xKSU+JSAKICBoY2hhcnQoJ2NvbHVtbicsCiAgICAgICAgIGhjYWVzKCB5ID0gJ24nLCAgZ3JvdXAgPSBhc19sYWJlbChQMV8xKSkpJT4lCiAgaGNfYWRkX3RoZW1lKGhjX3RoZW1lX2ZmeCgpKSU+JQogIGhjX3RpdGxlKAogICAgdGV4dCA9ICJOw7ptZXJvIGRlIGVudHJldmlzdGFkb3MgcG9yIGVzdGFkbyB5IHNleG8iCiAgKSAlPiUKICAjaGNfc3VidGl0bGUodGV4dCA9ICJMYXMgZWRhZGVzIGVzdMOhbiBhZ3J1cGFkYXMgZW4gaW50ZXJ2YWxvcyAKICAgIyAgICAgICAgICAgZGUgMTAgYcOxb3MgKGRhIGNsaWMgc29icmUgRiBvIE0pIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIk7Dum1lcm8gZGUgcGFydGljaXBhbnRlcyIpKSU+JQogIGhjX3hBeGlzKHRpdGxlPWxpc3QodGV4dD0iRXN0YWRvcyIpLAogICAgICAgICAgIGNhdGVnb3JpZXMgPSBnZXRfbGFiZWxzKGRhdGFfbW1zaSRlbnRfRU5IKSkgJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKfQoKZ3JhX3NleF9lc3QoZGF0YV9tbXNpKQoKYGBgCgojIyBFc2NvbGFyaWRhZCBzZXhvCgpgYGB7ciBlc2NvbGFyaWRhZF9zZXhvLCBmaWcud2lkdGg9MTB9CgpncmFfc2V4X2VkdSA8LSBmdW5jdGlvbihkZil7CmRmICU+JQogIGNvdW50KFA4XzNOLFAxXzEpJT4lIAogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicsICBncm91cCA9IGFzX2xhYmVsKFAxXzEpKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIkVzY29sYXJpZGFkIHBvciAgc2V4byIKICApICU+JQogICNoY19zdWJ0aXRsZSh0ZXh0ID0gIkxhcyBlZGFkZXMgZXN0w6FuIGFncnVwYWRhcyBlbiBpbnRlcnZhbG9zIAogICAjICAgICAgICAgICBkZSAxMCBhw7FvcyAoZGEgY2xpYyBzb2JyZSBGIG8gTSkiKSAlPiUKICAjIGhjX2NyZWRpdHMoCiAgIyAgZW5hYmxlZCA9IFRSVUUsIHRleHQgPSAiU291cmNlOiBTU1MiLAogICMgIHN0eWxlID0gbGlzdChmb250U2l6ZSA9ICIxMnB4IikpJT4lCiAgaGNfeUF4aXModGl0bGUgPSBsaXN0KHRleHQgPSAiTsO6bWVybyBkZSBwYXJ0aWNpcGFudGVzIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJFc2NvbGFyaWRhZCIpLAogICAgICAgICAgIGNhdGVnb3JpZXMgPSBnZXRfbGFiZWxzKGRhdGFfbW1zaSRQOF8zTikpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCn0KCmdyYV9zZXhfZWR1KGRhdGFfbW1zaSkKCmBgYAoKIyBQZXJjZXBjacOzbiBkZSBsYSBzaXR1YWNpw7NuIGVjb25vbWljYSAKCmBgYHtyfQoKZ3JhX3Blcl9lY29fYWN0PC0gZnVuY3Rpb24oZGYpewogIGRmJT4lCiAgY291bnQoUDEyXzEpJT4lIAogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiT3BpbmnDs24gc29icmUgc2l0dWFjacOzbiBlY29uw7NtaWNhIGFjdHVhbCIKICApICU+JQogICNoY19zdWJ0aXRsZSh0ZXh0ID0gIkxhcyBlZGFkZXMgZXN0w6FuIGFncnVwYWRhcyBlbiBpbnRlcnZhbG9zIAogICAjICAgICAgICAgICBkZSAxMCBhw7FvcyAoZGEgY2xpYyBzb2JyZSBGIG8gTSkiKSAlPiUKICAjIGhjX2NyZWRpdHMoCiAgIyAgZW5hYmxlZCA9IFRSVUUsIHRleHQgPSAiU291cmNlOiBTU1MiLAogICMgIHN0eWxlID0gbGlzdChmb250U2l6ZSA9ICIxMnB4IikpJT4lCiAgaGNfeUF4aXModGl0bGUgPSBsaXN0KHRleHQgPSAiTsO6bWVybyBkZSBwYXJ0aWNpcGFudGVzIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJQb3NpY2nDs24gZWNvbsOzbWljYSIpLAogICAgICAgICAgIGNhdGVnb3JpZXMgPSBnZXRfbGFiZWxzKGRmJFAxMl8xKSkgJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKfQpncmFfcGVyX2Vjb19hY3QoZGF0YV9tbXNpKQpgYGAKCgpgYGB7cn0KZ3JhX3Blcl9lY29fYW50PC0gZnVuY3Rpb24oZGYpewogIGRmJT4lCiAgY291bnQoUDEyXzIpJT4lIAogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnbicpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiT3BpbmnDs24gc29icmUgc2l0dWFjacOzbiBlY29uw7NtaWNhIGRlIGxvcyBwYWRyZXMiCiAgKSAlPiUKICAjaGNfc3VidGl0bGUodGV4dCA9ICJMYXMgZWRhZGVzIGVzdMOhbiBhZ3J1cGFkYXMgZW4gaW50ZXJ2YWxvcyAKICAgIyAgICAgICAgICAgZGUgMTAgYcOxb3MgKGRhIGNsaWMgc29icmUgRiBvIE0pIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIk7Dum1lcm8gZGUgcGFydGljaXBhbnRlcyIpKSU+JQogIGhjX3hBeGlzKHRpdGxlPWxpc3QodGV4dD0iUG9zaWNpw7NuIGVjb27Ds21pY2EiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkZiRQMTJfMikpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCn0KZ3JhX3Blcl9lY29fYW50KGRhdGFfbW1zaSkKYGBgCgoKYGBge3J9CgoKc2tleTwtZGF0YV9tbXNpJT4lCiAgc2VsZWN0KFAxMl8yLFAxMl8xKSU+JQogIGRhdGFfdG9fc2Fua2V5KCkKCiNza2V5Cgpmb3IgKGEgaW4gdW5pcXVlKHNrZXkkZnJvbSkpewpza2V5JGZyb21bc2tleSRmcm9tID09IGFdIDwtcGFzdGUoYSwncCcpCn0KCiNza2V5JHdlaWdodDwtYXMuZG91YmxlKHNrZXkkd2VpZ2h0KQoKI2ZvciAoYSBpbiB1bmlxdWUoc2tleSRmcm9tKSl7CiNza2V5W3NrZXkkZnJvbSA9PWEsICJ3ZWlnaHQiXSA8LSByb3VuZChza2V5W3NrZXkkZnJvbSA9PWEsICJ3ZWlnaHQiXSAvICNzdW0oc2tleVtza2V5JGZyb209PWEsM10pLDIpCiN9Cgojc2tleQoKc2tleSU+JQpoY2hhcnQoJ3NhbmtleScsbm9kZVdpZHRoPTUwLAogICAgICAgb3BhY2l0eT0xLCBsaW5rT3BhY2l0eT0wLjA1LCBtaW5MaW5rV2lkdGg9MiwKICAgICAgIG5hbWUgPSAiTW92aWxpZGFkIixub2RlUGFkZGluZyA9IDE1LGNsaXA9RkFMU0UsCiAgICAgICBkZXNjcmlwdGlvbiA9ICJob2xhIiklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCByZWxhdGl2YSIKICApJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKCmBgYAoKCmBgYHtyfQoKc2tleTwtZGF0YV9tbXNpJT4lCiAgZmlsdGVyKFAxXzE9PTEpJT4lCiAgc2VsZWN0KFAxMl8yLFAxMl8xKSU+JQogIGRhdGFfdG9fc2Fua2V5KCkKCgpmb3IgKGEgaW4gdW5pcXVlKHNrZXkkZnJvbSkpewpza2V5JGZyb21bc2tleSRmcm9tID09IGFdIDwtcGFzdGUoYSwncCcpCn0KCgpza2V5JT4lCmhjaGFydCgnc2Fua2V5Jyxub2RlV2lkdGg9NTAsCiAgICAgICBvcGFjaXR5PTEsIGxpbmtPcGFjaXR5PTAuMDUsIG1pbkxpbmtXaWR0aD0yLAogICAgICAgbmFtZSA9ICJNb3ZpbGlkYWQiLG5vZGVQYWRkaW5nID0gMTUsY2xpcD1GQUxTRSwKICAgICAgIGRlc2NyaXB0aW9uID0gImhvbGEiKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIHJlbGF0aXZhIgogICklPiUKICBoY19zdWJ0aXRsZSh0ZXh0ID0gIkhvbWJyZXMiKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgpgYGB7cn0KCnNrZXk8LWRhdGFfbW1zaSU+JQogIGZpbHRlcihQMV8xPT0yKSU+JQogIHNlbGVjdChQMTJfMixQMTJfMSklPiUKICBkYXRhX3RvX3NhbmtleSgpCgoKZm9yIChhIGluIHVuaXF1ZShza2V5JGZyb20pKXsKc2tleSRmcm9tW3NrZXkkZnJvbSA9PSBhXSA8LXBhc3RlKGEsJ3AnKQp9CgoKc2tleSU+JQpoY2hhcnQoJ3NhbmtleScsbm9kZVdpZHRoPTUwLAogICAgICAgb3BhY2l0eT0xLCBsaW5rT3BhY2l0eT0wLjA1LCBtaW5MaW5rV2lkdGg9MiwKICAgICAgIG5hbWUgPSAiTW92aWxpZGFkIixub2RlUGFkZGluZyA9IDE1LGNsaXA9RkFMU0UsCiAgICAgICBkZXNjcmlwdGlvbiA9ICJob2xhIiklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCByZWxhdGl2YSIKICApJT4lCiAgaGNfc3VidGl0bGUodGV4dCA9ICJNdWplcmVzIikgJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKCmBgYAojIyBQZXJjZXBjacOzbiBkZSBtb3ZpbGlkYWQgcG9yIGdydXBvIGRlIGVkYWQgKGRlY2VuYWwpCgpgYGB7cn0KIyBQZXJfU2l0RWNvCmRhdGFfbW1zaSAlPiUKICBjb3VudChFZGFkX0FnMixQZXJfU2l0RWNvKSU+JSAKICBncm91cF9ieShFZGFkX0FnMikgJT4lCiAgbXV0YXRlKGZyZXEgPSByb3VuZCgxMDAgKiBuL3N1bShuKSwgMSkpJT4lCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICdmcmVxJywgIGdyb3VwID0gYXNfbGFiZWwoUGVyX1NpdEVjbykpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIGRlIGFjdWVyZG8gYWwgZ3J1cG8gZGUgZWRhZCIKICApICU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSAiTGFzIGVkYWRlcyBlc3TDoW4gYWdydXBhZGFzIGVuIGludGVydmFsb3MgCiAgICMgICAgICAgICAgIGRlIDEwIGHDsW9zIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIlBvcmNlbnRhamUiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9IkdydXBvIGRlIGVkYWQiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkYXRhX21tc2kkRWRhZF9BZzIpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgojIyBQZXJjZXBjacOzbiBkZSBtb3ZpbGlkYWQgcG9yIGdydXBvIGRlIGVkYWQgKHF1aW5xdWVuYWwpCgpgYGB7cn0KIyBQZXJfU2l0RWNvCmRhdGFfbW1zaSAlPiUKICBjb3VudChFZGFkX0FnMSxQZXJfU2l0RWNvKSU+JSAKICBncm91cF9ieShFZGFkX0FnMSkgJT4lCiAgbXV0YXRlKGZyZXEgPSByb3VuZCgxMDAgKiBuL3N1bShuKSwgMSkpJT4lCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICdmcmVxJywgIGdyb3VwID0gYXNfbGFiZWwoUGVyX1NpdEVjbykpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIGRlIGFjdWVyZG8gYWwgZ3J1cG8gZGUgZWRhZCIKICApICU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSAiTGFzIGVkYWRlcyBlc3TDoW4gYWdydXBhZGFzIGVuIGludGVydmFsb3MgCiAgICMgICAgICAgICAgIGRlIDUgYcOxb3MiKSAlPiUKICAjIGhjX2NyZWRpdHMoCiAgIyAgZW5hYmxlZCA9IFRSVUUsIHRleHQgPSAiU291cmNlOiBTU1MiLAogICMgIHN0eWxlID0gbGlzdChmb250U2l6ZSA9ICIxMnB4IikpJT4lCiAgaGNfeUF4aXModGl0bGUgPSBsaXN0KHRleHQgPSAiUG9yY2VudGFqZSIpKSU+JQogIGhjX3hBeGlzKHRpdGxlPWxpc3QodGV4dD0iR3J1cG8gZGUgZWRhZCIpLAogICAgICAgICAgIGNhdGVnb3JpZXMgPSBnZXRfbGFiZWxzKGRhdGFfbW1zaSRFZGFkX0FnMSkpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCgpgYGAKCiMjIFBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCBwb3Igbml2ZWwgZGUgZXNjb2xhcmlkYWQKCmBgYHtyfQojIFBlcl9TaXRFY28KCmRhdGFfbW1zaSAlPiUKICBjb3VudChOaXZFc2NfSW5mLFBlcl9TaXRFY28pJT4lIAogIGdyb3VwX2J5KE5pdkVzY19JbmYpICU+JQogIG11dGF0ZShmcmVxID0gcm91bmQoMTAwICogbi9zdW0obiksIDEpKSU+JQogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnZnJlcScsICBncm91cCA9IGFzX2xhYmVsKFBlcl9TaXRFY28pKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCBkZSBhY3VlcmRvIGFsIG5pdmVsIGRlIGVzY29sYXJpZGFkIgogICkgJT4lCiAgaGNfc3VidGl0bGUodGV4dCA9ICJFbCBuaXZlbCBkZSBlc2NvbGFyaWRhZCBkZWwgaW5mb3JtYW50ZSIpICU+JQogICMgaGNfY3JlZGl0cygKICAjICBlbmFibGVkID0gVFJVRSwgdGV4dCA9ICJTb3VyY2U6IFNTUyIsCiAgIyAgc3R5bGUgPSBsaXN0KGZvbnRTaXplID0gIjEycHgiKSklPiUKICBoY195QXhpcyh0aXRsZSA9IGxpc3QodGV4dCA9ICJQb3JjZW50YWplIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJOaXZlbCBFc2NvbGFyIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGdldF9sYWJlbHMoZGF0YV9tbXNpJE5pdkVzY19JbmYpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgojIyBQZXJjZXBjacOzbiBkZSBtb3ZpbGlkYWQgcG9yIG5pdmVsIGRlIGVzY29sYXJpZGFkIGRlbCBwcm92ZWRvciBwcmluY2lwYWwKCmBgYHtyfQojIFBlcl9TaXRFY28KCmRhdGFfbW1zaSAlPiUKICBjb3VudChOaXZFc2NfUFAyLFBlcl9TaXRFY28pJT4lIAogIGdyb3VwX2J5KE5pdkVzY19QUDIpICU+JQogIG11dGF0ZShmcmVxID0gcm91bmQoMTAwICogbi9zdW0obiksIDEpKSU+JQogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnZnJlcScsICBncm91cCA9IGFzX2xhYmVsKFBlcl9TaXRFY28pKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCBkZSBhY3VlcmRvIGFsIG5pdmVsIGRlIGVzY29sYXJpZGFkIgogICkgJT4lCiAgaGNfc3VidGl0bGUodGV4dCA9ICJFbCBuaXZlbCBkZSBlc2NvbGFyaWRhZCBkZWwgcHJvdmVkb3IgcHJpbmNpcGFsIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIlBvcmNlbnRhamUiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9Ik5pdmVsIEVzY29sYXIiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkYXRhX21tc2kkTml2RXNjX1BQMikpICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCgpgYGAKCgojIyBQZXJjZXBjacOzbiBkZSBtb3ZpbGlkYWQgcG9yIGRpdmlzacOzbiBkZSBvdWNwYWNpw7NuIGRlbCBpbmZvcm1hbnRlCgpgYGB7cn0KIyBQZXJfU2l0RWNvCgoKZGF0YV9tbXNpICU+JQogIGNvdW50KERpdk9jdV9BY3QsUGVyX1NpdEVjbyklPiUgCiAgZ3JvdXBfYnkoRGl2T2N1X0FjdCkgJT4lCiAgbXV0YXRlKGZyZXEgPSByb3VuZCgxMDAgKiBuL3N1bShuKSwgMSkpJT4lCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICdmcmVxJywgIGdyb3VwID0gYXNfbGFiZWwoUGVyX1NpdEVjbykpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIGRlIHBvciBkaXZpc2nDs24gZGUgb2N1cGFjacOzbiIKICApICU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSAiRWwgbml2ZWwgZGUgb2N1YXBjacOzbiBkZWwgaW5mb3JtYW50ZSIpICU+JQogICMgaGNfY3JlZGl0cygKICAjICBlbmFibGVkID0gVFJVRSwgdGV4dCA9ICJTb3VyY2U6IFNTUyIsCiAgIyAgc3R5bGUgPSBsaXN0KGZvbnRTaXplID0gIjEycHgiKSklPiUKICBoY195QXhpcyh0aXRsZSA9IGxpc3QodGV4dCA9ICJQb3JjZW50YWplIikpJT4lCiAgaGNfeEF4aXModGl0bGU9bGlzdCh0ZXh0PSJOaXZlbCBkZSBvY3VhcGNpw7NuIiksCiAgICAgICAgICAgY2F0ZWdvcmllcyA9IGdldF9sYWJlbHMoZGF0YV9tbXNpJERpdk9jdV9BY3QpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgoKIyMgUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIHBvciBkaXZpc2nDs24gZGUgYWN1cGFjacOzbiBkZWwgcHJvdmVkb3IgcHJpbmNpcGFsCgpgYGB7cn0KIyBQZXJfU2l0RWNvCgpkYXRhX21tc2kgJT4lCiAgY291bnQoRGl2T2N1X1BQLFBlcl9TaXRFY28pJT4lIAogIGdyb3VwX2J5KERpdk9jdV9QUCkgJT4lCiAgbXV0YXRlKGZyZXEgPSByb3VuZCgxMDAgKiBuL3N1bShuKSwgMSkpJT4lCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICdmcmVxJywgIGdyb3VwID0gYXNfbGFiZWwoUGVyX1NpdEVjbykpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIGRlIHBvciBkaXZpc2nDs24gZGUgb2N1cGFjacOzbiIKICApICU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSAiRWwgbml2ZWwgZGUgb2N1YXBjacOzbiBkZWwgcHJvdmVkb3IgcHJpbmNpcGFsIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIlBvcmNlbnRhamUiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9Ik5pdmVsIGRlIG9jdWFwY2nDs24iKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkYXRhX21tc2kkRGl2T2N1X1BQKSkgJT4lCiAgICBoY19leHBvcnRpbmcoZW5hYmxlZCA9IFRSVUUsCiAgICAgICAgICAgICAgIGZpbGVuYW1lID0gImRhdG9zIiwKICAgICAgICAgICAgICAgYnV0dG9ucyA9IGxpc3QoY29udGV4dEJ1dHRvbiA9IGxpc3QobWVudUl0ZW1zID0gbXlNZW51SXRlbXMpKSkKCmBgYAoKIyMgUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIHBvciBhdXRvZGVzY3JpcGNpw7NuIMOpdG5pY2EKCmBgYHtyfQojIFBlcl9TaXRFY28KCmRhdGFfbW1zaSAlPiUKICBjb3VudChQMTBfMyxQZXJfU2l0RWNvKSU+JSAKICBncm91cF9ieShQMTBfMykgJT4lCiAgbXV0YXRlKGZyZXEgPSByb3VuZCgxMDAgKiBuL3N1bShuKSwgMSkpJT4lCiAgaGNoYXJ0KCdjb2x1bW4nLAogICAgICAgICBoY2FlcyggeSA9ICdmcmVxJywgIGdyb3VwID0gYXNfbGFiZWwoUGVyX1NpdEVjbykpKSU+JQogIGhjX2FkZF90aGVtZShoY190aGVtZV9mZngoKSklPiUKICBoY190aXRsZSgKICAgIHRleHQgPSAiUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIGRlIGFjdWVyZG8gYWwgZ3J1cG8gw6l0bmljbyIKICApICU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSAiIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIlBvcmNlbnRhamUiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9IkdydXBvIMOpdG5pY28iKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkYXRhX21tc2kkUDEwXzMpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgoKIyMgUGVyY2VwY2nDs24gZGUgbW92aWxpZGFkIHBvciBhdXRvY2xhc2lmaWFjacOzbiBkZSBjb2xvciBkZSBwaWVsCgpgYGB7cn0KIyBQZXJfU2l0RWNvCgpkYXRhX21tc2kgJT4lCiAgY291bnQoUDEwXzIsUGVyX1NpdEVjbyklPiUgCiAgZ3JvdXBfYnkoUDEwXzIpICU+JQogIG11dGF0ZShmcmVxID0gcm91bmQoMTAwICogbi9zdW0obiksIDApKSU+JQogIGhjaGFydCgnY29sdW1uJywKICAgICAgICAgaGNhZXMoIHkgPSAnZnJlcScsICBncm91cCA9IGFzX2xhYmVsKFBlcl9TaXRFY28pKSklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCBkZSBhY3VlcmRvIGFsIGNvbG9yIGRlIHBpZWwiCiAgKSAlPiUKICBoY19zdWJ0aXRsZSh0ZXh0ID0gIlBhcmEgZWwgY29sb3IgZGUgcGllbCBzZSByZXZpc2EgbGEgZXNjYWxhIikgJT4lCiAgIyBoY19jcmVkaXRzKAogICMgIGVuYWJsZWQgPSBUUlVFLCB0ZXh0ID0gIlNvdXJjZTogU1NTIiwKICAjICBzdHlsZSA9IGxpc3QoZm9udFNpemUgPSAiMTJweCIpKSU+JQogIGhjX3lBeGlzKHRpdGxlID0gbGlzdCh0ZXh0ID0gIlBvcmNlbnRhamUiKSklPiUKICBoY194QXhpcyh0aXRsZT1saXN0KHRleHQ9IkNvbG9yIGRlIHBpZWwiKSwKICAgICAgICAgICBjYXRlZ29yaWVzID0gZ2V0X2xhYmVscyhkYXRhX21tc2kkUDEwXzIpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKYGBgCgoKIyMgTW92aWxpZGFkIHBvciBlbnRpZGFkIGZlZGVyYXRpdmEKCmBgYHtyfQoKbW92X2VzdGFkbzwtZnVuY3Rpb24oYV8pewogIHNrZXk8LWRhdGFfbW1zaSU+JQogIGZpbHRlcihlbnRfRU5IPT1hXyklPiUKICBzZWxlY3QoUDEyXzIsUDEyXzEpJT4lCiAgZGF0YV90b19zYW5rZXkoKQoKZm9yIChhIGluIHVuaXF1ZShza2V5JGZyb20pKXsKc2tleSRmcm9tW3NrZXkkZnJvbSA9PSBhXSA8LXBhc3RlKGEsJ3AnKQp9Cgpmb3IgKGEgaW4gdW5pcXVlKHNrZXkkdG8pKXsKc2tleSR0b1tza2V5JHRvID09IGFdIDwtcGFzdGUoYSwnaCcpCn0KICAKc2tleSU+JQpoY2hhcnQoJ3NhbmtleScsbm9kZVdpZHRoPTUwLAogICAgICAgb3BhY2l0eT0xLCBsaW5rT3BhY2l0eT0wLjA1LCBtaW5MaW5rV2lkdGg9MiwKICAgICAgIG5hbWUgPSAiTW92aWxpZGFkIixub2RlUGFkZGluZyA9IDE1LGNsaXA9RkFMU0UsCiAgICAgICBkZXNjcmlwdGlvbiA9ICJob2xhIiklPiUKICBoY19hZGRfdGhlbWUoaGNfdGhlbWVfZmZ4KCkpJT4lCiAgaGNfdGl0bGUoCiAgICB0ZXh0ID0gIlBlcmNlcGNpw7NuIGRlIG1vdmlsaWRhZCByZWxhdGl2YSIKICApJT4lCiAgIGhjX3N1YnRpdGxlKHRleHQgPSBnZXRfbGFiZWxzKGRhdGFfbW1zaSRlbnRfRU5IKVthcy5pbnRlZ2VyKGFfKV0pICU+JQogICAgaGNfZXhwb3J0aW5nKGVuYWJsZWQgPSBUUlVFLAogICAgICAgICAgICAgICBmaWxlbmFtZSA9ICJkYXRvcyIsCiAgICAgICAgICAgICAgIGJ1dHRvbnMgPSBsaXN0KGNvbnRleHRCdXR0b24gPSBsaXN0KG1lbnVJdGVtcyA9IG15TWVudUl0ZW1zKSkpCn0KCm1vdl9lc3RhZG9faDwtZnVuY3Rpb24oYV8pewoKc2tleTwtZGF0YV9tbXNpJT4lCiAgZmlsdGVyKFAxXzE9PTEgJiBlbnRfRU5IPT1hXyApJT4lCiAgc2VsZWN0KFAxMl8yLFAxMl8xKSU+JQogIGRhdGFfdG9fc2Fua2V5KCkKCgpmb3IgKGEgaW4gdW5pcXVlKHNrZXkkZnJvbSkpewpza2V5JGZyb21bc2tleSRmcm9tID09IGFdIDwtcGFzdGUoYSwncCcpCn0KCmZvciAoYSBpbiB1bmlxdWUoc2tleSR0bykpewpza2V5JHRvW3NrZXkkdG8gPT0gYV0gPC1wYXN0ZShhLCdoJykKfQoKCnNrZXklPiUKaGNoYXJ0KCdzYW5rZXknLG5vZGVXaWR0aD01MCwKICAgICAgIG9wYWNpdHk9MSwgbGlua09wYWNpdHk9MC4wNSwgbWluTGlua1dpZHRoPTIsCiAgICAgICBuYW1lID0gIk1vdmlsaWRhZCIsbm9kZVBhZGRpbmcgPSAxNSxjbGlwPUZBTFNFLAogICAgICAgZGVzY3JpcHRpb24gPSAiaG9sYSIpJT4lCiAgaGNfYWRkX3RoZW1lKGhjX3RoZW1lX2ZmeCgpKSU+JQogIGhjX3RpdGxlKAogICAgdGV4dCA9ICJQZXJjZXBjacOzbiBkZSBtb3ZpbGlkYWQgcmVsYXRpdmEiCiAgKSU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSBwYXN0ZShnZXRfbGFiZWxzKGRhdGFfbW1zaSRlbnRfRU5IKVthcy5pbnRlZ2VyKGFfKV0sIkhvbWJyZXMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICBzZXAgPSI6ICIpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQoKfQoKbW92X2VzdGFkb19tPC1mdW5jdGlvbihhXyl7CnNrZXk8LWRhdGFfbW1zaSU+JQogIGZpbHRlcihQMV8xPT0yICYgZW50X0VOSD09YV8gKSU+JQogIHNlbGVjdChQMTJfMixQMTJfMSklPiUKICBkYXRhX3RvX3NhbmtleSgpCgoKZm9yIChhIGluIHVuaXF1ZShza2V5JGZyb20pKXsKc2tleSRmcm9tW3NrZXkkZnJvbSA9PSBhXSA8LXBhc3RlKGEsJ3AnKQp9Cgpmb3IgKGEgaW4gdW5pcXVlKHNrZXkkdG8pKXsKc2tleSR0b1tza2V5JHRvID09IGFdIDwtcGFzdGUoYSwnaCcpCn0KCnNrZXklPiUKaGNoYXJ0KCdzYW5rZXknLG5vZGVXaWR0aD01MCwKICAgICAgIG9wYWNpdHk9MSwgbGlua09wYWNpdHk9MC4wNSwgbWluTGlua1dpZHRoPTIsCiAgICAgICBuYW1lID0gIk1vdmlsaWRhZCIsbm9kZVBhZGRpbmcgPSAxNSxjbGlwPUZBTFNFLAogICAgICAgZGVzY3JpcHRpb24gPSAiaG9sYSIpJT4lCiAgaGNfYWRkX3RoZW1lKGhjX3RoZW1lX2ZmeCgpKSU+JQogIGhjX3RpdGxlKAogICAgdGV4dCA9ICJQZXJjZXBjacOzbiBkZSBtb3ZpbGlkYWQgcmVsYXRpdmEiCiAgKSU+JQogIGhjX3N1YnRpdGxlKHRleHQgPSBwYXN0ZShnZXRfbGFiZWxzKGRhdGFfbW1zaSRlbnRfRU5IKVthcy5pbnRlZ2VyKGFfKV0sIk11amVyZXMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICBzZXAgPSI6ICIpKSAlPiUKICAgIGhjX2V4cG9ydGluZyhlbmFibGVkID0gVFJVRSwKICAgICAgICAgICAgICAgZmlsZW5hbWUgPSAiZGF0b3MiLAogICAgICAgICAgICAgICBidXR0b25zID0gbGlzdChjb250ZXh0QnV0dG9uID0gbGlzdChtZW51SXRlbXMgPSBteU1lbnVJdGVtcykpKQp9Cgptb3ZfZXN0YWRvKCIwMSIpCm1vdl9lc3RhZG9faCgiMDEiKQptb3ZfZXN0YWRvX20oIjAxIikKCm1vdl9lc3RhZG8oIjAyIikKbW92X2VzdGFkb19oKCIwMiIpCm1vdl9lc3RhZG9fbSgiMDIiKQoKbW92X2VzdGFkbygiMDMiKQptb3ZfZXN0YWRvX2goIjAzIikKbW92X2VzdGFkb19tKCIwMyIpCgptb3ZfZXN0YWRvKCIwNCIpCm1vdl9lc3RhZG9faCgiMDQiKQptb3ZfZXN0YWRvX20oIjA0IikKCm1vdl9lc3RhZG8oIjA1IikKbW92X2VzdGFkb19oKCIwNSIpCm1vdl9lc3RhZG9fbSgiMDUiKQoKCmBgYAoKCiMgRmlsdHJhZG8gZGUgZGF0b3MgZGUgbG9zIGhpam9zCgpTZWxlY2Npw7NuIGRlIHZhcmlhYmxlcyBkZSBsb3MgaGlqb3MgcGFyYSBzdSBtYXBlbyBhIGVuaWctMjAxNi4KCmBgYHtyfQp2YXI8LWMoKQoKI0ZvbGlvdml2IC0+IGRpZmVyZW50ZSAKI0ZvbGlvaG9nIC0+IGRpZmVyZW50ZQojSWRfcG9ibGEgLT4gZGlmZXJlbnRlCiNlbnRfRU5IIC0+ICBjdWFscXVpZXJhIDIgZGlnaXRvcyBkZSBGb2xpb3ZpdiAocHJpbWVyb3MpCiNlc3Rfc29jaW9fRU5IIC0+IHZpdmllbmRhcyBlc3Rfc29jaW8KdmFyZyA8LSBjKCJGb2xpb3ZpdiIsIkZvbGlvaG9nIiwiSWRfcG9ibGEiLCJlbnRfRU5IIiwiZXN0X3NvY2lvX0VOSCIpCnZhciA8LWModmFyLCB2YXJnKQoKCiNQMV8xIC0+IHBvYmxhY2lvbiBzZXhvCiNQMV8yIC0+IHBvYmxhY2lvbiBlZGFkCiNQMV8zIC0+IHBvYmxhY2lvbiBwYXJlbnRlc2NvCnZhcmlkIDwtIGMoIlAxXzEiLCJQMV8yIiwiUDFfMyIpCnZhciA8LSBjKHZhcix2YXJpZCkKCgoKCiNQOF8zTiAtPiBwb2JsYWNpb24gbml2ZWxhcHJvYiAjNDEKI1A4XzNHIC0+IHBvYmxhY2lvbiBncmFkb2Fwcm9iICMjIzQyIHBlbmRpZW50ZSBwYXJhIGFmaW5hciBsYSBlZHVjYWNpw7NuCnZhcmVkdSA8LSBjKCJQOF8zTiIpCnZhciA8LSBjKHZhciwgdmFyZWR1KQoKCgojUDlfMS0+IHBvYmxhY2lvbiBlZG9fY29ueXVnICM0NQp2YXJjb255PC0gYygiUDlfMSIpCnZhcjwtYyh2YXIsdmFyY29ueSkKCiNQMTFfMV8xLT4gaG9nYXJlcyBudW1fcGlja3VwICAjNDMKI1AxMV8xXzItPiBob2dhcmVzIG51bV92YW4gICM0MgojUDExXzFfMy0+IGhvZ2FyZXMgbnVtX2F1dG8gICM0MAp2YXJhdXRvczwtYygiUDExXzFfMSIsIlAxMV8xXzIiLCJQMTFfMV8zIikKdmFyPC1jKHZhcix2YXJhdXRvcykKCgojI1AxMV8yIHkgUDExXzMgPC0gdml2aWVuZGFzIHRlbmVuY2lhICMyOAp2YXJ2aXY8LWMoIlAxMV8yIiwiUDExXzMiKQp2YXI8LWModmFyLHZhcnZpdikKCiMjUDExXzRfCgoKIyNQMTFfNV8yIHkgUF8xMV81XzMgICA8LSBob2dhcmVzIHRhcmpldGEgIzExNgp2YXJ0YXI8LWMoIlAxMV81XzIiLCJQMTFfNV8zIikKdmFyPC1jKHZhcix2YXJ0YXIpCgojUDExXzYgPC0gZ2FzdG9zaG9nYXJlcyBjbGF2ZSBDMDIwIAp2YXJkb2M8LWMoIlAxMV82IikKdmFyPC1jKHZhcix2YXJkb2MpCgoKCiNQMTFfN18xPC0gaG9nYXJlcyB0ZWxlZm9ubyAjMzYKI1AxMV83XzI8LSBob2dhcmVzIGNlbHVsYXIgIzM3CiNQMTFfN18zPC0gaG9nYXJlcyB0dl9wYWdhICMzOAojUDExXzdfNDwtIGhvZ2FyZXMgY29uZXhfaW50ZSAjMzkKI1AxMV83XzU8LSBob2dhcmVzIG51bV9lc3RlciwgbnVtX2dyYWIsIG51bV9yYWRpbyAjNTgsNjAsNjIKI1AxMV83XzY8LSBob2dhcmVzIG51bV90dmQgIzY3CiNQMTFfN183PC0gaG9nYXJlcyBudW1fZHZkICM2OAojUDExXzdfODwtIGhvZ2FyZXMgbnVtX2xpY3VhICMgNzIKI1AxMV83Xzk8LSBob2dhcmVzIG51bV90b3N0YSAjIDc0CiNQMTFfN18xMDwtIGhvZ2FyZXMgbnVtX21pY3JvICMgNzYKI1AxMV83XzExPC0gaG9nYXJlcyBudW1fcmVmcmkgIyA3OAojUDExXzdfMTI8LSBob2dhcmVzIG51bV9lc3R1ZiAjIDgwCiNQMTFfN18xMzwtIGhvZ2FyZXMgbnVtX2xhdmFkICMgODIKI1AxMV83XzE0PC0gaG9nYXJlcyBudW1fcGxhbmMgIyA4NAojUDExXzdfMTU8LSBob2dhcmVzIG51bV9tYXF1aSAjIDg2CiNQMTFfN18xNjwtIGhvZ2FyZXMgbnVtX3ZlbnRpICMgODgKI1AxMV83XzE3PC0gaG9nYXJlcyBudW1fanVlZ28gIyA5NgojIyMjI1AxMV83XzE4PC0gbm8gdGVuZW1vcyB0YWJsZXRhcwojUDExXzdfMTk8LSBob2dhcmVzIG51bV9jb21wdSAjIDkyCiNQMTFfN18yMDwtIGhvZ2FyZXMgbnVtX2ltcHJlICMgOTQKIyMjI1AxMV83XzIxPC0gYW5pbWFsZXMgZGUgdHJiYWpvIG5vIHNlIGFncmVnYXJvbgojIyMjUDExXzdfMjI8LSBnYW5hbmRvIG5vIHNlIGFncmVnYXJvbgp2YXJob2c8LWMoIlAxMV83XzEiLCJQMTFfN18yIiwiUDExXzdfMyIsIlAxMV83XzQiLCJQMTFfN181IiwiUDExXzdfNiIsCiAgICAgICAgICAiUDExXzdfNyIsIlAxMV83XzgiLCJQMTFfN185IiwiUDExXzdfMTAiLCJQMTFfN18xMSIsIlAxMV83XzEyIiwKICAgICAgICAgICJQMTFfN18xMyIsIlAxMV83XzE0IiwiUDExXzdfMTUiLCJQMTFfN18xNiIsIlAxMV83XzE3IiwiUDExXzdfMTkiLAogICAgICAgICAgIlAxMV83XzIwIikKdmFyPC1jKHZhcix2YXJob2cpCgoKIyMjIyMgVmFyaWFibGVzIGNyZWFkYXMKCiMgQ29uZGljacOzbiBkZSBvY3VwYWNpw7NuIGRlbCBpbmZvcm1hbnRlLCBBY3R1YWwKIyBDb25PY3VfQWN0IDwtIE5vcyBxdWVkYW1zbyBjb25zIGxvcyBvY3VwYWRvcyAxCgojIERpdmlzacOzbiBwcmluY2lwYWwgZGUgb2N1cGFjacOzbiBkZWwgaW5mb3JtYW50ZQojIERpdk9jdV9BY3QgPC0gdHJhYmFqb3Mgc2luY28KCgojIE5pdmVsIGRlIGVzY29sYXJpZGFkIGRlbCBpbmZvcm1hbnRlCiMgTml2RXNjX0luZiA8LSBjb25jZW50cmFkb2hvZ2FyIGVkdWNhX2plZmUgIzEyCgp2YXJ2YzwtYygiRWRhZF9BZzIiLCJFZGFkX0FnMSIsIk5pdkVzY19JbmYiLCJDb25PY3VfQWN0IiwgIkRpdk9jdV9BY3QiKQp2YXIgPC0gYyh2YXIsdmFydmMpCgoKCgpmaWx0cmFkb192YXJfaGlqb3MgPC0gZnVuY3Rpb24oZGYsdmFyKXsKICBkZm48LSBkZiAlPiUKICAgICAgICBzZWxlY3QoYWxsX29mKHZhcikpCiAgcmV0dXJuKGRmbikKfQpgYGAKClNlbGVjY2lvbmFtb3M6CgotIEVudGlkYWQgRmVkZXJhdGl2YSAoZW50X0VOSCwgZW4gY3VhbHF1aWVyYSBlbmlnaCAyIGRpZ2l0b3MgZGVsIGZvbGlvIGRlIHZpdmllbmRhKQotIEVzdHJhdG8gc29jaWVjb27Ds21pY28gKGVzdF9zb2Npb19FTkggdml2aWVuZGFzLCB2aXZpZW5kYXMgZXN0X3NvYykKLSBTZXhvIChQMV8xLCBwb2JsYWNpb24gc2V4bykKLSBFZGFkIChQMV8yLCBwb2JsYWNpb24gZWRhZCkKLSBQYXJlbnRlc2NvIChQMV8zLCBwb2JsYWNpb24gcGFyZW50ZXNjbykKLSBOaXZlbCBkZSBlZHVjYWNpw7NuIGluZm9ybWFudGUsIChOaXZFc2NfSW5mLCBjb25jZW50cmFkb2hvZ2FyIGVkdWNhX2plZmUpCi0gRGl2aXNpb24gZGUgb2N1YXBjacOzbiBkZWwgaW5mb3JtYW50ZSAoRGl2T2N1X0FjdCwgdHJhYmFqb3Mgc2luY28pCgpgYGB7cn0KdmFyaSA8LSBjKCJlbnRfRU5IIiwgImVzdF9zb2Npb19FTkgiLCAiUDFfMSIsCiAgICAgICAgICAiUDFfMiIsIlAxXzMiLCJOaXZFc2NfSW5mIiwiRGl2T2N1X0FjdCIpCmRhdGFfbW1zaSA8LWNhcmdhcl9tbXNpKCkKaGlqb3M8LWZpbHRyYWRvX3Zhcl9oaWpvcyhkYXRhX21tc2ksdmFyaSkKCiMgamVmZXMgZGUgZmFtaWxpYQpoaWpvczwtaGlqb3MlPiUKICBmaWx0ZXIoUDFfMz09IjEiKQpucm93KGhpam9zKQpzYXZlUkRTKGhpam9zLCBmaWxlPSJEYXRvcy9oaWpvc19tbXNpLlJkYSIpCmBgYAoKYGBge3J9CmdyYV9zZXhfZXN0KGhpam9zKQoKYGBgCgoKClRvbWFtb3MgYWwgZW50cmV2aXN0YWRvIHF1ZSBlcyBlbCBqZWZlIGRlIGhvZ2FyLCBsbyBjdWFsIG5vcyBkYSB1biB0b3RhbCBkZSBfMTI3MDZfIG9ic2VydmFjaW9uZXMgKGFwcm94aW1hZGFtZW50ZSAxLjUgZWwgbsO6bWVybyB0b3RhbCBkZSBFU1JVLTIwMTcpCgpgYGB7cn0KCiMgUDFfMzogwr9RdcOpIGVzIHVzdGVkIGRlbCBqZWZlIGRlbCBob2dhcj8KIyAxIGplZmUKIyAyIEVzcGFzQCBjb21wYcOxZXJhQAoKZmlsdHJhZG9fY2FyYWMgPC0gZnVuY3Rpb24oZGYpeyAKICAgICAgICBkZm48LSBkZiU+JQogICAgICAgICAgICAgIGZpbHRlcihQMV8zPT0iMSIpCiAgICAgICAgcmV0dXJuKGRmbikKfQoKCmE8LWZpbHRyYWRvX3Zhcl9oaWpvcyhkYXRhX21tc2ksdmFyaSkKCmNhcmFjX2ZpbDwtIGZpbHRyYWRvX2NhcmFjKGEpCmhlYWQoY2FyYWNfZmlsKQpgYGAKCgpob2xhCgpgYGB7ciwgZXZhbD1GQUxTRX0KI2dldF9sYWJlbChkYXRhX21tc2lbYyh2YXIpXSkKI2dldF9sYWJlbHMoZGF0YV9tbXNpW2ModmFyKV0pCmBgYAoKCgoKIyMgR3LDoWZpY2EgdG90YWwgcG9yIGVzdGFkbwoKYGBge3J9CmdyYV90b2xfZXN0KGNhcmFjX2ZpbCkgCmBgYAoKIyMgR3LDoWZpY2EgcG9yIGVzdGFkbyB5IHNleG8KCmBgYHtyfQpncmFfc2V4X2VzdChjYXJhY19maWwpCmBgYAojIyBHcsOhZmljYSBwb3Igc2V4byB5IGVkdWNhY2nDs24gCgpgYGB7cn0KZ3JhX3NleF9lZHUoZGF0YV9tbXNpKQpgYGAKCiMgUmVjb25vY2ltaWVudG8gZGUgcGFkcmVzCgpUb21hbW9zIGEgbG9zIHBhZHJlcyBwYXJhIGxvcyBjdWFsZXMgdGVtZW5vc21vcyBlbCBpbmdyZXNvIGRlbCBoaWpvCgpgYGB7cn0KcGFkcmVzX2g8LWRhdGFfbW1zaSU+JQogIGZpbHRlcihQMV8zPT0iMSIpJT4lCiAgc2xpY2UoYXMuaW50ZWdlcih1bmxpc3QoaW5ncmVfaGlqX2YlPiVzZWxlY3QoaWRfaGlqbykpKSklPiUKICBtdXRhdGUoaWRfaGlqbyA9YXMudmVjdG9yKGluZ3JlX2hpal9mJT4lc2VsZWN0KGlkX2hpam8pICkpCgpwYWRyZXNfaAoKdW5pcXVlKHBhZHJlc19oJFAxXzMpCm5yb3cocGFkcmVzX2gpCnBhZHJlc19oJGlkX2hpam8KYGBgCgpmaWx0cmFtb3MgbGFzIHZhcmlhYmxlcyBkZSBsb3MgcGFkcmVzIAoKLSBFc3RhZG8gZGUgcmVzaWRlbmNpYSBwcCBQMl8xRVNUX0QKLSBJZGVudGlmaWNhY2nDs24gcHJvdmVkb3IgcHJpY2lwYWwgUDJfNQotIE5JdmVsIGRlIGVzY29sYXJpZGFkIGRlbCBwYWRyZSBQM181TgoKLSBFc2NvbGFyaWRhZCBwcCBOaXZFc2NfUFAgKG5pdmVsKQotIE9jdXBhY2nDs24gcHAgRGl2T2N1X1BQIChzaW5jbykKCmBgYHtyfQp2YXJwaDwtYygiUDJfMUVTVF9EIiwiUDJfNSIsIlAzXzVOIiwgIk5pdkVzY19QUCIsIkRpdk9jdV9QUCIsImlkX2hpam8iKQpwYWRyZXNfaHY8LSBwYWRyZXNfaCU+JQogICAgICAgICAgICBzZWxlY3QoYWxsX29mKHZhcnBoKSkKCnBhZHJlc19odiREaXZPY3VfUFAKYGBgCgoKCgo=</div>
 
 
 </div>
@@ -933,7 +1196,7 @@ $(document).ready(function () {
 <script>
 $(document).ready(function () {
   window.initializeSourceEmbed("MMSI2016.Rmd");
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
