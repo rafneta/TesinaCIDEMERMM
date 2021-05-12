@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Rafael Martínez Martínez" />
+
+
+<title>Pedaceria</title>
+
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="estilo.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Tesina CIDE-ME Rafael Martínez-Martínez</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Estimacion.html">Estimación</a>
+</li>
+<li>
+  <a href="ESRU2017.html">Datos ESRU - EMOVI</a>
+</li>
+<li>
+  <a href="AA.html">Aprendizaje Automático</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Pedaceria</h1>
+<h4 class="author">Rafael Martínez Martínez</h4>
+<h4 class="date">4/18/2021</h4>
+
+</div>
+
+
+<div id="total-region" class="section level2">
+<h2>Total region</h2>
+<pre class="r"><code>regc&lt;-regre_completa(100)
+
+#     beta            sd
+#eii    0.2268798    0.01096603
+#rr     0.2234       0.01198</code></pre>
+<pre class="r"><code>summary(regc$regresionp[[1]])</code></pre>
+</div>
+<div id="total-ocupacion-y-region" class="section level2">
+<h2>Total ocupacion y region</h2>
+<pre class="r"><code>regc&lt;-regre_completa(100)
+
+#      beta            sd
+#eig  0.2068          0.043
+#rr   0.2273          0.023
+reg_tol_ocureg&lt;-regc</code></pre>
+</div>
+<div id="region-reg" class="section level2">
+<h2>Region, reg</h2>
+<p>1025 hijos, 4093 padres</p>
+<pre class="r"><code># regc&lt;-regre_region(1,1000)
+# hist(unlist(regc$cohort_dif))
+
+# region     beta     sd
+# 1       0.2931401 0.03462845 (157)
+# 2       0.2297694 0.02263458 (254)
+# 3       0.1693491 0.01307308 (364 )    
+# 4       0.2651086 0.02861013 (184)</code></pre>
+</div>
+<div id="region-ocu-reg" class="section level2">
+<h2>Region, ocu reg</h2>
+<p>603 hijos, 4093 padres</p>
+<pre class="r"><code>regc&lt;-regre_region(4,1000)
+hist(unlist(regc$cohort_dif))
+
+# region     beta     sd
+# 1       0.4058899 0.130069
+# 2       0.1289695 0.1008054  
+# 3       0.2848181 0.06784838             
+# 4       0.208238  0.1198145       </code></pre>
+</div>
+<div id="total-region-y-cohort-criterio-1" class="section level2">
+<h2>Total region y cohort criterio 1</h2>
+<pre class="r"><code>regc&lt;-regre_completa(100)
+
+#      beta            sd
+#eig   0.4695          0.0337
+#rr    0.3813          0.01346
+#########################SEXO#################
+#eig   0.4405          0.029
+##r    0.3532          0.0129
+
+#reg_tol_regc&lt;-regc
+#reg_tol_regc_sexo&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_tol_regc, file=&quot;Datos/Regresiones/reg_tol_regc.Rda&quot;)
+saveRDS(reg_tol_regc_sexo, file=&quot;Datos/Regresiones/reg_tol_regc_sexo.Rda&quot;)</code></pre>
+<pre class="r"><code>summary(regc$regresionp[[1]])</code></pre>
+</div>
+<div id="total-region-y-cohort-criterio-2" class="section level2">
+<h2>Total region y cohort criterio 2</h2>
+<pre class="r"><code>regc&lt;-regre_completa(100)
+#########################SEXO#################
+#eig   0.4596          0.0245
+##r    0.3706          0.0120
+
+reg_tol_regc_sexo_cri2&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_tol_regc_sexo_cri2, file=&quot;Datos/Regresiones/reg_tol_regc_sexo_cri2.Rda&quot;)</code></pre>
+</div>
+<div id="total-region-y-cohort-criterio-3" class="section level2">
+<h2>Total region y cohort criterio 3</h2>
+<pre class="r"><code>regc&lt;-regre_completa(100)
+#########################SEXO#################
+#eig   0.5125          0.0187
+##r    0.3777          0.0119</code></pre>
+<pre class="r"><code>#reg_tol_regc_sexo_cri3&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_tol_regc_sexo_cri3, file=&quot;Datos/Regresiones/reg_tol_regc_sexo_cri3.Rda&quot;)</code></pre>
+</div>
+<div id="total-ocu-reg-y-coh-criteri-1" class="section level2">
+<h2>Total ocu, reg y coh criteri 1</h2>
+<pre class="r"><code>regc&lt;-regre_completa(100)
+
+#      beta            sd
+#eig   0.40           0.071              
+#rr    0.2746         0.0305
+############################SEXO
+#eig   0.3790         0.0678                  
+#rr    0.2606         0.0289
+
+
+
+#reg_tol_ocuregco&lt;-regc
+#reg_tol_ocuregco_sexo&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_tol_ocuregco, file=&quot;Datos/Regresiones/reg_tol_ocuregco.Rda&quot;)
+saveRDS(reg_tol_ocuregco_sexo, file=&quot;Datos/Regresiones/reg_tol_ocuregco_sexo.Rda&quot;)</code></pre>
+</div>
+<div id="total-ocu-reg-y-coh-criteri-3" class="section level2">
+<h2>Total ocu, reg y coh criteri 3</h2>
+<pre class="r"><code>reg_tol_ocuregco_sexo_cri3&lt;-regre_completa(100)
+
+
+############################SEXO
+#      beta            sd
+#eig    0.4167       0.0455             
+#rr    0.2812        0.0229</code></pre>
+<pre class="r"><code>saveRDS(reg_tol_ocuregco_sexo_cri3, file=&quot;Datos/Regresiones/reg_tol_ocuregco_sexo_cri3.Rda&quot;)</code></pre>
+</div>
+<div id="total-combinada-criteri-3" class="section level2">
+<h2>Total combinada criteri 3</h2>
+<pre class="r"><code>reg_tol_combinada_sexo_cri3_r1617&lt;-regre_completa(1)
+
+
+#Considerando el RR en los ingresos del 2016 (100 iteraciones 8 minutos)
+############################ SEXO
+#        beta            sd
+# eig   0.4539         0.0283              
+# rr    0.3285         0.0154
+
+#Considerando el RR en los ingresos cojunto 2016 - 2018
+############################ SEXO
+#        beta            sd
+# eig   0.4637         0.0272              
+# rr    0.3266         0.0164
+
+
+######################## base en ocupación
+
+# enigh 98
+# 0.38
+# 0.27
+
+# enigh 96
+# 0.38
+# 0.26
+
+# enigh 94
+# 35
+# 25
+
+
+
+
+reg_tol_combinada_sexo_cri3_r1617$regr</code></pre>
+<pre class="r"><code>saveRDS(reg_tol_combinada_sexo_cri3, file=&quot;Datos/Regresiones/reg_tol_combinada_sexo_cri3.Rda&quot;)</code></pre>
+</div>
+<div id="region-re_ch-criterio-1" class="section level2">
+<h2>Region, re_ch criterio 1</h2>
+<p>1009 hijos, 4093 padres</p>
+<pre class="r"><code>regc&lt;-regre_region(4,100)
+
+###########################SEXO
+# region     beta     sd            betar          sd
+# 1       0.3688     0.0692        0.2902       0.0486
+# 2       0.5086     0.0550        0.3867       0.0330
+# 3       0.3281     0.0387        0.2810       0.224
+# 4       0.2704     0.0564        0.2333       0.0268</code></pre>
+<pre class="r"><code>regc$coeficienter[1]</code></pre>
+<pre class="r"><code>#reg_reg1_regc_sexo&lt;-regc
+#reg_reg2_regc_sexo&lt;-regc
+#reg_reg3_regc_sexo&lt;-regc
+#reg_reg4_regc_sexo&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_reg1_regc_sexo, file=&quot;Datos/Regresiones/reg_reg1_regc_sexo.Rda&quot;)
+saveRDS(reg_reg2_regc_sexo, file=&quot;Datos/Regresiones/reg_reg2_regc_sexo.Rda&quot;)
+saveRDS(reg_reg3_regc_sexo, file=&quot;Datos/Regresiones/reg_reg3_regc_sexo.Rda&quot;)
+saveRDS(reg_reg4_regc_sexo, file=&quot;Datos/Regresiones/reg_reg4_regc_sexo.Rda&quot;)</code></pre>
+<div id="relativa" class="section level3">
+<h3>relativa</h3>
+<pre class="r"><code>regc&lt;-regre_region_rel(3,100)</code></pre>
+<pre class="r"><code>regc$coeficienter[1]</code></pre>
+</div>
+</div>
+<div id="region-re_ch-criterio-2" class="section level2">
+<h2>Region, re_ch criterio 2</h2>
+<p>1009 hijos, 4093 padres</p>
+<pre class="r"><code>regc&lt;-regre_region(3,100)
+
+###########################SEXO
+# region     beta     sd            betar          sd
+# 1       0.4204    0.0681         0.2709        0.0460
+# 2       0.6369    0.0529         0.5454        0.0449
+# 3       0.3670    0.0546         0.3204        0.0427
+# 4       0.3068    0.05347        0.2410        0.0306</code></pre>
+<pre class="r"><code>#reg_reg1_regc_sexo_cri2&lt;-regc
+#reg_reg2_regc_sexo_cri2&lt;-regc
+#reg_reg3_regc_sexo_cri2&lt;-regc
+#reg_reg4_regc_sexo_cri2&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_reg1_regc_sexo_cri2, file=&quot;Datos/Regresiones/reg_reg1_regc_sexo_cri2.Rda&quot;)
+saveRDS(reg_reg2_regc_sexo_cri2, file=&quot;Datos/Regresiones/reg_reg2_regc_sexo_cri2.Rda&quot;)
+saveRDS(reg_reg3_regc_sexo_cri2, file=&quot;Datos/Regresiones/reg_reg3_regc_sexo_cri2.Rda&quot;)
+saveRDS(reg_reg4_regc_sexo_cri2, file=&quot;Datos/Regresiones/reg_reg4_regc_sexo_cri2.Rda&quot;)</code></pre>
+<div id="relativa-1" class="section level3">
+<h3>relativa</h3>
+<pre class="r"><code>regc&lt;-regre_region_rel(1,100)# 0.24 0.22 (region 4, region 2), 0.34 0.23 (region1, region 2), 0.34, 0.25 (region 1 , region 4)</code></pre>
+</div>
+</div>
+<div id="region-re_ch-criterio-3" class="section level2">
+<h2>Region, re_ch criterio 3</h2>
+<pre class="r"><code>regc&lt;-regre_region(3,100)
+
+###########################SEXO
+# region     beta     sd            betar          sd
+# 1        0.3465   0.0513        0.2413         0.0328
+# 2        0.5153   0.0350        0.3901         0.0169
+# 3        0.4165  0.0413         0.3407         0.0258
+# 4        0.3813  0.0366         0.3054         0.0188</code></pre>
+<pre class="r"><code>#reg_reg1_regc_sexo_cri3&lt;-regc
+#reg_reg2_regc_sexo_cri3&lt;-regc
+#reg_reg3_regc_sexo_cri3&lt;-regc
+#reg_reg4_regc_sexo_cri3&lt;-regc</code></pre>
+<pre class="r"><code>saveRDS(reg_reg1_regc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg1_regc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg2_regc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg2_regc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg3_regc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg3_regc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg4_regc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg4_regc_sexo_cri3.Rda&quot;)</code></pre>
+<div id="relativa-2" class="section level3">
+<h3>relativa</h3>
+<pre class="r"><code>regc&lt;-regre_region_rel(4,100)# 0.35 0.28 (region 4, region 2), 0.32 0.20 (region1, region 2), 0.34, 0.25 (region 1 , region 4)</code></pre>
+</div>
+</div>
+<div id="region-ocu-reg-y-ch" class="section level2">
+<h2>Region, ocu reg y ch</h2>
+<p>405 hijos, 4093 padres</p>
+<pre class="r"><code>regc&lt;-regre_region(4,1000)
+hist(unlist(regc$cohort_dif))
+
+# region     beta     sd
+# 1        0.3067816 0.2146518
+# 2       0.2484634  0.1556629
+# 3       0.3129175  0.08272955       
+# 4       0.03976532 0.1528532    </code></pre>
+</div>
+<div id="region-ocu-reg-y-ch-criterio-3" class="section level2">
+<h2>Region, ocu reg y ch criterio 3</h2>
+<p>405 hijos, 4093 padres</p>
+<pre class="r"><code>#reg_reg1_ocuregc_sexo_cri3&lt;-regre_region(1,100)
+#reg_reg2_ocuregc_sexo_cri3&lt;-regre_region(2,100)
+reg_reg3_ocuregc_sexo_cri3&lt;-regre_region(3,100)
+#reg_reg4_ocuregc_sexo_cri3&lt;-regre_region(4,100)
+# region     beta     sd        betar    sd
+# 1        0.3121   0.1279     0.1622   0.0688
+# 2        0.3473   0.0969     0.2572   0.0457
+# 3       0.2940   0.0674      0.2225   0.0383        
+# 4        0.21235  0.1029     0.2082  0.0479</code></pre>
+<pre class="r"><code>saveRDS(reg_reg1_ocuregc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg1_ocuregc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg2_ocuregc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg2_ocuregc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg3_ocuregc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg3_ocuregc_sexo_cri3.Rda&quot;)</code></pre>
+</div>
+<div id="region-combinada-criterio-3" class="section level2">
+<h2>Region, combinada criterio 3</h2>
+<pre class="r"><code>reg_reg1_combinada_sexo_cri3_r1617&lt;-regre_region(1,50)
+reg_reg2_combinada_sexo_cri3_r1617&lt;-regre_region(2,50)
+reg_reg3_combinada_sexo_cri3_r1617&lt;-regre_region(3,50)
+reg_reg4_combinada_sexo_cri3_r1617&lt;-regre_region(4,50)
+
+
+####### considerando la RR en  2016
+# region     beta     sd        betar    sd
+# 1        0.3054              0.2359
+# 2        0.3390              0.2555
+# 3        0.3624              0.3077                        &lt;&lt;&lt;&lt;&lt;&lt;&lt; inversión en el rango respecto a el sur    
+# 4        0.3809              0.2686
+
+
+####### considerando la RR en  2016 - 2018
+# region     beta     sd      betar    sd
+# 1         0.30     (0.29,100)       0.24 (0.2313)    
+# 2         0.3390  (0.3193 ,100)    0.25  (0.2383)
+# 3         0.36 (0.3688,100)       0.3054  (0.31)    &lt;&lt;&lt;&lt;&lt;&lt;&lt; inversión en el rango respecto a el sur, en todo    
+# 4         0.3826 (0.3448,100)     0.26    (0.26)
+
+
+reg_reg1_combinada_sexo_cri3$coeficienter[10]
+
+reg_reg2_combinada_sexo_cri3$coeficienter[10]
+reg_reg3_combinada_sexo_cri3$coeficienter[9]
+reg_reg4_combinada_sexo_cri3$coeficienter[9]
+
+reg_reg2_combinada_sexo_cri3$regres
+summary(reg_reg1_combinada_sexo_cri3_r1617$regresion[[10]])# regresionp[[10]])</code></pre>
+<pre class="r"><code>saveRDS(reg_reg1_ocuregc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg1_ocuregc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg2_ocuregc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg2_ocuregc_sexo_cri3.Rda&quot;)
+saveRDS(reg_reg3_ocuregc_sexo_cri3, file=&quot;Datos/Regresiones/reg_reg3_ocuregc_sexo_cri3.Rda&quot;)</code></pre>
+<pre class="r"><code>resul %&gt;% 
+  ggplot(aes(x=beta)) +
+    geom_histogram(aes(y=..density.. ), bins=25, alpha=0.6,color=&quot;blue&quot;)+
+  geom_density() + theme_gray()</code></pre>
+</div>
+<div id="pedaceria-esru" class="section level2">
+<h2>Pedaceria ESRU</h2>
+</div>
+<div id="filtramos-a-los-hjos" class="section level1">
+<h1>Filtramos a los hjos</h1>
+<div id="selección-de-hijos" class="section level2">
+<h2>Selección de hijos</h2>
+<p>Criterios de filtrado - pregunta p2, comparten el mimso gasto para comer: 1 ) Si 2 ) No - pregunta 5 Edades entre 25 y 45 años - pregunta p08, es el jefe del hogar: 1 ) jefe 2) cónyuge NO IMPLEMENTADO - pregunta p12, actualmente estudia, 1)Si 2)No - p26 Había un jefe de hogar en la infancia (1 padre 2 madre) - p43 y p43m Reporta educación del padre o madre priciapl - p68, Personas que trabajan, 1. Si, 2. No - p69 si trabaja pero la semana pasada no - p132 numero de personas que aportan ingreso - p133 cohort de todas las personas y todos los ingresos (1 ingreso)</p>
+<p>Variables de selección para estimar ingreso</p>
+<ul>
+<li><p>Estado</p></li>
+<li><p>pregunta 5, edad</p></li>
+<li><p>pregunta 6, sexo</p></li>
+<li><p>Pregunta 13, nivel de escuela</p></li>
+<li><p>p76 ocupación –SINCO3 codificación ocupación entrevistado</p></li>
+<li><p>p133 cohort de todas las personas y todos los ingresos</p></li>
+</ul>
+</div>
+</div>
+<div id="identificación-de-padres" class="section level1">
+<h1>Identificación de padres</h1>
+<pre class="r"><code>hijos_emovi_hp &lt;- readRDS(file=&quot;Datos/ingreso_hij_f_emovi.Rda&quot;)
+
+# p05 edad act
+# p06 sexo act
+# p13 educ hijo
+# SINCO3, ocupación hijo
+# p23 en qeu estado vivia a los 14
+# p26 principal sosten ecómico
+# p38_11 edad padre 2016
+# p38m_11 edad madre 2016
+# p43 nivel educativo padre
+#p43m nivel educativo madre
+# cmo1_2 ocupacion del padre
+# cmo2_2 ocupacion de la madre 
+
+
+varp&lt;-c(&quot;Estado&quot;,&quot;p05&quot;,&quot;p06&quot;,&quot;p13&quot;,&quot;SINCO3&quot;,&quot;p23&quot;,&quot;p26&quot;,&quot;p38_11&quot;,&quot;p38m_11&quot;,
+        &quot;p43&quot;,&quot;p43m&quot;,&quot;cmo1_2&quot;,&quot;cmo2_2&quot;,&quot;mov&quot;,&quot;id_ho&quot;,&quot;region&quot;)
+padres_h&lt;-data_emovi2017%&gt;%
+    filter(p02 == 1)  %&gt;% #compartir gasot para comer
+  filter(between(p05,25,40)) %&gt;% # edad
+  #filter(p08 == 1)  %&gt;% 
+  filter(p12 == 2)  %&gt;%# ya no estudia
+  filter(p26 == 1 | p26==2 ) %&gt;% # sosten principal papa, mama, 
+   filter((!is.na(p43) &amp; p43!=98 &amp; p26 == 1 )|
+            (!is.na(p43m) &amp; p43m!=98  &amp; p26 == 2 )) %&gt;% # reporta educación de pp
+   filter(!is.na(p13))%&gt;% #  reporta educación
+  filter(SINCO3 !=&quot;&quot;) %&gt;%# reporta oficio actual
+   filter(p68 == 1 | p69 == 1)  %&gt;% # si trabaja
+   filter(p132 %in% c(1)) %&gt;%# persona que aportan ingreso
+  filter(!p133 %in% c(8,9,NA) )%&gt;%
+  select(varp)%&gt;%
+  slice(as.integer(unlist(hijos_emovi_hp%&gt;%select(id_hijo))))%&gt;%
+  mutate(
+         pp_id_hijo = hijos_emovi_hp%&gt;%pull(id_hijo),
+         pp_id_hijoo= hijos_emovi_hp%&gt;%pull(id_ho),
+         ing_h = hijos_emovi_hp%&gt;%pull(ing_men_p_h),
+         ling_h = log (hijos_emovi_hp%&gt;%pull(ing_men_p_h)) 
+         ) %&gt;%
+  rename(
+          edad_h = p05,
+          sexo_h = p06,
+          edu_h = p13,
+          ocu_h = SINCO3,
+          pp_estado = p23,
+          pp = p26,
+          p_edad_2016= p38_11,
+          m_edad_2016 = p38m_11,
+          p_edu = p43,
+          m_edu = p43m,
+          p_ocu = cmo1_2,
+          m_ocu = cmo2_2
+         )%&gt;%
+  mutate(
+        p_edu = as.integer(p_edu),
+        m_edu = as.integer(m_edu)
+  )
+  
+ 
+# las ocupaciones no encontradas las sustituimos por un NA
+padres_h&lt;-padres_h%&gt;%
+  mutate(p_ocu = ifelse(p_ocu==&quot;.&quot;,NA,p_ocu),
+         m_ocu = ifelse(m_ocu==&quot;.&quot;,NA,m_ocu))
+
+unique(padres_h$p_ocu)
+unique(padres_h$m_ocu)
+padres_h</code></pre>
+</div>
+<div id="est-per-de-25-años." class="section level1">
+<h1>Est Per de 25 años.</h1>
+<p>Estas personas se tiene qeu buscar en 2016-11=2005, es decir, la inforación que porporcionan es la correspondiente a la situación en el 2005,</p>
+<pre class="r"><code>filtro_edad &lt;- function(df,edad){ 
+  #recibe el df y regresa df con edad
+        df %&gt;%
+         filter(edad_h==edad)
+  }
+
+
+
+# hacemos la codificación de ESRU a ENIGH2005
+padres_h25&lt;-padres_h%&gt;%
+   mutate(
+    p_edu = ifelse(p_edu%in% c(1),1,
+                      ifelse( p_edu == 2,2,
+                      ifelse(p_edu %in% c(3,4),3,
+                      ifelse( p_edu %in% c(5,6),4,
+                      ifelse(p_edu %in% c(7,8),6,
+                      ifelse(p_edu %in% c(9,10),5,
+                      ifelse(p_edu==11,7,8))))))),
+    m_edu = ifelse(m_edu%in% c(1),1,
+                      ifelse(m_edu == 2,2,
+                      ifelse(m_edu %in% c(3,4),3,
+                      ifelse(m_edu %in% c(5,6),4,
+                      ifelse(m_edu %in% c(7,8),6,
+                      ifelse(m_edu %in% c(9,10),5,
+                      ifelse(m_edu==11,7,8)))))))
+  )
+
+
+
+#lista de 16(25 a 40) elementos cada elemento contiene los hijos por edad
+
+peredades &lt;- lapply(25:40, filtro_edad, df = padres_h25)
+peredades[[1]]
+
+filtro_pp&lt;-function(df_1,edadh, general=0)
+{
+  #recibe un hijo de un dataframe, la edad del hijo, para polimorfismo
+  # general = 0y regresa un data frame con los datos
+  # ordenados del hijo
+  if(df_1[&quot;pp&quot;]==1)
+  {
+    dfn &lt;- df_1%&gt;%
+          filter(pp==1)%&gt;%
+          select(starts_with(c(&quot;pp&quot;,&quot;p_&quot;)),ling_h,edu_h,ocu_h,edad_h)%&gt;%
+          rename(
+            id_hijo = pp_id_hijo,
+            pp_sexo = pp,
+            pp_edad = p_edad_2016,
+            pp_educ = p_edu,
+            pp_ocup = p_ocu
+          )%&gt;%
+        mutate(pp_edad = pp_edad + (14-edadh))
+  }
+  if(df_1[&quot;pp&quot;]==2)
+    {
+    dfn&lt;-df_1%&gt;%
+        filter(pp==2)%&gt;%
+        select(starts_with(c(&quot;pp&quot;,&quot;m_&quot;)),ling_h, edu_h,ocu_h,edad_h)%&gt;%
+        rename(
+          id_hijo = pp_id_hijo,
+          pp_sexo = pp,
+          pp_edad = m_edad_2016,
+          pp_educ = m_edu,
+          pp_ocup = m_ocu
+        )%&gt;%
+        mutate(pp_edad = pp_edad + (14-edadh))
+  }
+  if(is.na(dfn$pp_edad) &amp; general){
+    return(&quot;ND&quot;)
+  }
+  return(dfn)
+}
+
+#comporbamos qeu funcione bien
+filtro_pp(peredades[[1]][1,],25,0)
+
+
+acomoda_df&lt;-function(df,edadh){
+  #damos un dafa de una edad, con al edad, y
+  # nos regresa un data frame acomodado
+  aux&lt;-function(i){
+    return(df[i,])
+  }
+  a&lt;-lapply(1:nrow(df),aux)
+  L&lt;-lapply(a,filtro_pp,edadh=edadh)
+  dfn &lt;-bind_rows(L[1:length(L)])
+  return(dfn)
+}
+
+dfh25&lt;-acomoda_df(peredades[[1]],25)
+dfh25
+
+
+pro_edad_p &lt;- function(L,edad_h){
+  #promedio de edad de lso padres por edad de los hijos
+  ed&lt;-c()
+  dro &lt;- 0
+  for(i in 1:nrow(L[[edad_h-24]])){
+    a&lt;-peredades[[edad_h-24]][i,]
+    df&lt;-filtro_pp(a,edad_h)
+    
+    if(is.data.frame(df)){
+      ed &lt;-c(ed,df$edad)  
+    }
+    else{
+      dro&lt;-dro+1
+    }
+  }
+  return(c(mean(ed),dro,nrow(L[[edad_h-24]])))
+}
+
+edades_pro&lt;- lapply(25:40,pro_edad_p,L=peredades)</code></pre>
+<div id="sel-padres-poblacion" class="section level2">
+<h2>sel padres poblacion</h2>
+<pre class="r"><code>poblacion&lt;-read.dbf(
+              file=&quot;Datos/ENIGH-Historica/2005/poblacion.dbf&quot;
+              )
+
+
+
+pobla_enigh2005&lt;-poblacion%&gt;%
+  filter(
+    PARENTESCO == 100,
+    between(EDAD,30,50),
+    !is.na(N_INSTR161),
+    !is.na(CMO121),
+    is.na(CMO251)
+  )%&gt;%
+  select(
+    FOLIO,
+    NUM_REN,
+    EDAD,
+    N_INSTR161,
+    CMO121
+  )
+
+unique(pobla_enigh2005$N_INSTR161)</code></pre>
+<p>##sel ingresos padres</p>
+<pre class="r"><code>ingresos&lt;-read.dbf(
+              file=&quot;Datos/ENIGH-Historica/2005/ingresos.dbf&quot;
+              )</code></pre>
+<pre class="r"><code>familias_integrantes &lt;- function(df,nr){
+  dfn &lt;- df %&gt;%
+    filter(NUM_REN %in% nr)
+  return(dfn)
+} 
+
+
+
+ingresos_acu &lt;- function(df,clavs){
+ dfn &lt;- df %&gt;%
+   group_by(FOLIO, NUM_REN) %&gt;%
+   filter(CLAVE %in% clavs)%&gt;%
+   summarise(
+   claves_a = paste(CLAVE,collapse = &quot;,&quot;),
+  ing_tri_t = sum(ING_TRI),
+  ing_men_p = ing_tri_t/3,
+  ling_men_p = log(ing_men_p)
+  ) %&gt;% ungroup()
+ 
+ 
+ return(dfn)
+}
+
+#hogares &lt;- c(&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;)
+personas_h &lt;- c(&#39;01&#39;)
+
+a&lt;-familias_integrantes(ingresos,personas_h)
+a
+claves&lt;-c(&quot;P001&quot;,&quot;P002&quot;,&quot;P003&quot;,&quot;P011&quot;,&quot;P023&quot;,&quot;P024&quot;,&quot;P054&quot;,&quot;P055&quot;,&quot;P056&quot;, &quot;P059&quot;,&quot;P060&quot;,&quot;P061&quot;,&quot;P063&quot;,&quot;P068&quot;,&quot;P060&quot;,&quot;P070&quot;,&quot;P071&quot;,&quot;P072&quot;,&quot;P073&quot;,&quot;P074&quot;,&quot;P075&quot;,&quot;P076&quot;,&quot;P077&quot;,&quot;P078&quot;,&quot;P079&quot;,&quot;P080&quot;)
+ingre_enigh2005&lt;-ingresos_acu(a,claves) 
+ingre_enigh2005&lt;-ingre_enigh2005%&gt;%
+  select(FOLIO,ling_men_p)
+ingre_enigh2005</code></pre>
+</div>
+<div id="regresion-padres" class="section level2">
+<h2>Regresion padres</h2>
+<pre class="r"><code>data_padres2005&lt;-full_join(pobla_enigh2005,ingre_enigh2005)%&gt;%
+  drop_na()%&gt;%
+  mutate(
+    CMO121 = substr(CMO121,1,2)
+  )%&gt;%
+  rename(
+    EDU=N_INSTR161,
+    OCU = CMO121
+  )%&gt;%
+  mutate(
+    EDU = as.character(EDU)
+  )
+
+unique(data_padres2005$EDU)
+
+# ajuste para nivel de ecucación ESRU
+data_padres2005$EDU[data_padres2005$EDU == &quot;9&quot;] &lt;- 8
+
+data_padres2005$EDU &lt;- factor(data_padres2005$EDU)
+data_padres2005$OCU &lt;- factor(data_padres2005$OCU)
+
+unique(data_padres2005$OCU)</code></pre>
+<pre class="r"><code>reg_padres&lt;-lm(
+  formula = ling_men_p ~ EDU +  OCU + EDAD +I(EDAD*EDAD),
+  data = data_padres2005
+)
+summary(reg_padres)</code></pre>
+</div>
+<div id="inser-padre-en-hijo" class="section level2">
+<h2>Inser padre en hijo</h2>
+<p>sacamso coeficeicneite de educación y ocupación</p>
+<pre class="r"><code>#str(data_padres2005$EDU[1])
+# Factor w/ 10 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,..: 4
+
+#str(data_padres2005$OCU[2])
+# chr &quot;55&quot;
+
+#str(data_padres2005$EDAD[5])
+# int 36
+
+# predicción 8.354147
+
+dfh25_na&lt;-dfh25%&gt;%
+  drop_na()
+
+ data&lt;- data.frame(
+   EDU= as.character(dfh25_na$pp_educ),
+  OCU= as.character(dfh25_na$pp_ocup),
+  EDAD = 0
+ )
+
+# data&lt;- data.frame(
+#   EDU= &quot;1&quot;,
+#   OCU= &quot;11&quot;,
+#   EDAD= 0
+# 
+# )
+# 
+# 
+# fh25$pp_ocup
+
+dfhp25&lt;- dfh25_na%&gt;%
+  mutate(ling_p = predict(object = reg_padres,   
+        newdata = data)) 
+dfhp25
+hchart(dfhp25,&quot;scatter&quot;,hcaes( x = ling_p, y = ling_h) )</code></pre>
+</div>
+<div id="eii-25-años" class="section level2">
+<h2>EII 25 años</h2>
+<pre class="r"><code>reg_hp&lt;-lm(
+  formula = ling_h ~ ling_p  ,
+  data = dfhp25
+)
+summary(reg_hp)</code></pre>
+</div>
+<div id="comprobación-de-resueltado" class="section level2">
+<h2>Comprobación de resueltado</h2>
+<pre class="r"><code>padres_h %&gt;%
+  filter(edad_h==25)%&gt;%
+  count(mov)%&gt;%
+  mutate(freq = round(100 * n/sum(n), 0))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad de acuerdo a la edad&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;Para el color de piel se revisa la escala&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Edad&quot;),
+           categories = get_labels(padres_h$mov)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+</div>
+<div id="est-muestar-completa" class="section level1">
+<h1>Est Muestar completa</h1>
+<pre class="r"><code>hijos_emovi_hp &lt;- readRDS(file=&quot;Datos/ingreso_hij_f_emovi.Rda&quot;)
+
+# p05 edad act
+# p06 sexo act
+# p13 educ hijo
+# SINCO3, ocupación hijo
+# p23 en qeu estado vivia a los 14
+# p26 principal sosten ecómico
+# p38_11 edad padre 2016
+# p38m_11 edad madre 2016
+# p43 nivel educativo padre
+#p43m nivel educativo madre
+# cmo1_2 ocupacion del padre
+# cmo2_2 ocupacion de la madre 
+
+
+varp&lt;-c(&quot;Estado&quot;,&quot;p05&quot;,&quot;p06&quot;,&quot;p13&quot;,&quot;SINCO3&quot;,&quot;p23&quot;,&quot;p26&quot;,&quot;p38_11&quot;,&quot;p38m_11&quot;,&quot;p43&quot;,&quot;p44&quot;,
+        &quot;p43m&quot;,&quot;p44m&quot;,&quot;cmo1_2&quot;,&quot;cmo2_2&quot;,&quot;mov&quot;,&quot;region&quot;)
+padres_h&lt;-data_emovi2017%&gt;%
+    filter(p02 == 1)  %&gt;% #compartir gasot para comer
+  filter(between(p05,25,40)) %&gt;% # edad
+  #filter(p08 == 1)  %&gt;% 
+  filter(p12 == 2)  %&gt;%# ya no estudia
+  filter(p26 == 1 | p26==2 ) %&gt;% # sosten principal papa, mama, 
+   filter((!is.na(p43) &amp; p43!=98 &amp; p26 == 1 )|
+            (!is.na(p43m) &amp; p43m!=98  &amp; p26 == 2 )) %&gt;% # reporta educación de pp
+   filter(!is.na(p13))%&gt;% #  reporta educación
+  filter(SINCO3 !=&quot;&quot;) %&gt;%# reporta oficio actual
+   filter(p68 == 1 | p69 == 1)  %&gt;% # si trabaja
+   filter(p132 %in% c(1)) %&gt;%# persona que aportan ingreso
+  filter(!p133 %in% c(8,9,NA) )%&gt;%
+  select(varp)%&gt;%
+  slice(as.integer(unlist(hijos_emovi_hp%&gt;%select(id_hijo))))%&gt;%
+  mutate(
+         pp_id_hijo = hijos_emovi_hp%&gt;%pull(id_hijo),
+         ing_h = hijos_emovi_hp%&gt;%pull(ing_men_p_h),
+         ling_h = log (hijos_emovi_hp%&gt;%pull(ing_men_p_h)) 
+         ) %&gt;%
+  rename(
+          edad_h = p05,
+          sexo_h = p06,
+          edu_h = p13,
+          ocu_h = SINCO3,
+          pp_estado = p23,
+          pp = p26,
+          p_edad_2016= p38_11,
+          m_edad_2016 = p38m_11,
+          p_edu = p43,
+          p_edug = p44,
+          m_edu = p43m,
+          m_edug = p44m,
+          p_ocu = cmo1_2,
+          m_ocu = cmo2_2
+         )%&gt;%
+  mutate(
+        p_edu = as.integer(p_edu),
+        m_edu = as.integer(m_edu)
+  )
+  
+ 
+# las ocupaciones no encontradas las sustituimos por un NA
+padres_h&lt;-padres_h%&gt;%
+  mutate(p_ocu = ifelse(p_ocu==&quot;.&quot;,NA,p_ocu),
+         m_ocu = ifelse(m_ocu==&quot;.&quot;,NA,m_ocu))
+
+unique(padres_h$p_ocu)
+unique(padres_h$m_ocu)
+padres_h</code></pre>
+<p>#Crear base limpia</p>
+<pre class="r"><code>filtro_pp_c&lt;-function(df_1,general = 0)
+{
+  #recibe un hijo de un dataframe, para polimorfismo
+  # general = 0y regresa un data frame con los datos
+  # ordenados del hijo
+  if(df_1[&quot;pp&quot;]==1)
+  {
+    dfn &lt;- df_1%&gt;%
+          filter(pp==1)%&gt;%
+          select(starts_with(c(&quot;pp&quot;,&quot;p_&quot;)),
+                 ling_h,edu_h,ocu_h,edad_h,p_edad_2016,region)%&gt;%
+          mutate(pp_edad2016 = p_edad_2016)%&gt;%
+          rename(
+            id_hijo = pp_id_hijo,
+            pp_sexo = pp,
+            pp_edad = p_edad_2016,
+            pp_educ = p_edu,
+            pp_educg = p_edug,
+            pp_ocup = p_ocu
+          )%&gt;%
+        mutate(pp_edad = pp_edad + (14-edad_h))
+  }
+  if(df_1[&quot;pp&quot;]==2)
+    {
+    dfn&lt;-df_1%&gt;%
+        filter(pp==2)%&gt;%
+        select(starts_with(c(&quot;pp&quot;,&quot;m_&quot;)),
+               ling_h, edu_h,ocu_h,edad_h,m_edad_2016,region)%&gt;%
+       mutate(pp_edad2016 = m_edad_2016)%&gt;%
+        rename(
+          id_hijo = pp_id_hijo,
+          pp_sexo = pp,
+          pp_edad = m_edad_2016,
+          pp_educ = m_edu,
+          pp_educg = m_edug,
+          pp_ocup = m_ocu
+        )%&gt;%
+        mutate(pp_edad = pp_edad + (14-edad_h))
+  }
+  if(is.na(dfn$pp_edad) &amp; general){
+    return(&quot;ND&quot;)
+  }
+  return(dfn)
+}
+
+#comporbamos qeu funcione bien
+filtro_pp_c(padres_h[1,])
+
+
+acomoda_df_c&lt;-function(df){
+  #damos un df de una edad,  y
+  # nos regresa un data frame acomodado
+  aux&lt;-function(i){
+    return(df[i,])
+  }
+  a&lt;-lapply(1:nrow(df),aux)
+  L&lt;-lapply(a,filtro_pp_c)
+  dfn &lt;-bind_rows(L[1:length(L)])
+  return(dfn)
+}
+
+dfh&lt;-acomoda_df_c(padres_h)
+
+
+
+pro_edad_c &lt;- function(df){
+  #le damos el df y nos regresa el promedio de la edade  los padres
+  df%&gt;%summarise(
+    promedi_edad_padres = mean(pp_edad2016,na.rm=TRUE))
+  }
+
+edades_pro&lt;- pro_edad_c(dfh)
+
+edades_pro
+#edades de padres faltantes
+sum(is.na(dfh$pp_edad2016))
+# 13 de 337</code></pre>
+<div id="sel-padres-poblacion-1" class="section level2">
+<h2>sel padres poblacion</h2>
+<p>Seleccionamos de la ENIGH 1997, no hay entonces 1998</p>
+<pre class="r"><code>poblacion&lt;-read.dbf(
+              file=&quot;Datos/ENIGH-Historica/1998/POBLA98.dbf&quot;
+              )
+
+
+
+pobla_enigh1998&lt;-poblacion%&gt;%
+  filter(
+    parentesco == &quot;01&quot;,
+    between(edad,30,50),
+    !is.na(ed_formal),
+    !is.na(ed_tecnica),
+    !is.na(ocupacion),
+    n_empleos==1, # el entrevistado solo proporciona una ocupación
+  )%&gt;%
+  select(
+    folio,
+    num_ren,
+    edad,
+    ed_formal,
+    ed_tecnica,
+    ocupacion
+  )%&gt;%
+ mutate(
+  ed_formal = as.integer(as.character(ed_formal)),
+   ed_tecnica= as.integer(as.character(ed_tecnica)),
+  estado = substr(folio,5,6)
+ )
+
+#unique(pobla_enigh1998$ed_formal)
+#pobla_enigh1998$ed_formal
+nrow(pobla_enigh1998)
+head(pobla_enigh1998$ed_formal)
+str(pobla_enigh1998$ed_formal)#caracter 2 espacios
+unique(pobla_enigh1998$ed_formal)
+#pobla_enigh1998$ed_formal==&quot;03&quot;
+head(pobla_enigh1998$ed_tecnica)
+str(pobla_enigh1998$ed_tecnica)#caracter 1 espacio
+unique(pobla_enigh1998$ed_tecnica)
+#pobla_enigh1998%&gt;%count(n_empleos), se exploro para quitar una ocupacion
+names(poblacion)
+str(poblacion$per_ing)</code></pre>
+</div>
+<div id="cod-enigh-1998" class="section level2">
+<h2>cod enigh 1998</h2>
+<pre class="r"><code># hacemos la codificación de ENIGH2018 a ESRU
+#1  Preescolar o kínder
+# 2 Primaria
+# 3 Secundaria técnica
+# 4 Secundaria general
+# 5 Preparatoria técnica
+# 6 Preparatoria general
+# 7 Técnica o comercial con secundaria
+# 8 Técnica o comercial con preparatoria
+# 9 Normal básica (con primaria o secundari
+# 10 Normal de licenciatura
+# 11 Profesional (licenciatura o ingeniería)
+# 12 Postgrado (maestría o doctorado)
+#_____________________________________________________
+# 98 NS, no aplica porque pedimos la edución del pp como instrumento
+
+
+# vemso las combinaciones de educación para codificar
+
+comb&lt;-pobla_enigh1998%&gt;%
+   mutate( combi = paste(as.character(ed_formal),as.character(ed_tecnica)))%&gt;%
+  select(ed_formal,ed_tecnica,combi)
+
+  
+sort(unique(comb$combi))
+# [1] &quot;01 1&quot; &quot;02 1&quot; &quot;03 1&quot; &quot;03 2&quot; &quot;04 1&quot; &quot;05 1&quot; &quot;06 1&quot; &quot;07 1&quot; &quot;07 2&quot; &quot;08 1&quot;
+# [11] &quot;08 2&quot; &quot;08 3&quot; &quot;08 4&quot; &quot;08 5&quot; &quot;09 1&quot; &quot;09 4&quot; &quot;09 5&quot; &quot;10 1&quot; &quot;10 2&quot; &quot;10 4&quot;
+# [21] &quot;10 5&quot; &quot;11 1&quot; &quot;11 3&quot; &quot;11 4&quot; &quot;11 5&quot; &quot;11 6&quot; &quot;11 7&quot; &quot;12 1&quot; &quot;12 3&quot; &quot;12 5&quot;
+# [31] &quot;12 6&quot; &quot;12 7&quot; &quot;13 1&quot; &quot;13 5&quot; &quot;13 6&quot; &quot;13 7&quot; &quot;13 8&quot; &quot;13 9&quot; &quot;14 1&quot; &quot;14 3&quot;
+# [41] &quot;14 5&quot; &quot;14 6&quot; &quot;14 7&quot; &quot;14 9&quot; &quot;15 1&quot; &quot;15 3&quot; &quot;15 4&quot; &quot;15 5&quot; &quot;15 6&quot; &quot;15 7&quot;
+# [51] &quot;15 9&quot; &quot;16 1&quot; &quot;16 5&quot; &quot;16 7&quot; &quot;16 9&quot;
+
+
+
+
+# &quot;16 1&quot; &quot;16 5&quot; &quot;16 7&quot; &quot;16 9&quot;
+
+#codificamos a a años de educación
+pobla_enighc1998&lt;-pobla_enigh1998%&gt;%
+   mutate(
+   edu_a = ifelse(ed_formal==1 &amp; ed_tecnica==1,0,    #sin instruccion(1)
+          ifelse((ed_formal %in% c(2,3,4,5,6,7,8,9,10,11,12,13))
+                 &amp; (ed_tecnica %in% c(1,2)),ed_formal-1,
+          ifelse(ed_formal==8 &amp; (ed_tecnica %in% c(3,4,5)),9,
+          ifelse(ed_formal==9 &amp; (ed_tecnica %in% c(4,5)),10,
+          ifelse(ed_formal==10 &amp; (ed_tecnica %in% c(2,4,5)),11,
+          ifelse(ed_formal==11 &amp; (ed_tecnica %in% c(3,4,5,5,7)),12,
+          ifelse((ed_formal %in%c(12)) &amp; (ed_tecnica %in% c(3,5,6,7)),12,
+          ifelse(ed_formal==13 &amp; (ed_tecnica %in% c(5,6,7,8,9)),13,
+          ifelse(ed_formal==14 &amp; (ed_tecnica %in% c(1,3,5,6,7,9)),14,
+          ifelse(ed_formal==15 &amp; (ed_tecnica %in% c(1,3,4,5,6,7,9)),17,19))))))))))
+  )
+
+unique(pobla_enighc1998$edu_a )
+
+#codificamos a coghort de educación
+
+pobla_enighc1998&lt;-pobla_enighc1998%&gt;%
+   mutate(
+   edu_ac = ifelse(edu_a %in% 0:5,&quot;C1&quot;,    
+          ifelse(edu_a %in% 6:10 ,&quot;C2&quot;,
+          ifelse(edu_a %in% 11:12,&quot;C3&quot;,
+          ifelse(edu_a %in% 13:14,&quot;C4&quot;,&quot;C5&quot;))))
+  )
+
+unique(pobla_enighc1998$edu_ac )</code></pre>
+</div>
+<div id="etiquetamos-region" class="section level2">
+<h2>etiquetamos region</h2>
+<pre class="r"><code>pobla_enighc1998&lt;-pobla_enighc1998%&gt;%
+          mutate(
+            region = ifelse(estado %in% c(&quot;02&quot;,&quot;26&quot;,&quot;08&quot;,&quot;05&quot;,&quot;19&quot;,&quot;28&quot;),1,
+                     ifelse(estado %in% c(&quot;12&quot;,&quot;20&quot;,&quot;07&quot;,&quot;30&quot;,&quot;27&quot;,&quot;04&quot;,&quot;31&quot;,&quot;23&quot;),5,0))
+          )</code></pre>
+</div>
+<div id="cod-esru" class="section level2">
+<h2>cod ESRU</h2>
+<pre class="r"><code>dfh_c&lt;- dfh%&gt;%
+   mutate(
+   pp_educ_a = ifelse(pp_educ==1,1,    #sin instruccion(1)
+          ifelse(pp_educ==2,1+pp_educg,
+          ifelse(pp_educ %in% c(3,4),7+pp_educg,
+          ifelse(pp_educ %in% c(5,6,7,8,9),10+pp_educg,
+          ifelse(pp_educ %in% c(10,11),13+pp_educg,17+pp_educg)))))
+  )
+
+  
+
+unique(dfh_c$pp_educ_a)
+
+dfh_c&lt;-dfh_c%&gt;%
+  mutate(
+   pp_educ_ac = ifelse(pp_educ_a %in% 0:5,&quot;C1&quot;,    
+          ifelse(pp_educ_a %in% 6:10 ,&quot;C2&quot;,
+          ifelse(pp_educ_a %in% 11:12,&quot;C3&quot;,
+          ifelse(pp_educ_a %in% 13:14,&quot;C4&quot;,&quot;C5&quot;))))
+  )</code></pre>
+<p>##sel ingresos padres</p>
+<pre class="r"><code>ingresos&lt;-read.dbf(
+              file=&quot;Datos/ENIGH-Historica/1998/ingresos.dbf&quot;
+              )</code></pre>
+<pre class="r"><code>familias_integrantes &lt;- function(df,nr){
+  dfn &lt;- df %&gt;%
+    filter(NUM_REN %in% nr)
+  return(dfn)
+} 
+
+
+
+ingresos_acu &lt;- function(df,clavs){
+ dfn &lt;- df %&gt;%
+   group_by(FOLIO, NUM_REN) %&gt;%
+   filter(CLAVE %in% clavs)%&gt;%
+   summarise(
+   claves_a = paste(CLAVE,collapse = &quot;,&quot;),
+  ing_tri_t = sum(ING_TRI),
+  ing_men_p = ing_tri_t/3,
+  ling_men_p = log(ing_men_p)
+  ) %&gt;% ungroup()
+ 
+ 
+ return(dfn)
+}
+
+#hogares &lt;- c(&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;)
+personas_h &lt;- c(&#39;01&#39;)
+
+a&lt;-familias_integrantes(ingresos,personas_h)
+a
+claves&lt;-c(&quot;P001&quot;,&quot;P002&quot;,&quot;P003&quot;,&quot;P010&quot;,&quot;P011&quot;,&quot;P012&quot;,&quot;P013&quot;,&quot;P014&quot;,&quot;P015&quot;, &quot;P016&quot;,&quot;P017&quot;,&quot;P018&quot;,&quot;P020&quot;,&quot;P021&quot;,&quot;P026&quot;,&quot;P027&quot;,&quot;P035&quot;,&quot;P040&quot;,&quot;P041&quot;,&quot;P042&quot;,&quot;P044&quot;,&quot;P045&quot;)
+ingre_enigh1998&lt;-ingresos_acu(a,claves) 
+ingre_enigh1998&lt;-ingre_enigh1998%&gt;%
+  select(FOLIO,NUM_REN,ling_men_p)%&gt;%
+  rename(
+    folio = FOLIO,
+    num_ren = NUM_REN
+  )
+ingre_enigh1998</code></pre>
+</div>
+<div id="regresion-padres-1" class="section level2">
+<h2>Regresion padres</h2>
+<pre class="r"><code>data_padres1998&lt;-full_join(pobla_enighc1998,ingre_enigh1998)%&gt;%
+  drop_na()%&gt;%
+   mutate(
+     ocupacion = substr(ocupacion,1,2)
+   )#%&gt;%
+  # rename(
+  #   EDU=N_INSTR161,
+  #   OCU = CMO121
+  # )%&gt;%
+  # mutate(
+  #   EDU = as.character(EDU)
+  # )
+data_padres1998
+
+unique(data_padres1998$edad)
+
+# ajuste para nivel de ecucación ESRU
+
+#data_padres2005$EDU &lt;- factor(data_padres2005$EDU)
+#data_padres2005$OCU &lt;- factor(data_padres2005$OCU)
+
+#unique(data_padres2005$OCU)</code></pre>
+<pre class="r"><code>reg_padres&lt;-lm(
+  formula = ling_men_p ~ edu_ac + ocupacion + edad +I(edad*edad),
+  data = data_padres1998
+)
+summary(reg_padres)</code></pre>
+</div>
+<div id="inser-padre-en-hijo-1" class="section level2">
+<h2>Inser padre en hijo</h2>
+<p>sacamso coeficeicneite de educación y ocupación</p>
+<pre class="r"><code># data&lt;- data.frame(
+#    edu_ac= &quot;C1&quot;,
+#   ocupacion= &quot;11&quot;,
+#   edad = 0
+#  )
+# 
+# predict(object = reg_padres,   
+#         newdata = data)
+ 
+#unique(dfh_c$pp_ocup)
+#sum(is.na(dfh_c$pp_ocup)) podemos utiizar la ocupación como instrumento tambien, solo se pierden 12 muestras
+
+dfh_cna&lt;-dfh_c%&gt;%drop_na(pp_ocup,pp_edad)
+
+data&lt;- data.frame(
+    edu_ac= dfh_cna$pp_educ_ac,
+   ocupacion= dfh_cna$pp_ocup,
+   edad = 0
+  )
+
+dfhpf&lt;- dfh_cna%&gt;%
+  mutate(ling_p = predict(object = reg_padres,   
+        newdata = data)) 
+dfhpf
+
+
+# SI solo instrumentamos por eduacion
+
+
+
+
+hchart(dfhpf,&quot;scatter&quot;,hcaes( x = ling_p, y = ling_h) )</code></pre>
+</div>
+<div id="eii-todos" class="section level2">
+<h2>EII Todos</h2>
+<pre class="r"><code>reg_hp&lt;-lm(
+  formula = ling_h ~ ling_p + edad_h+ I(edad_h*edad_h)+ substr(ocu_h,1,2),
+  data = dfhpf
+)
+summary(reg_hp)</code></pre>
+<pre class="r"><code>padres_h %&gt;%
+  count(mov)%&gt;% 
+  mutate(freq = round(100 * n/sum(n), 0))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Tipo de percepción&quot;),
+           categories = get_labels(padres_h$mov)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+</div>
+<div id="estimación-regional" class="section level1">
+<h1>Estimación regional</h1>
+<pre class="r"><code>reg_padres&lt;-lm(
+  formula = ling_men_p ~ edu_ac + ocupacion + edad +I(edad*edad),
+  data = data_padres1998, subset=(region==1))
+summary(reg_padres)</code></pre>
+<div id="inser-padre-en-hijo-2" class="section level2">
+<h2>Inser padre en hijo</h2>
+<p>sacamso coeficeicneite de educación y ocupación</p>
+<pre class="r"><code># data&lt;- data.frame(
+#    edu_ac= &quot;C1&quot;,
+#   ocupacion= &quot;11&quot;,
+#   edad = 0
+#  )
+# 
+# predict(object = reg_padres,   
+#         newdata = data)
+ 
+#unique(dfh_c$pp_ocup)
+#sum(is.na(dfh_c$pp_ocup)) podemos utiizar la ocupación como instrumento tambien, solo se pierden 12 muestras
+
+dfh_cna&lt;-dfh_c%&gt;%
+  filter(region==&quot;1&quot;)%&gt;%
+  drop_na(pp_ocup)
+
+data&lt;- data.frame(
+    edu_ac= dfh_cna$pp_educ_ac,
+   ocupacion= dfh_cna$pp_ocup,
+   edad = 0
+  )
+
+dfhpf&lt;- dfh_cna%&gt;%
+  mutate(ling_p = predict(object = reg_padres,   
+        newdata = data)) 
+dfhpf
+
+
+
+
+
+
+hchart(dfhpf,&quot;scatter&quot;,hcaes( x = ling_p, y = ling_h) )</code></pre>
+</div>
+<div id="eii-regional-1" class="section level2">
+<h2>EII regional 1</h2>
+<pre class="r"><code>reg_hp&lt;-lm(
+  formula = ling_h ~ ling_p + edad_h+ I(edad_h*edad_h)+ substr(ocu_h,1,2),
+  data = dfhpf
+)
+summary(reg_hp)</code></pre>
+</div>
+<div id="comprobación-de-resueltado-1" class="section level2">
+<h2>Comprobación de resueltado</h2>
+<pre class="r"><code>padres_h %&gt;%
+  filter(region==&quot;1&quot;)%&gt;%
+  count(mov)%&gt;%
+  mutate(freq = round(100 * n/sum(n), 0))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad region 1&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;Para el color de piel se revisa la escala&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Edad&quot;),
+           categories = get_labels(padres_h$vo)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+</div>
+<div id="estimación-regional-5" class="section level1">
+<h1>Estimación regional 5</h1>
+<pre class="r"><code>reg_padres&lt;-lm(
+  formula = ling_men_p ~ edu_ac + ocupacion + edad +I(edad*edad),
+  data = data_padres1998, subset=(region==5))
+summary(reg_padres)</code></pre>
+<div id="inser-padre-en-hijo-3" class="section level2">
+<h2>Inser padre en hijo</h2>
+<p>sacamso coeficeicneite de educación y ocupación</p>
+<pre class="r"><code># data&lt;- data.frame(
+#    edu_ac= &quot;C1&quot;,
+#   ocupacion= &quot;11&quot;,
+#   edad = 0
+#  )
+# 
+# predict(object = reg_padres,   
+#         newdata = data)
+ 
+#unique(dfh_c$pp_ocup)
+#sum(is.na(dfh_c$pp_ocup)) podemos utiizar la ocupación como instrumento tambien, solo se pierden 12 muestras
+
+dfh_cna&lt;-dfh_c%&gt;%
+  filter(region==&quot;5&quot;)%&gt;%
+  drop_na(pp_ocup)
+
+data&lt;- data.frame(
+    edu_ac= dfh_cna$pp_educ_ac,
+   ocupacion= dfh_cna$pp_ocup,
+   edad = 0
+  )
+
+dfhpf&lt;- dfh_cna%&gt;%
+  mutate(ling_p = predict(object = reg_padres,   
+        newdata = data)) 
+dfhpf
+
+
+
+
+
+
+hchart(dfhpf,&quot;scatter&quot;,hcaes( x = ling_p, y = ling_h) )</code></pre>
+</div>
+<div id="eii-regional-1-1" class="section level2">
+<h2>EII regional 1</h2>
+<pre class="r"><code>reg_hp&lt;-lm(
+  formula = ling_h ~ ling_p + edad_h+ I(edad_h*edad_h)+ substr(ocu_h,1,2),
+  data = dfhpf
+)
+summary(reg_hp)</code></pre>
+</div>
+<div id="comprobación-de-resueltado-2" class="section level2">
+<h2>Comprobación de resueltado</h2>
+<pre class="r"><code>padres_h %&gt;%
+  filter(region==&quot;5&quot;)%&gt;%
+  count(mov)%&gt;%
+  mutate(freq = round(100 * n/sum(n), 0))%&gt;%
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;freq&#39;))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Percepción de movilidad region 1&quot;
+  ) %&gt;%
+  hc_subtitle(text = &quot;Para el color de piel se revisa la escala&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Porcentaje&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Tipo de percepción&quot;),
+           categories = get_labels(padres_h$vo)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+</div>
+<div id="recuperadoas" class="section level1">
+<h1>recuperadoas</h1>
+<pre class="r"><code># un solo ingreso, el jefe responde
+
+# pregunta p2, comparten el mimso gasto para comer: 1 ) Si 2 ) No
+# pregunta p08, es el jefe del hogar: 1 ) Si 
+# pregunta p12. actualmente estudia, 1)Si 2)No
+# p68, Personas que trabajan, 1. Si, 2. No
+cambiar_eti(&#39;p133&#39;,enco = &quot;Windows-1252&quot;)
+
+data1_emovi2017 &lt;-  data_emovi2017 %&gt;% 
+  filter(p02 == 1)  %&gt;%
+  filter(p08 == 1)  %&gt;% 
+  filter(p12 == 2)  %&gt;%
+  filter(p68 == 1 | p69 == 1)  %&gt;%
+  filter(p132 == 1) %&gt;%
+  filter(!p133 %in% c(8,9,NA) ) %&gt;%
+  filter(p134a != 8) %&gt;%
+  filter(p134b != 8) %&gt;%
+  filter(p134c != 8) %&gt;%
+  filter(p134d != 8) %&gt;%
+  filter(p134e != 8) %&gt;%
+  filter(p134f != 8) %&gt;%
+  filter(p134g != 8) %&gt;%
+  filter(p134h != 8) %&gt;%
+  filter(p134i != 8) 
+
+
+plota &lt;- data1_emovi2017 %&gt;%
+  count(Estado) %&gt;%
+  hchart(&#39;treemap&#39;,
+         hcaes(x = paste(get_labels(Estado),&#39; &#39;,&#39;(&#39;, n,&#39;)&#39;, sep = &#39;&#39;), value=&#39;n&#39;, color = &#39;n&#39;)) %&gt;%
+  hc_add_theme(hc_theme_ffx()) %&gt;%
+  hc_title(
+    text = &quot;Número de entrevistados por estado&quot;
+  )%&gt;% 
+  hc_subtitle(text = paste(&quot;Total de participates: &quot; , toString(nrow(data1_emovi2017)))) %&gt;%
+  hc_exporting(enabled = TRUE,
+               filename = &quot;archivo&quot;,
+               sourceWidth =  1000,
+               sourceHeight = 640,
+               scale = 10,
+              
+               buttons = list(contextButton = list(menuItems = myMenuItems))
+  )
+
+
+plota
+
+data1_emovi2017 %&gt;%
+  count(Estado, p06)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(p06)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Número de entrevistados por estado y sexo&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Estados&quot;),
+           categories = get_labels(data1_emovi2017$Estado)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+
+data1_emovi2017 %&gt;%
+  count(p13,p06)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(p06)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Escolaridad por  sexo&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Escolaridad&quot;),
+           categories = get_labels(data1_emovi2017$p13)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+
+data1_emovi2017 %&gt;%
+  count(p133,p06)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(p06)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Ingreso por sexo por  sexo&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Catehoria de ingreso&quot;),
+           categories = get_labels(data1_emovi2017$p133)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+
+data1_emovi2017 %&gt;%
+  count(p133,p13)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(p13)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Educación por cohort de ingreso (1 solo ingreso)&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Categoria de ingreso&quot;),
+           categories = get_labels(data1_emovi2017$p133)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+
+
+
+data1_emovi2017 %&gt;%
+  count(p133,p131)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(p131)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Carros por cohort de ingreso (1 solo ingreso)&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Categoria de ingreso&quot;),
+           categories = get_labels(data1_emovi2017$p133)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))
+
+
+data1_emovi2017 %&gt;%
+  count(p133,p122)%&gt;% 
+  hchart(&#39;column&#39;,
+         hcaes( y = &#39;n&#39;,  group = as_label(p122)))%&gt;%
+  hc_add_theme(hc_theme_ffx())%&gt;%
+  hc_title(
+    text = &quot;Cuartos por cohort de ingreso (1 solo ingreso)&quot;
+  ) %&gt;%
+  #hc_subtitle(text = &quot;Las edades están agrupadas en intervalos 
+   #           de 10 años (da clic sobre F o M)&quot;) %&gt;%
+  # hc_credits(
+  #  enabled = TRUE, text = &quot;Source: SSS&quot;,
+  #  style = list(fontSize = &quot;12px&quot;))%&gt;%
+  hc_yAxis(title = list(text = &quot;Número de participantes&quot;))%&gt;%
+  hc_xAxis(title=list(text=&quot;Categoria de ingreso&quot;),
+           categories = get_labels(data1_emovi2017$p133)) %&gt;%
+    hc_exporting(enabled = TRUE,
+               filename = &quot;datos&quot;,
+               buttons = list(contextButton = list(menuItems = myMenuItems)))</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
